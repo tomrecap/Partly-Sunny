@@ -1,0 +1,45 @@
+<!-- app/views/cities/show.html.erb -->
+
+<h1>Current Weather in <%= @city.name %></h1>
+
+<h2>Current Temperature:</h2>
+<p><%= @current_temperature %></p>
+
+<table>
+  <tr>
+    <th>Condition</th>
+    <th></th>
+  </tr>
+
+  <% @weather_condition_frequencies.each do |condition| %>
+  <tr>
+    <td><%= condition[0] %></td>
+    <td><%= number_to_percentage(condition[1], precision: 0) %></td>
+  </tr>
+  <% end %>
+
+</table>
+
+
+
+<h2>Recent Reports:</h2>
+<table>
+  <tr>
+    <th>Temperature</th>
+    <th>Condition</th>
+    <th>Submission Time</th>
+  </tr>
+
+  <% @recent_reports.each do |report| %>
+  <tr>
+    <td><%= report.temperature %></td>
+    <td><%= report.weather_condition.description %></td>
+    <td><%= friendly_time_format(report.created_at) %></td>
+  </tr>
+  <% end %>
+
+</table>
+
+<p>
+  <%= link_to "New Report for #{@city.name}", @new_report_for_city_url %>
+</p>
