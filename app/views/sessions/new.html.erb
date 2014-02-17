@@ -1,0 +1,30 @@
+<!-- app/views/sessions/new.html.erb -->
+
+<h1>Sign In</h1>
+
+<form action="<%= session_url %>" method="post">
+  <%= insert_form_authenticity_token %>
+
+  <p>
+    <label for="user_name">User Name</label>
+    <input
+      type="text"
+      name="user[user_name]"
+      value="<%= @user.try(:user_name) %>"
+      id="user_name">
+  </p>
+
+  <p>
+    <label for="password">Password</label>
+    <input
+      type="password"
+      name="user[password]"
+      id="password">
+  </p>
+
+  <p><input type="submit" value="Sign In!"></p>
+</form>
+
+<p>
+  Not a member yet? <%= link_to "Join!", new_user_url %>
+</p>
