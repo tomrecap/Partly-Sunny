@@ -68,7 +68,7 @@ class City < ActiveRecord::Base
 
   def build_frequency_hash(array)
     frequencies = Hash.new(0)
-    array.each { |elem| frequencies[id] += (100.0/array.length) }
+    array.each { |elem| frequencies[elem] += (100.0/array.length) }
     frequencies
   end
 

@@ -11,6 +11,7 @@ class CitiesController < ApplicationController
     @current_temperature = @city.current_temperature
     @recent_reports = @city.recent_reports
     @weather_condition_frequencies = @city.top_three_conditions
+
   end
 
 end
