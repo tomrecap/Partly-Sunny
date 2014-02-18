@@ -1,0 +1,2 @@
+module FavoriteCityLinksHelper
+end

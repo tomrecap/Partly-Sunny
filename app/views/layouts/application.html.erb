@@ -9,6 +9,8 @@
 <body>
 
   <p>params: <%= params %></p>
+  <p>session: <%= session %></p>
+
   <%= "<p>errors: #{flash[:errors]} </p>".html_safe if flash[:errors] %>
   <%= "<p>notice: #{flash[:notice]} </p>".html_safe if flash[:notice] %>
 

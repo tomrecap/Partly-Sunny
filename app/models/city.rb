@@ -27,6 +27,19 @@ class City < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many(
+    :favorite_city_links,
+    class_name: "FavoriteCityLink",
+    foreign_key: :city_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :favoriters,
+    through: :favorite_city_links,
+    source: :user
+  )
+
 # TO DO: clean this up
   def top_three_conditions
     condition_ids = recent_reports.map(&:weather_condition_id)

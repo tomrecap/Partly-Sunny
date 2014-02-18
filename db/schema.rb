@@ -11,13 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217214414) do
+ActiveRecord::Schema.define(:version => 20140218150223) do
 
   create_table "cities", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "favorite_city_links", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "city_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "favorite_city_links", ["user_id", "city_id"], :name => "index_favorite_city_links_on_user_id_and_city_id", :unique => true
+  add_index "favorite_city_links", ["user_id"], :name => "index_favorite_city_links_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "user_name",                                         :null => false

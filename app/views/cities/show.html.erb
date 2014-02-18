@@ -2,6 +2,10 @@
 
 <h1>Current Weather in <%= @city.name %></h1>
 
+<p>
+  <%= insert_approriate_favorite_city_button(@city.id) %>
+</p>
+
 <h2>Current Temperature:</h2>
 <p><%= @current_temperature %></p>
 

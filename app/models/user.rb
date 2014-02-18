@@ -31,6 +31,19 @@ class User < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many(
+    :favorite_city_links,
+    class_name: "FavoriteCityLink",
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :favorite_cities,
+    through: :favorite_city_links,
+    source: :city
+  )
+
   def self.find_by_credentials(user_name, entered_password)
     user = User.find_by_user_name(user_name)
     user.try(:is_password?, entered_password) ? user : nil
