@@ -20,9 +20,16 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_session_token
   validates :user_name, :email, :bio, :session_token, :home_city_id, :password_digest, presence: true
-  validates :user_name, :session_token, uniqueness: true
+  validates :user_name, :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }
   validates_confirmation_of :password
+
+  belongs_to(
+    :home_city,
+    class_name: "City",
+    foreign_key: :home_city_id,
+    primary_key: :id
+  )
 
   def self.find_by_credentials(user_name, entered_password)
     user = User.find_by_user_name(user_name)

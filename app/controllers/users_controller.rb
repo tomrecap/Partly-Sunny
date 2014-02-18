@@ -1,11 +1,16 @@
 class UsersController < ApplicationController
 
+  def index
+    @users = User.all
+  end
+
   def new
-    prepare_new_instance_variables
+    prepare_details_form_instance_variables
   end
 
   def create
     @user = User.new(params[:user])
+
 
     if @user.save
       login_user!(@user)
@@ -14,7 +19,7 @@ class UsersController < ApplicationController
     else
       flash.now[:errors] = @user.errors.full_messages
 
-      prepare_new_instance_variables
+      prepare_details_form_instance_variables
       render :new
     end
   end
@@ -28,11 +33,25 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
 
+    prepare_details_form_instance_variables
   end
 
   def update
+    @user = User.find(params[:id])
 
+    if @user.update_attributes(params[:user])
+      flash.now[:notice] = "Your information has been updated."
+
+      prepare_details_form_instance_variables
+      render :edit
+    else
+      flash.now[:errors] = @user.errors.full_messages
+
+      prepare_details_form_instance_variables
+      render :edit
+    end
   end
 
   def destroy
@@ -40,7 +59,7 @@ class UsersController < ApplicationController
   end
 
   private
-  def prepare_new_instance_variables
+  def prepare_details_form_instance_variables
     @cities = City.all
   end
 end

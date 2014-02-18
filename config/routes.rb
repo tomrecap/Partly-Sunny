@@ -4,7 +4,7 @@ WeatherApp::Application.routes.draw do
   resources :weather_reports, only: [:new, :create]
   resources :cities, only: [:show, :index]
 
-  resources :users, except: :index do
+  resources :users do #, except: :index do
     get 'activate', on: :collection
   end
   resource :session, only: [:new, :create, :destroy]

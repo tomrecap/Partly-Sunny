@@ -20,6 +20,13 @@ class City < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many(
+    :residents,
+    class_name: "User",
+    foreign_key: :home_city_id,
+    primary_key: :id
+  )
+
 # TO DO: clean this up
   def top_three_conditions
     condition_ids = recent_reports.map(&:weather_condition_id)

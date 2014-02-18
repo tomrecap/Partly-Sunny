@@ -1,0 +1,63 @@
+<!-- app/views/users/_details.html.erb -->
+<% action_url = (mode == :new ? users_url : user_url(@user)) %>
+
+<form action="<%= action_url %>" method="post">
+  <%= change_post_to_put if mode == :edit %>
+
+  <%= insert_form_authenticity_token %>
+
+  <p>
+    <label for="user_name">User Name</label>
+    <input
+      type="text"
+      name="user[user_name]"
+      value="<%= @user.try(:user_name) %>"
+      id="user_name">
+  </p>
+
+  <p>
+    <label for="email">Email</label>
+    <input
+      type="text"
+      name="user[email]"
+      value="<%= @user.try(:email) %>"
+      id="email">
+  </p>
+
+  <p>
+    <label for="password">Password</label>
+    <input
+      type="password"
+      name="user[password]"
+      id="password">
+    <br>
+    <label for="password_confirmation">Confirm</label>
+    <input
+      type="password"
+      name="user[password_confirmation]"
+      id="password_confirmation">
+  </p>
+
+  <p>
+    <label for="home_city_id">Home City</label>
+    <select name="user[home_city_id]" id="home_city_id">
+      <% @cities.each do |city| %>
+        <option
+          value="<%= city.id %>"
+          <%= "selected" if @user.try(:home_city_id) == city.id %>>
+          <%= city.name %>
+        </option>
+      <% end %>
+    </select>
+  </p>
+
+  <p>
+    <label for="bio">Bio:</label>
+    <br>
+    <textarea name="user[bio]" id="bio" rows="4" cols="35"><%= @user.try(:bio) %></textarea>
+    <br>
+    <label for="bio">(140 characters max)</label>
+  </p>
+
+  <p><input type="submit" value="<%= mode == :new ? 'Sign Up!' : 'Update Information' %>"></p>
+</form>

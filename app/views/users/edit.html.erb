@@ -1,0 +1,9 @@
+<!-- app/view/users/show.html.erb -->
+
+<h1>Settings</h1>
+
+<%= render 'details', mode: :edit %>
+
+<p>
+  <%= button_to "Delete Account", user_url(@user), method: :delete %>
+</p>
