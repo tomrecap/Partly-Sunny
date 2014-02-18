@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140218164253) do
+ActiveRecord::Schema.define(:version => 20140218185413) do
 
   create_table "cities", :force => true do |t|
     t.string   "name",       :null => false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20140218164253) do
     t.string   "user_name",                                         :null => false
     t.string   "email",                                             :null => false
     t.string   "password_digest",                                   :null => false
-    t.string   "bio",             :limit => 140,                    :null => false
+    t.string   "bio",             :limit => 140
     t.string   "session_token",                                     :null => false
     t.boolean  "activated",                      :default => false
     t.datetime "created_at",                                        :null => false

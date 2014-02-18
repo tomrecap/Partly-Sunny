@@ -1,5 +1,5 @@
 WeatherApp::Application.routes.draw do
-  root to: 'sessions#new'
+  root to: 'cities#index'
 
   resources :weather_reports, only: [:new, :create]
   resources :cities, only: [:show, :index]

@@ -21,6 +21,12 @@ class City < ActiveRecord::Base
   )
 
   has_many(
+    :weather_conditions,
+    through: :weather_reports,
+    source: :weather_condition
+  )
+
+  has_many(
     :residents,
     class_name: "User",
     foreign_key: :home_city_id,
@@ -40,28 +46,50 @@ class City < ActiveRecord::Base
     source: :user
   )
 
-# TO DO: clean this up
+  def self.find_with_current_data(city_id)
+    City.includes(weather_reports: :weather_condition)
+      .where("weather_reports.created_at >= ?", WeatherReport::TIME_HORIZON)
+      .find(city_id)
+  end
+
   def top_three_conditions
     condition_ids = recent_reports.map(&:weather_condition_id)
-    total_reports = condition_ids.length
-
-    frequencies_by_id = Hash.new(0)
-    condition_ids.each { |id| frequencies_by_id[id] += (100.0/total_reports) }
-
-    frequency_array = frequencies_by_id.sort_by do |_id, value|
-      -value
-    end
+    frequencies_by_id = build_frequency_hash(condition_ids)
+    frequency_array = hash_to_array_sorted_by_values(frequencies_by_id)
 
     frequencies_by_name = {}
     frequency_array[0...3].each do |id, frequency|
-      frequencies_by_name[WeatherCondition.find(id).description] = frequency
+      name = condition_names_hash[id]
+      frequencies_by_name[name] = frequency
     end
 
     frequencies_by_name
   end
 
+  def build_frequency_hash(array)
+    frequencies = Hash.new(0)
+    array.each { |elem| frequencies_by_id[id] += (100.0/array.length) }
+    frequencies
+  end
+
+  def hash_to_array_sorted_by_values(hash)
+    frequencies_by_id.sort_by { |key, value| -value }
+  end
+
+  def condition_names_hash
+    unless @conditions_names_hash
+      @conditions_names_hash = {}
+      weather_conditions.each do |condition|
+        @conditions_names_hash[condition.id] ||= condition.description
+      end
+    end
+
+    @conditions_names_hash
+  end
+
+# use includes for city & city.joinsweatherreport here
   def recent_reports
-    @recent_reports ||= WeatherReport.where("city_id = ? AND created_at >= ?", self.id, WeatherReport::TIME_HORIZON)
+    @recent_reports ||= self.weather_reports.includes(:weather_condition).where("city_id = ? AND created_at >= ?", self.id, WeatherReport::TIME_HORIZON)
   end
 
   def current_temperature

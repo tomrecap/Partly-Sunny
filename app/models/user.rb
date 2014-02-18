@@ -18,8 +18,8 @@ class User < ActiveRecord::Base
   attr_accessible :user_name, :email, :password, :bio, :session_token, :home_city_id, :password_confirmation, :favorite_city_ids, :favorited_user_ids
   attr_reader :password
 
-  before_validation :ensure_session_token, :ignore_blank_password_entries
-  validates :user_name, :email, :bio, :session_token, :home_city_id, :password_digest, presence: true
+  before_validation :ensure_session_token
+  validates :user_name, :email, :session_token, :home_city_id, :password_digest, presence: true
   validates :user_name, :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }
   validates_confirmation_of :password
@@ -69,9 +69,4 @@ class User < ActiveRecord::Base
     self.session_token ||= self.class.new_token
   end
 
-  def ignore_blank_password_entries
-    self.password = nil if self.password.blank?
-    self.password_confirmation = nil if self.password_confirmation.blank?
-
-  end
 end

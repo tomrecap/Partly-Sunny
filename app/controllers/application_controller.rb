@@ -28,4 +28,12 @@ class ApplicationController < ActionController::Base
     redirect_to new_session_url unless signed_in?
   end
 
+  def require_not_signed_in!
+    redirect_to cities_url if signed_in?
+  end
+
+  def prevent_users_from_modifying_others
+    redirect_to cities_url unless params[:id].to_i == current_user.id
+  end
+
 end

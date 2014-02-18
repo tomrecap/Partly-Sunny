@@ -3,7 +3,7 @@
 <h1>Current Weather in <%= @city.name %></h1>
 
 <p>
-  <%= insert_approriate_favorite_city_button(@city.id) %>
+  <%= insert_approriate_favorite_city_button(@city.id) if signed_in? %>
 </p>
 
 <h2>Current Temperature:</h2>
@@ -45,7 +45,7 @@
 </table>
 
 <p>
-  <%= link_to "New Report for #{@city.name}", @new_report_for_city_url %>
+  <%= link_to "New Report for #{@city.name}", new_weather_report_url(city_id: @city.id) %>
 </p>
 
 <p>
