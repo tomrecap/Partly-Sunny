@@ -15,7 +15,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :user_name, :email, :password, :bio, :session_token, :home_city_id, :password_confirmation, :favorite_city_ids
+  attr_accessible :user_name, :email, :password, :bio, :session_token, :home_city_id, :password_confirmation, :favorite_city_ids, :favorited_user_ids
   attr_reader :password
 
   before_validation :ensure_session_token, :ignore_blank_password_entries
@@ -24,25 +24,20 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 8, allow_nil: true }
   validates_confirmation_of :password
 
-  belongs_to(
-    :home_city,
-    class_name: "City",
-    foreign_key: :home_city_id,
-    primary_key: :id
-  )
+  belongs_to(:home_city, class_name: "City", foreign_key: :home_city_id, primary_key: :id)
 
-  has_many(
-    :favorite_city_links,
-    class_name: "FavoriteCityLink",
-    foreign_key: :user_id,
-    primary_key: :id
-  )
+  has_many(:favorite_city_links, class_name: "FavoriteCityLink",
+    foreign_key: :user_id, primary_key: :id)
+  has_many(:favorite_cities, through: :favorite_city_links, source: :city)
 
-  has_many(
-    :favorite_cities,
-    through: :favorite_city_links,
-    source: :city
-  )
+  has_many(:favorite_user_links_outbound, class_name: "FavoriteUserLink",
+    foreign_key: :favoriter_id, primary_key: :id)
+  has_many(:favorited_users, through: :favorite_user_links_outbound, source: :favorited_user)
+
+  # MIGHT NOT NEED THESE?
+  has_many(:favorite_user_links_inbound, class_name: "FavoriteUserLink",
+    foreign_key: :favorited_id, primary_key: :id)
+  has_many(:admirers, through: :favorite_user_links_inbound, source: :favoriter)
 
   def self.find_by_credentials(user_name, entered_password)
     user = User.find_by_user_name(user_name)
@@ -69,6 +64,7 @@ class User < ActiveRecord::Base
   end
 
   private
+
   def ensure_session_token
     self.session_token ||= self.class.new_token
   end

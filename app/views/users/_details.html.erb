@@ -76,5 +76,24 @@
     <% end %>
   </p>
 
+  <% if mode == :edit %>
+    <p>
+      Favorite Users:
+      <br>
+      <input type="hidden" name="user[favorited_user_ids][]" value=" ">
+      <% @users.each do |user| %>
+      <input
+        type="checkbox"
+        name="user[favorited_user_ids][]"
+        value="<%= user.id %>"
+        id="fave_user_checkbox_<%= user.id %>"
+        <%= "checked" if @user.try(:favorited_user_ids) && @user.favorited_user_ids.include?(user.id) %>
+        >
+      <label for="fave_user_checkbox_<%= user.id %>"><%= user.user_name %></label>
+      <br>
+      <% end %>
+    </p>
+  <% end %>
+
   <p><input type="submit" value="<%= mode == :new ? 'Sign Up!' : 'Update Information' %>"></p>
 </form>

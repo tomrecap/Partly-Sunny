@@ -60,5 +60,6 @@ class UsersController < ApplicationController
   private
   def prepare_details_form_instance_variables
     @cities = City.all
+    @users = User.where("id <> ?", current_user.id)
   end
 end
