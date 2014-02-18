@@ -1,5 +1,7 @@
 <h1>Welcome, <%= @user.user_name %></h1>
 
+<%= image_tag @user.try(:avatar).try(:url, :full) %>
+
 <p>
   Your favorite cities:
   <ul>

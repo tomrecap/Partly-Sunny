@@ -7,10 +7,10 @@ WeatherApp is a crowd-sourced weather site with social features. Anyone can subm
 
 * submit a weather report (done 2/17)
 * view current weather for a city (done 2/17)
-* add users & authentication
+* add users & authentication (done 2/18)
 * post & view a photo
 * view photo gallery (for site, user, or city)
-* add users & cities to favorites
+* add users & cities to favorites (done 2/18)
 * news feed w/ weather & photos for favorite cities & users
 * add tags to photos & view photo gallery by tags
 * add comments to photos

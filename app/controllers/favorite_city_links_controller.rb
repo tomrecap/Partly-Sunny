@@ -1,6 +1,5 @@
 class FavoriteCityLinksController < ApplicationController
   before_filter :require_signed_in!
-  before_filter :prevent_users_from_modifying_others, only: :destroy
 
   def create
     @favorite_city_link = current_user.favorite_city_links.new
@@ -16,10 +15,17 @@ class FavoriteCityLinksController < ApplicationController
   end
 
   def destroy
-    FavoriteCityLink.destroy(params[:id])
+    @favorite_city_link = FavoriteCityLink.find(params[:id])
 
-    flash[:notice] = "Favorite removed"
-    redirect_to :back
+    if @favorite_city_link.user_id == current_user.id
+      @favorite_city_link.destroy
+
+      flash[:notice] = "Favorite removed"
+      redirect_to :back
+    else
+      flash[:notice] = "Cannot modify another user's favorite"
+      redirect_to :back
+    end
   end
 
 

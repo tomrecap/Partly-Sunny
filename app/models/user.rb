@@ -2,27 +2,36 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  user_name       :string(255)      not null
-#  email           :string(255)      not null
-#  password_digest :string(255)      not null
-#  bio             :string(140)      not null
-#  session_token   :string(255)      not null
-#  activated       :boolean          default(FALSE)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  home_city_id    :integer          not null
+#  id                  :integer          not null, primary key
+#  user_name           :string(255)      not null
+#  email               :string(255)      not null
+#  password_digest     :string(255)      not null
+#  bio                 :string(140)
+#  session_token       :string(255)      not null
+#  activated           :boolean          default(FALSE)
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  home_city_id        :integer          not null
+#  avatar_file_name    :string(255)
+#  avatar_content_type :string(255)
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :user_name, :email, :password, :bio, :session_token, :home_city_id, :password_confirmation, :favorite_city_ids, :favorited_user_ids
+  attr_accessible :user_name, :email, :password, :bio, :session_token,
+    :home_city_id, :password_confirmation, :favorite_city_ids,
+    :favorited_user_ids, :avatar
   attr_reader :password
+
+  has_attached_file :avatar, styles: { thumbnail: "100x100", full: "600x600" }
 
   before_validation :ensure_session_token
   validates :user_name, :email, :session_token, :home_city_id, :password_digest, presence: true
   validates :user_name, :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }
   validates_confirmation_of :password
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   belongs_to(:home_city, class_name: "City", foreign_key: :home_city_id, primary_key: :id)
 
