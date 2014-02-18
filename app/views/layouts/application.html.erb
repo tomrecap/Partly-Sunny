@@ -16,7 +16,9 @@
 
   <p>
     <% if signed_in? %>
-      Currently logged in as: <%= link_to current_user.user_name, edit_user_url(current_user) %>
+      Currently logged in as: <%= link_to current_user.user_name, user_url(current_user) %>
+      <br>
+      <%= link_to "Settings", edit_user_url(current_user) %>
       <%= button_to "Sign Out", session_url, method: :delete %>
     <% else %>
       <%= link_to "Sign In", new_session_url %> or <%= link_to "Sign Up", new_user_url %>

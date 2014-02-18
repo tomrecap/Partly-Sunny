@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @user = User.includes(:favorite_cities, :favorited_users).find(params[:id])
   end
 
   def edit

@@ -1,0 +1,7 @@
+<!-- app/view/cities/_current_weather_summary.html.erb -->
+
+<p>
+  <%= link_to city.name, city_url(city) %>
+  <br>
+  <%= city.current_temperature %> <%= city.top_three_conditions.first.first %>
+</p>

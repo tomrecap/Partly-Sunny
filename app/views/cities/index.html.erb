@@ -1,0 +1,7 @@
+<h1>Cities</h1>
+
+<ul>
+  <% @cities.each do |city| %>
+    <li><%= link_to city.name, city_url(city) %></li>
+  <% end %>
+</ul>

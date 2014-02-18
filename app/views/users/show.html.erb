@@ -1,0 +1,19 @@
+<h1>Welcome, <%= @user.user_name %></h1>
+
+<p>
+  Your favorite cities:
+  <ul>
+    <% @user.favorite_cities.each do |city| %>
+      <li><%= render "cities/current_weather_summary", city: city %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  Your favorite users:
+  <ul>
+    <% @user.favorited_users.each do |user| %>
+      <li><%= link_to user.user_name, user_url(user) %></li>
+    <% end %>
+  </ul>
+</p>
