@@ -15,10 +15,10 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :user_name, :email, :password, :bio, :session_token, :home_city_id, :password_confirmation
+  attr_accessible :user_name, :email, :password, :bio, :session_token, :home_city_id, :password_confirmation, :favorite_city_ids
   attr_reader :password
 
-  before_validation :ensure_session_token
+  before_validation :ensure_session_token, :ignore_blank_password_entries
   validates :user_name, :email, :bio, :session_token, :home_city_id, :password_digest, presence: true
   validates :user_name, :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }
@@ -71,5 +71,11 @@ class User < ActiveRecord::Base
   private
   def ensure_session_token
     self.session_token ||= self.class.new_token
+  end
+
+  def ignore_blank_password_entries
+    self.password = nil if self.password.blank?
+    self.password_confirmation = nil if self.password_confirmation.blank?
+
   end
 end

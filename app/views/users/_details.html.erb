@@ -59,5 +59,22 @@
     <label for="bio">(140 characters max)</label>
   </p>
 
+  <p>
+    Favorite Cities:
+    <br>
+    <input type="hidden" name="user[favorite_city_ids][]" value=" ">
+    <% @cities.each do |city| %>
+    <input
+      type="checkbox"
+      name="user[favorite_city_ids][]"
+      value="<%= city.id %>"
+      id="city_checkbox_<%= city.id %>"
+      <%= "checked" if @user.try(:favorite_city_ids) && @user.favorite_city_ids.include?(city.id) %>
+      >
+    <label for="city_checkbox_<%= city.id %>"><%= city.name %></label>
+    <br>
+    <% end %>
+  </p>
+
   <p><input type="submit" value="<%= mode == :new ? 'Sign Up!' : 'Update Information' %>"></p>
 </form>

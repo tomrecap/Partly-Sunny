@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
-
     if @user.save
       login_user!(@user)
       # UPDATE THE REDIRECT URL AT SOME POINT
