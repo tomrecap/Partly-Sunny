@@ -68,12 +68,12 @@ class City < ActiveRecord::Base
 
   def build_frequency_hash(array)
     frequencies = Hash.new(0)
-    array.each { |elem| frequencies_by_id[id] += (100.0/array.length) }
+    array.each { |elem| frequencies[id] += (100.0/array.length) }
     frequencies
   end
 
   def hash_to_array_sorted_by_values(hash)
-    frequencies_by_id.sort_by { |key, value| -value }
+    hash.sort_by { |key, value| -value }
   end
 
   def condition_names_hash
