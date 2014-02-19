@@ -4,11 +4,11 @@
     <%= image_tag photo.image.url(:small) %>
     <figcaption>
       <p>
-        <%= photo.caption %>
-      </p>
+        <%= image_tag photo.submitter.avatar.url(:thumbnail) %>
 
-      <p>
-        Taken in <%= photo.city.name %> at <%= friendly_time_format(photo.created_at) %>
+        <%= photo.submitter.user_name %>
+        <br>
+        <%= time_ago_in_words(photo.created_at) %>
       </p>
     </figcaption>
   </li>
