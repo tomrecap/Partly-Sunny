@@ -24,7 +24,10 @@ class User < ActiveRecord::Base
     :favorited_user_ids, :avatar
   attr_reader :password
 
-  has_attached_file :avatar, styles: { thumbnail: "100x100", full: "600x600" }, :default_url => "images/avatar.png"
+  has_attached_file :avatar, styles: {
+    thumbnail: "100x100",
+    full: "600x600"
+  }, :default_url => "images/avatar.png"
 
   before_validation :ensure_session_token
   validates :user_name, :email, :session_token, :home_city_id,
@@ -37,22 +40,23 @@ class User < ActiveRecord::Base
   belongs_to(:home_city, class_name: "City", foreign_key: :home_city_id,
     primary_key: :id)
 
-  has_many(:favorite_city_links, class_name: "FavoriteCityLink",
-    foreign_key: :user_id, primary_key: :id)
-  has_many(:favorite_cities, through: :favorite_city_links, source: :city)
+  has_many :favorite_city_links
+  has_many :favorite_cities, through: :favorite_city_links, source: :city
 
   has_many(:favorite_user_links_outbound, class_name: "FavoriteUserLink",
-    foreign_key: :favoriter_id, primary_key: :id)
+    foreign_key: :favoriter_id)
   has_many(:favorited_users, through: :favorite_user_links_outbound,
     source: :favorited_user)
 
   # MIGHT NOT NEED THESE?
   has_many(:favorite_user_links_inbound, class_name: "FavoriteUserLink",
-    foreign_key: :favorited_id, primary_key: :id)
+    foreign_key: :favorited_id)
   has_many(:admirers, through: :favorite_user_links_inbound,
     source: :favoriter)
 
   has_many(:photos, class_name: "Photo", foreign_key: :submitter_id, primary_key: :id, dependent: :destroy)
+
+  has_many :comments, dependent: :destroy
 
   def self.find_by_credentials(user_name, entered_password)
     user = User.find_by_user_name(user_name)

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user, :signed_in?
+  helper_method :current_user, :signed_in?, :current_user_can_delete?
 
   private
 
@@ -34,6 +34,10 @@ class ApplicationController < ActionController::Base
 
   def prevent_users_from_modifying_others
     redirect_to cities_url unless params[:id].to_i == current_user.id
+  end
+
+  def current_user_can_delete?(comment)
+    current_user == (comment.author || comment.photo.submitter)
   end
 
 end

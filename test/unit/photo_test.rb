@@ -4,8 +4,8 @@
 #
 #  id                 :integer          not null, primary key
 #  caption            :string(255)
-#  submitter_id       :string(255)      not null
-#  city_id            :string(255)
+#  submitter_id       :integer          not null
+#  city_id            :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  image_file_name    :string(255)

@@ -4,8 +4,8 @@
 #
 #  id                 :integer          not null, primary key
 #  caption            :string(255)
-#  submitter_id       :string(255)      not null
-#  city_id            :string(255)
+#  submitter_id       :integer          not null
+#  city_id            :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  image_file_name    :string(255)
@@ -25,10 +25,9 @@ class Photo < ActiveRecord::Base
   validates :submitter_id, :city_id, presence: true
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
-  belongs_to(:city, class_name: "City",
-    foreign_key: :city_id, primary_key: :id)
+  belongs_to :city
+  belongs_to :submitter, class_name: "User", foreign_key: :submitter_id
 
-  belongs_to(:submitter, class_name: "User",
-    foreign_key: :submitter_id, primary_key: :id)
+  has_many :comments, dependent: :destroy
 
 end
