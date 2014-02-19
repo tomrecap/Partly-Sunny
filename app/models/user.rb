@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
     :favorited_user_ids, :avatar
   attr_reader :password
 
-  has_attached_file :avatar, styles: { thumbnail: "100x100", full: "600x600" }
+  has_attached_file :avatar, styles: { thumbnail: "100x100", full: "600x600" }, :default_url => "images/avatar.png"
 
   before_validation :ensure_session_token
   validates :user_name, :email, :session_token, :home_city_id,
