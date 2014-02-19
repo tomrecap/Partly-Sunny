@@ -1,0 +1,16 @@
+<ul>
+  <% photos.each do |photo| %>
+  <li>
+    <%= image_tag photo.image.url(:small) %>
+    <figcaption>
+      <p>
+        <%= photo.caption %>
+      </p>
+
+      <p>
+        Taken in <%= photo.city.name %> at <%= friendly_time_format(photo.created_at) %>
+      </p>
+    </figcaption>
+  </li>
+  <% end %>
+</ul>

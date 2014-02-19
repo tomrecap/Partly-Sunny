@@ -1,48 +1,55 @@
 <!-- app/views/cities/show.html.erb -->
 
-<h1>Current Weather in <%= @city.name %></h1>
+<h1 class="page-title">Current Weather in <%= @city.name %></h1>
 
 <p>
   <%= insert_approriate_favorite_city_button(@city.id) if signed_in? %>
 </p>
 
-<h2>Current Temperature:</h2>
-<p><%= @current_temperature %></p>
+<section class="current-conditions">
+  <h2 class="section-title">Current Conditions</h2>
+  <p><%= @current_temperature %></p>
 
-<table>
-  <tr>
-    <th>Condition</th>
-    <th></th>
-  </tr>
+  <table>
+    <tr>
+      <th>Condition</th>
+      <th></th>
+    </tr>
 
-  <% @weather_condition_frequencies.each do |condition| %>
-  <tr>
-    <td><%= condition[0] %></td>
-    <td><%= number_to_percentage(condition[1], precision: 0) %></td>
-  </tr>
-  <% end %>
+    <% @weather_condition_frequencies.each do |condition| %>
+    <tr>
+      <td><%= condition[0] %></td>
+      <td><%= number_to_percentage(condition[1], precision: 0) %></td>
+    </tr>
+    <% end %>
 
-</table>
+  </table>
+</section>
 
+<section class="recent-reports">
+  <h2 class="section-title">Latest Reports</h2>
+  <table>
+    <tr>
+      <th>Temperature</th>
+      <th>Condition</th>
+      <th>Submission Time</th>
+    </tr>
 
+    <% @recent_reports.each do |report| %>
+    <tr>
+      <td><%= report.temperature %></td>
+      <td><%= report.weather_condition.description %></td>
+      <td><%= friendly_time_format(report.created_at) %></td>
+    </tr>
+    <% end %>
 
-<h2>Recent Reports:</h2>
-<table>
-  <tr>
-    <th>Temperature</th>
-    <th>Condition</th>
-    <th>Submission Time</th>
-  </tr>
+  </table>
+</section>
 
-  <% @recent_reports.each do |report| %>
-  <tr>
-    <td><%= report.temperature %></td>
-    <td><%= report.weather_condition.description %></td>
-    <td><%= friendly_time_format(report.created_at) %></td>
-  </tr>
-  <% end %>
-
-</table>
+<section class="recent-photos">
+  <h2 class="section-title">Latest Photos</h2>
+  <%= render "photos/last_four_photos", photos: @photos %>
+</section>
 
 <p>
   <%= link_to "New Report for #{@city.name}", new_weather_report_url(city_id: @city.id) %>

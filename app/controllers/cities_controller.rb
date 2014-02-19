@@ -12,6 +12,7 @@ class CitiesController < ApplicationController
     @recent_reports = @city.recent_reports
     @weather_condition_frequencies = @city.top_three_conditions
 
+    @photos = @city.photos.limit(4).order("created_at DESC")
   end
 
 end

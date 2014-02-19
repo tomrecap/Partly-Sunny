@@ -2,8 +2,8 @@ class CreatePhotos < ActiveRecord::Migration
   def change
     create_table :photos do |t|
       t.string :caption
-      t.string :submitter_id, null: false
-      t.string :city_id
+      t.integer :submitter_id, null: false
+      t.integer :city_id
 
       t.timestamps
     end

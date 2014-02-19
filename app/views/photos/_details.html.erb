@@ -37,5 +37,5 @@
 </form>
 
 <p>
-  <%= button_to "Delete Photo", photo_url(@photo), method: :delete if @photo.submitter == current_user%>
+  <%= button_to "Delete Photo", photo_url(@photo), method: :delete if @photo.try(:submitter) == current_user%>
 </p>

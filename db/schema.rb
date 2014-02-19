@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(:version => 20140219140436) do
 
   create_table "photos", :force => true do |t|
     t.string   "caption"
-    t.string   "submitter_id",       :null => false
-    t.string   "city_id"
+    t.integer  "submitter_id",       :null => false
+    t.integer  "city_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "image_file_name"
