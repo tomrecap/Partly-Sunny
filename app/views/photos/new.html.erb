@@ -2,35 +2,4 @@
 
 <h1>Add A Photo</h1>
 
-<form action="<%= photos_url %>" method="post" enctype="multipart/form-data">
-  <%= insert_form_authenticity_token %>
-
-  <p>
-    <%= image_tag @photo.try(:image).try(:url, :small) %>
-    <br>
-    <label for="image">Choose a Photo</label>
-    <input type="file" name="photo[image]" value="" id="image">
-  </p>
-
-  <p>
-    <label for="caption">Caption</label>
-    <textarea name="photo[caption]" id="caption"><%= @photo.try(:caption) %></textarea>
-  </p>
-
-  <p>
-    <label for="city_id">City</label>
-    <select name="photo[city_id]" id="city_id">
-      <% @cities.each do |city| %>
-        <option
-          value="<%= city.id %>"
-          <%= "selected" if current_user.try(:home_city_id) == city.id %>>
-          <%= city.name %>
-        </option>
-      <% end %>
-    </select>
-  </p>
-
-  <!-- add tags here when implemented -->
-
-  <p><input type="submit" value="Add Photo"></p>
-</form>
+<%= render "details", mode: :new, cities: @cities, photo: @photo %>

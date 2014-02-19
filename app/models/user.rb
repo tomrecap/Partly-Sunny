@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
     source: :favoriter)
 
   has_many(:photos, class_name: "Photo",
-    foreign_key: :submitter_id, primary_key: :id)
+    foreign_key: :submitter_id, primary_key: :id, dependent: :destroy)
 
   def self.find_by_credentials(user_name, entered_password)
     user = User.find_by_user_name(user_name)

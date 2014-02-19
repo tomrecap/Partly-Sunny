@@ -1,0 +1,41 @@
+<!-- /app/view/photos/_details.html.erb -->
+<% action_url = (mode == :new ? photos_url : photo_url(@photo)) %>
+
+<form action="<%= action_url %>" method="post" enctype="multipart/form-data">
+  <%= change_post_to_put if mode == :edit %>
+
+  <%= insert_form_authenticity_token %>
+
+  <p>
+    <%= image_tag photo.try(:image).try(:url, :small) %>
+    <br>
+    <label for="image">Choose a Photo</label>
+    <input type="file" name="photo[image]" value="" id="image">
+  </p>
+
+  <p>
+    <label for="caption">Caption</label>
+    <textarea name="photo[caption]" id="caption"><%= photo.try(:caption) %></textarea>
+  </p>
+
+  <p>
+    <label for="city_id">City</label>
+    <select name="photo[city_id]" id="city_id">
+      <% cities.each do |city| %>
+        <option
+          value="<%= city.id %>"
+          <%= "selected" if current_user.try(:home_city_id) == city.id %>>
+          <%= city.name %>
+        </option>
+      <% end %>
+    </select>
+  </p>
+
+  <!-- add tags here when implemented -->
+
+  <p><input type="submit" value="<%= mode == :new ? 'Add' : 'Update' %> Photo"></p>
+</form>
+
+<p>
+  <%= button_to "Delete Photo", photo_url(@photo), method: :delete if @photo.submitter == current_user%>
+</p>
