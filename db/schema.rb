@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140218224846) do
+ActiveRecord::Schema.define(:version => 20140219140436) do
 
   create_table "cities", :force => true do |t|
     t.string   "name",       :null => false
@@ -38,6 +38,21 @@ ActiveRecord::Schema.define(:version => 20140218224846) do
 
   add_index "favorite_user_links", ["favoriter_id", "favorited_id"], :name => "index_favorite_user_links_on_favoriter_id_and_favorited_id", :unique => true
   add_index "favorite_user_links", ["favoriter_id"], :name => "index_favorite_user_links_on_favoriter_id"
+
+  create_table "photos", :force => true do |t|
+    t.string   "caption"
+    t.string   "submitter_id",       :null => false
+    t.string   "city_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "photos", ["city_id"], :name => "index_photos_on_city_id"
+  add_index "photos", ["submitter_id"], :name => "index_photos_on_submitter_id"
 
   create_table "users", :force => true do |t|
     t.string   "user_name",                                             :null => false

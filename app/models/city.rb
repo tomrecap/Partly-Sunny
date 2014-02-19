@@ -13,38 +13,24 @@ class City < ActiveRecord::Base
 
   validates :name, uniqueness: true, presence: true
 
-  has_many(
-    :weather_reports,
-    class_name: "WeatherReport",
-    foreign_key: :city_id,
-    primary_key: :id
-  )
+  has_many(:weather_reports, class_name: "WeatherReport",
+    foreign_key: :city_id, primary_key: :id)
 
-  has_many(
-    :weather_conditions,
-    through: :weather_reports,
-    source: :weather_condition
-  )
+  has_many(:weather_conditions, through: :weather_reports,
+    source: :weather_condition)
 
-  has_many(
-    :residents,
-    class_name: "User",
-    foreign_key: :home_city_id,
-    primary_key: :id
-  )
+  has_many(:residents, class_name: "User",
+    foreign_key: :home_city_id, primary_key: :id)
 
-  has_many(
-    :favorite_city_links,
-    class_name: "FavoriteCityLink",
-    foreign_key: :city_id,
-    primary_key: :id
-  )
+  has_many(:favorite_city_links, class_name: "FavoriteCityLink",
+    foreign_key: :city_id, primary_key: :id)
 
-  has_many(
-    :favoriters,
-    through: :favorite_city_links,
-    source: :user
-  )
+  has_many(:favoriters, through: :favorite_city_links,
+    source: :user)
+
+  has_many(:photos, class_name: "Photo",
+    foreign_key: :city_id, primary_key: :id)
+
 
   def self.find_with_current_data(city_id)
     City.includes(weather_reports: :weather_condition)
