@@ -1,0 +1,19 @@
+<h1 class="page-title"><%= @photo.submitter.user_name %>'s Photo</h1>
+
+<%= image_tag @photo.image.url(:big) %>
+
+<p>
+  <%= @photo.caption %>
+</p>
+
+<p>
+  Taken in <%= @photo.city.name %> at <%= friendly_time_format(@photo.created_at) %>
+</p>
+
+<p>
+  <!-- tags go here -->
+</p>
+
+<p>
+  <!-- comment box goes here -->
+</p>

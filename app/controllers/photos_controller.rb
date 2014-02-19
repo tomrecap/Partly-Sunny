@@ -1,17 +1,20 @@
 class PhotosController < ApplicationController
 
   def new
-
+    prepare_instance_variables_for_details_form
   end
 
   def create
-    @photo = Photo.new(params[:photo])
+    @photo = current_user.photos.new(params[:photo])
 
     if @photo.save
-      # WHAT GOES HERE?
+      flash[:notice] = "Photo added successfully"
+
+      redirect_to photo_url(@photo)
     else
       flash.now[:errors] = @photo.errors.full_messages
 
+      prepare_instance_variables_for_details_form
       render :new
     end
   end
@@ -44,5 +47,8 @@ class PhotosController < ApplicationController
     redirect_to #WHERE?
   end
 
-
+  private
+  def prepare_instance_variables_for_details_form
+    @cities = City.all
+  end
 end
