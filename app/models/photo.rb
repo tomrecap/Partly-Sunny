@@ -15,7 +15,7 @@
 #
 
 class Photo < ActiveRecord::Base
-  attr_accessible :caption, :submitter_id, :city_id , :image
+  attr_accessible :caption, :submitter_id, :city_id , :image, :tag_ids
 
   has_attached_file :image, styles: {
     big: "1200x1200>",
@@ -29,5 +29,7 @@ class Photo < ActiveRecord::Base
   belongs_to :submitter, class_name: "User", foreign_key: :submitter_id
 
   has_many :comments, dependent: :destroy
+  has_many :photo_taggings, dependent: :destroy
+  has_many :tags, through: :photo_taggings, source: :tag
 
 end

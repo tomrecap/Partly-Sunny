@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140219183100) do
+ActiveRecord::Schema.define(:version => 20140219195009) do
 
   create_table "cities", :force => true do |t|
     t.string   "name",       :null => false
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(:version => 20140219183100) do
   add_index "favorite_user_links", ["favoriter_id", "favorited_id"], :name => "index_favorite_user_links_on_favoriter_id_and_favorited_id", :unique => true
   add_index "favorite_user_links", ["favoriter_id"], :name => "index_favorite_user_links_on_favoriter_id"
 
+  create_table "photo_taggings", :force => true do |t|
+    t.integer  "photo_id",   :null => false
+    t.integer  "tag_id",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "photo_taggings", ["photo_id", "tag_id"], :name => "index_photo_taggings_on_photo_id_and_tag_id"
+  add_index "photo_taggings", ["photo_id"], :name => "index_photo_taggings_on_photo_id"
+  add_index "photo_taggings", ["tag_id"], :name => "index_photo_taggings_on_tag_id"
+
   create_table "photos", :force => true do |t|
     t.string   "caption"
     t.integer  "submitter_id",       :null => false
@@ -63,6 +74,12 @@ ActiveRecord::Schema.define(:version => 20140219183100) do
 
   add_index "photos", ["city_id"], :name => "index_photos_on_city_id"
   add_index "photos", ["submitter_id"], :name => "index_photos_on_submitter_id"
+
+  create_table "tags", :force => true do |t|
+    t.string   "body",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "user_name",                                             :null => false

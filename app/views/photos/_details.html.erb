@@ -31,7 +31,23 @@
     </select>
   </p>
 
-  <!-- add tags here when implemented -->
+  <p>
+    Tags:
+    <br>
+    <input type="hidden" name="photo[tag_ids][]" value=" ">
+    <% @tags.each do |tag| %>
+    <input
+      type="checkbox"
+      name="photo[tag_ids][]"
+      value="<%= tag.id %>"
+      id="tag_checkbox_<%= tag.id %>"
+      <%= "checked" if @photo.try(:tag_ids) && @photo.tag_ids.include?(tag.id) %>
+      >
+    <label for="tag_checkbox_<%= tag.id %>"><%= tag.body %></label>
+    <br>
+    <% end %>
+  </p>
+
 
   <p><input type="submit" value="<%= mode == :new ? 'Add' : 'Update' %> Photo"></p>
 </form>

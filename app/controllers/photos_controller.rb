@@ -52,5 +52,6 @@ class PhotosController < ApplicationController
   private
   def prepare_instance_variables_for_details_form
     @cities = City.all
+    @tags = Tag.all
   end
 end

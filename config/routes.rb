@@ -6,6 +6,7 @@ WeatherApp::Application.routes.draw do
   resources :favorite_city_links, only: [:create, :destroy]
   resources :photos do
     resources :comments, only: [:create, :destroy]
+    resources :tags, only: [:create, :destroy]
   end
 
   resources :users do #, except: :index do
