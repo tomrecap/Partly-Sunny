@@ -16,6 +16,7 @@ WeatherApp::Application.routes.draw do
 
   resources :users do
     get 'activate', on: :collection
+    get 'dashboard', on: :member
     resource :gallery, only: :show
   end
 
