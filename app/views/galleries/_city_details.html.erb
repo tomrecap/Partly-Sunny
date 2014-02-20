@@ -1,0 +1,9 @@
+<!-- /app/views/galleries/_city_details.html.erb -->
+
+<p>
+  <%= render "cities/current_weather_summary", city: city %>
+</p>
+
+<p>
+    <%= insert_approriate_favorite_city_button(city.id) if signed_in? %>
+</p>

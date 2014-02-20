@@ -21,7 +21,24 @@ module ApplicationHelper
       </form>"
       tag.html_safe
     end
+  end
 
+  def insert_approriate_favorite_user_button(favorited_id)
+    favorite_user_link = FavoriteUserLink.find_by_favoriter_id_and_favorited_id(
+      current_user.id,
+      favorited_id
+    )
+
+    if !!favorite_user_link
+      button_to 'Remove from Favorites', favorite_user_link_url(favorite_user_link), method: :delete
+    else
+      tag = "<form action='#{favorite_user_links_url}' method='post'>
+        <input type='hidden' name='favorite_user_link[favorited_id]' value='#{favorited_id}'>
+        #{insert_form_authenticity_token}
+        <input type='submit' value='Add to Favorites'>
+      </form>"
+      tag.html_safe
+    end
   end
 
 end

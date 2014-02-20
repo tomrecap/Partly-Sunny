@@ -47,7 +47,7 @@
 </section>
 
 <section class="recent-photos">
-  <h2 class="section-title">Latest Photos</h2>
+  <h2 class="section-title"><%= link_to "Latest Photos", city_gallery_url(@city) %></h2>
   <%= render "photos/last_four_photos", photos: @photos %>
 </section>
 
