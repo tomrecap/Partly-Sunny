@@ -1,0 +1,105 @@
+section {
+  border: 1px solid #999;
+}
+
+.content {
+  width:800px;
+  margin-top: 50px;
+  margin-left:auto;
+  margin-right:auto;
+  border: 1px solid #999;
+  line-height:140%;
+}
+
+header {
+  display:block;
+  position:relative;
+  margin-bottom:50px;
+}
+
+header:after {
+  content:"";
+  clear:both;
+  display:table;
+}
+
+header .logo-and-tagline {
+  float:left;
+}
+
+header .tagline {
+  display:block;
+  position: relative;
+  width:230px;
+  left: 50px;
+}
+
+header .city-picker {
+  float:right;
+  margin-right:50px;
+}
+
+.middle-row {
+  display:block;
+  position:relative;
+  margin-bottom:50px;
+}
+
+.middle-row:after {
+  content:"";
+  clear:both;
+  display:table;
+}
+
+.middle-row .signin {
+  float:left;
+  width:230px;
+/*  left: 50px;*/
+}
+
+.middle-row .new-report {
+  float:right;
+  margin-right:50px;
+}
+
+.new-weather-and-photos {
+  display:block;
+  position:relative;
+  margin-bottom:50px;
+}
+
+.new-weather-and-photos:after {
+  content:"";
+  clear:both;
+  display:table;
+}
+
+.new-weather-and-photos .latest-reports {
+  float:left;
+  width:230px;
+/*  left: 50px;*/
+}
+
+.new-weather-and-photos .recent-photos {
+  float:left;
+  margin-left:100px;
+}
+
+.recent-photos ul {
+  display:block;
+  float:left;
+}
+
+.recent-photos li {
+  display:block;
+  float:left;
+}
+
+.recent-photos li+li {
+ margin-left:50px;
+}
+
+.recent-photos img {
+  max-width:200px;
+  height:200px;
+}

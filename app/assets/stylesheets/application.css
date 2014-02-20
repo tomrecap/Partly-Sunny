@@ -12,12 +12,20 @@
  *= require_tree .
  */
 
-body {
-  font-family:Helvetica, sans-serif;
-  margin-left:50px;
-  margin-top:30px;
+html, body, p, ul, li {
+  margin:0;
+  padding:0;
+  border:none;
+  font:inherit;
+  vertical-align:baseline;
 }
 
-section {
-  border: 1px solid #999;
+li {
+  list-style:none;
 }
+
+body {
+  font-family:Helvetica, sans-serif;
+}
+
+

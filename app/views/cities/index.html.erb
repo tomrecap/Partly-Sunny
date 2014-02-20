@@ -1,28 +1,30 @@
 <!-- /app/views/cities/index.html.erb -->
-<section>
-  <%= image_tag "http://placehold.it/350x150&text=Logo" %>
-  <p>
-    A crowd-sourced weather site for sharing forecasts & photos
-  </p>
-</section>
 
-<section>
-  <h2>Get the weather!</h2>
-  <ul>
-    <% @cities.each do |city| %>
-      <li><%= link_to city.name, city_url(city) %></li>
-    <% end %>
-  </ul>
-</section>
+<div class="content">
 
-<section>
-  <%= render "sessions/new", user: nil %>
-</section>
+<header>
+  <section class="logo-and-tagline">
+    <%= image_tag "http://placehold.it/350x150&text=Logo" %>
+    <p class="tagline">
+      A crowd-sourced weather site for sharing forecasts & photos
+    </p>
+  </section>
 
-<section>
-  <%= render "weather_reports/new",
-    weather_conditions: @weather_conditions,
-    cities: @cities %>
+  <section class="city-picker">
+    <%= render "city_picker", cities: @cities %>
+  </section>
+</header>
+
+<section class="middle-row">
+  <section class="signin">
+    <%= render "sessions/new", user: nil %>
+  </section>
+
+  <section class="new-report">
+    <%= render "weather_reports/new",
+      weather_conditions: @weather_conditions,
+      cities: @cities %>
+  </section>
 </section>
 
 <section class="new-weather-and-photos">
@@ -56,3 +58,4 @@
   </section>
 </section>
 
+</div>
