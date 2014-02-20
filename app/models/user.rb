@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   attr_accessible :user_name, :email, :password, :bio, :session_token,
     :home_city_id, :password_confirmation, :favorite_city_ids,
     :favorited_user_ids, :avatar
-  attr_reader :password
+  attr_reader :password, :avatar_remote_url
 
   has_attached_file :avatar, styles: {
     thumbnail: "100x100",
@@ -80,6 +80,14 @@ class User < ActiveRecord::Base
     self.session_token = self.class.new_token
     self.save!
     self.session_token
+  end
+
+  def avatar_remote_url=(url_value)
+    self.avatar = URI.parse(url_value)
+    # Assuming url_value is http://example.com/photos/face.png
+    # avatar_file_name == "face.png"
+    # avatar_content_type == "image/png"
+    @avatar_remote_url = url_value
   end
 
   private

@@ -35,7 +35,7 @@
       <th>Submission Time</th>
     </tr>
 
-    <% @recent_reports.each do |report| %>
+    <% @recent_reports.take(10).each do |report| %>
     <tr>
       <td><%= report.temperature %></td>
       <td><%= report.weather_condition.description %></td>

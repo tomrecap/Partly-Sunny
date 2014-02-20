@@ -70,7 +70,7 @@ class UsersController < ApplicationController
   end
 
   def ignore_blank_password_entries
-    params[:user][:password] = nil if params[:user][:password].blank?
-    params[:user][:password_confirmation] = nil if params[:user][:password_confirmation].blank?
+    params[:user].delete(:password) if params[:user][:password].blank?
+    params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
   end
 end
