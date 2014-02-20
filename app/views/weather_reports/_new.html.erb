@@ -1,6 +1,6 @@
-<!-- app/views/weather_reports/new.html.erb -->
+<!-- app/views/weather_reports/_new.html.erb -->
 
-<h1>New Weather Report</h1>
+<h1>How is the weather?</h1>
 
 <form action="<%= weather_reports_url %>" method="post">
 
@@ -18,7 +18,7 @@
   <p>
     <label for="condition">Condition</label>
     <select name="weather_report[weather_condition_id]" id="condition">
-      <% @weather_conditions.each do |condition| %>
+      <% weather_conditions.each do |condition| %>
         <option
           value="<%= condition.id %>"
           "<%= "selected" if @weather_report.try(&:weather_condition_id) == condition.id %>">
@@ -31,7 +31,7 @@
   <p>
     <label for="city">City</label>
     <select name="weather_report[city_id]" id="city">
-      <% @cities.each do |city| %>
+      <% cities.each do |city| %>
         <option
           value="<%= city.id %>"
           <%= "selected" if @weather_report.try(&:city_id) == city.id %>>

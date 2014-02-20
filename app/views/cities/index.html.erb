@@ -1,7 +1,58 @@
-<h1>Cities</h1>
+<!-- /app/views/cities/index.html.erb -->
+<section>
+  <%= image_tag "http://placehold.it/350x150&text=Logo" %>
+  <p>
+    A crowd-sourced weather site for sharing forecasts & photos
+  </p>
+</section>
 
-<ul>
-  <% @cities.each do |city| %>
-    <li><%= link_to city.name, city_url(city) %></li>
-  <% end %>
-</ul>
+<section>
+  <h2>Get the weather!</h2>
+  <ul>
+    <% @cities.each do |city| %>
+      <li><%= link_to city.name, city_url(city) %></li>
+    <% end %>
+  </ul>
+</section>
+
+<section>
+  <%= render "sessions/new", user: nil %>
+</section>
+
+<section>
+  <%= render "weather_reports/new",
+    weather_conditions: @weather_conditions,
+    cities: @cities %>
+</section>
+
+<section class="new-weather-and-photos">
+  <section class="latest-reports">
+    <h2>Latest Reports</h2>
+    <ul>
+    <% @recently_updated_cities.each do |city| %>
+      <li><%= render "current_weather_summary", city: city %></li>
+    <% end %>
+    </ul>
+    <%= link_to "Sign in to customize >", new_session_url %>
+  </section>
+
+  <section class="recent-photos">
+    <h2>Recent Photos</h2>
+    <ul>
+      <% @recent_photos.each do |photo| %>
+      <li>
+        <a href="<%= city_gallery_url(photo.city_id) %>">
+          <%= image_tag photo.image.url(:small) %>
+        </a>
+        <figcaption>
+          <a href="<%= city_gallery_url(photo.city_id) %>">
+            <%= photo.city.name %>
+          </a>
+        </figcaption>
+      </li>
+      <% end %>
+    </ul>
+    <%= link_to "Sign in to post your own >", new_session_url %>
+  </section>
+</section>
+

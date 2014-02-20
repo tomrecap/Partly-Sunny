@@ -2,7 +2,13 @@ class CitiesController < ApplicationController
   before_filter :require_signed_in!, except: [:show, :index]
 
   def index
-    @cities = City.all
+    redirect_to dashboard_user_url(current_user) if signed_in?
+    @cities = City.includes(:photos).all
+    @weather_conditions = WeatherCondition.all
+
+    @recently_updated_cities = City.includes(:weather_reports).order("weather_reports.created_at DESC").uniq.limit(2)
+
+    @recent_photos = @cities.sample(2).map { |city| city.photos.first }
   end
 
   def show

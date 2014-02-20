@@ -1,6 +1,4 @@
-<!-- app/views/sessions/new.html.erb -->
-
-<h1>Sign In</h1>
+<!-- app/views/sessions/_new.html.erb -->
 
 <form action="<%= session_url %>" method="post">
   <%= insert_form_authenticity_token %>
@@ -10,7 +8,7 @@
     <input
       type="text"
       name="user[user_name]"
-      value="<%= @user.try(:user_name) %>"
+      value="<%= user.try(:user_name) %>"
       id="user_name">
   </p>
 
@@ -26,5 +24,5 @@
 </form>
 
 <p>
-  Not a member yet? <%= link_to "Join!", new_user_url %>
+  New? <%= link_to "Join!", new_user_url %>
 </p>
