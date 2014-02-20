@@ -1,0 +1,55 @@
+<!-- /app/views/users/dashboard.html.erb -->
+
+<div class="content dashboard">
+
+<header>
+  <a href="<%= root_url %>">
+    <%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %>
+  </a>
+  <h1 class="page-title">Welcome, <%= link_to current_user.user_name,
+    user_gallery_url(current_user) %>!</h2>
+  <nav>
+    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
+    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
+  </nav>
+</header>
+
+<section class="main-columns">
+  <section class="city-picker">
+    <%= render "cities/city_picker", cities: @cities %>
+  </section>
+
+  <section class="middle-column">
+    <section>
+      <h2 class="section-title">My Weather</h3>
+      <%= render "cities/current_weather_summary", city: current_user.home_city %>
+    </section>
+
+    <section class="photo-feed">
+      <h2 class="section-title">Weather Photos</h3>
+      <%= render "photos/full_feed", photos: @photos %>
+    </section>
+  </section>
+
+  <section class="right-column">
+    <section>
+      <h2 class="section-title">Favorite Places</h3>
+        <ul>
+          <% @favorite_cities_without_home.each do |city| %>
+            <li>
+              <%= render "cities/current_weather_summary", city: city %>
+            </li>
+          <% end %>
+        </ul>
+    </section>
+
+    <section>
+      <%= render "weather_reports/new",
+        weather_conditions: @weather_conditions,
+        cities: @cities %>
+    </section>
+
+  </section>
+</section>
+
+</div>

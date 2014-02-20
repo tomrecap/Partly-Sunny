@@ -1,6 +1,25 @@
 <!-- app/views/users/new.html.erb -->
 
-<h1>Sign Up</h1>
+<div class="content new-user">
 
-<%= render 'details', mode: :new %>
+<header>
+  <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
+  <h1 class="page-title">Sign Up</h1>
+  <nav>
+    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
+    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
+  </nav>
+</header>
 
+
+<section class="main-columns">
+  <section class="city-picker">
+    <%= render "cities/city_picker", cities: @cities %>
+  </section>
+
+  <section class="middle-column">
+    <section class="new-user-form">
+      <%= render 'details', mode: :new %>
+    </section>
+  </section>
+</div>

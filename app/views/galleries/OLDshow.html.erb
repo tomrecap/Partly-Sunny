@@ -1,0 +1,12 @@
+<!-- /app/views/galleries/show.html.erb -->
+<section class="photo-gallery">
+  <h1>Weather Photos for: <%= @name %></h1>
+
+  <%= render "photos/full_feed", photos: @photos %>
+
+</section>
+
+<section class="user-profile-box">
+  <%= (render "user_details", user: @subject) if @subject.is_a?(User) %>
+  <%= (render "city_details", city: @subject) if @subject.is_a?(City) %>
+</section>

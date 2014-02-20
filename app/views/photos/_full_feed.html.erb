@@ -1,0 +1,60 @@
+<!-- /app/views/photos/_full_feed.html.erb -->
+
+<ul>
+  <% photos.each do |photo| %>
+  <li>
+    <a href="<%= photo_url(photo) %>">
+      <%= image_tag photo.image.url(:small), class: "content-photo" %>
+    </a>
+    <figcaption>
+      <p>
+        <a href="<%= user_gallery_url(photo.submitter) %>"><%= image_tag photo.submitter.avatar.url(:thumbnail), class: "avatar" %></a>
+
+        <a href="<%= user_gallery_url(photo.submitter) %>">
+          <%= photo.submitter.user_name %></a>
+
+        in
+
+        <a href="<%= city_url(photo.city_id) %>">
+          <%= photo.city.name %></a>
+
+        <%= time_ago_in_words(photo.created_at) %> ago
+      </p>
+
+      <p>
+        <%= photo.caption %>
+      </p>
+
+      <p>
+        Tags:
+        <ul class="tag-list">
+          <% photo.tags.each do |tag| %>
+          <li><%= link_to tag.body, tag_gallery_url(tag) %></li>
+          <% end %>
+        </ul>
+      </p>
+
+      <p>
+        Comments:
+        <ul>
+          <% photo.comments.each do |comment| %>
+          <li><%= link_to comment.author.user_name, user_gallery_url(comment.author) %>: <%= comment.body %></li>
+          <% end %>
+        </ul>
+      </p>
+
+      <p>
+        <form action="<%= photo_comments_url(photo) %>" method="post">
+          <%= insert_form_authenticity_token %>
+          <p>
+            <label for="comment">Add a Comment:</label>
+            <textarea name="comment[body]" id="comment"></textarea>
+          </p>
+
+          <p><input type="submit" value="Post"></p>
+        </form>
+      </p>
+    </figcaption>
+  </li>
+  <% end %>
+</ul>

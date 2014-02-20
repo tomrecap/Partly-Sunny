@@ -4,11 +4,11 @@
   <% photos.each do |photo| %>
   <li>
     <a href="<%= photo_url(photo) %>">
-      <%= image_tag photo.image.url(:small) %>
+      <%= image_tag photo.image.url(:small), class: "teaser-photo" %>
     </a>
     <figcaption>
       <p>
-        <a href="<%= user_url(photo.submitter) %>"><%= image_tag photo.submitter.avatar.url(:thumbnail) %></a>
+        <a href="<%= user_url(photo.submitter) %>"><%= image_tag photo.submitter.avatar.url(:thumbnail), class: "avatar" %></a>
 
         <%= photo.submitter.user_name %>
         <br>

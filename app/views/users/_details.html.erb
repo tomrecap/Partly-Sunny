@@ -62,7 +62,7 @@
   <p>
     <label for="avatar">Avatar</label>
     <br>
-    <%= image_tag @user.try(:avatar).try(:url, :full) %>
+    <%= image_tag @user.try(:avatar).try(:url, :full), class: "teaser-photo" %>
     <br>
     <input
       type="file"

@@ -8,12 +8,33 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def dashboard
+    starting_photo = params[:offset] || 0
+
+    @cities = City.all
+    @favorite_cities_without_home = current_user.favorite_cities.reject do |city|
+      city.id == current_user.home_city_id
+    end
+    @weather_conditions = WeatherCondition.all
+
+    @photos = Photo
+      .where(
+        "(photos.submitter_id IN (?)) OR (photos.city_id IN (?))",
+        current_user.favorited_user_ids,
+        current_user.favorite_city_ids
+      ).limit(10).offset(starting_photo)
+  end
+
   def new
     prepare_details_form_instance_variables
   end
 
   def create
+    # TEST THIS
     @user = User.new(params[:user])
+    unless @user.favorite_city_ids.includes?(@user.home_city_id)
+      @user.favorite_city_ids << @user.home_city_id
+    end
 
     if @user.save
       login_user!(@user)

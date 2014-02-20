@@ -12,13 +12,14 @@ class CitiesController < ApplicationController
   end
 
   def show
+    @cities = City.all
     @city = City.find_with_current_data(params[:id])
     # @city = City.find(params[:id])
     @current_temperature = @city.current_temperature
     @recent_reports = @city.recent_reports
     @weather_condition_frequencies = @city.top_three_conditions
 
-    @photos = @city.photos.limit(4).order("created_at DESC")
+    @photos = @city.photos.limit(2).order("created_at DESC")
   end
 
 end

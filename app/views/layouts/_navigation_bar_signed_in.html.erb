@@ -1,0 +1,8 @@
+<ul>
+  <li><%= link_to "Post a weather update", new_weather_report_url %></li>
+  <li><%= link_to "Post a photo", new_photo_url %></li>
+  <li><%= link_to "Dashboard", root_url %></li>
+  <li><%= link_to "My profile", user_gallery_url(current_user) %></li>
+  <li><%= link_to "Settings", edit_user_url(current_user) %></li>
+  <li><%= button_to "Sign Out", session_url, method: :delete %></li>
+</ul>

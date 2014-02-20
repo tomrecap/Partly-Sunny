@@ -1,5 +1,28 @@
 <!-- /app/views/photos/edit.html.erb -->
 
-<h1>Edit Photo</h1>
+<div class="content photo-edit">
 
-<%= render "details", mode: :edit, cities: @cities, photo: @photo %>
+<header>
+  <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
+  <h1 class="page-title">Edit Photo</h1>
+  <nav>
+    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
+    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
+  </nav>
+</header>
+
+
+<section class="main-columns">
+  <section class="city-picker">
+    <%= render "cities/city_picker", cities: @cities %>
+  </section>
+
+  <section class="middle-column">
+    <section class="edit-photo-form">
+      <%= render "details", mode: :edit, cities: @cities, photo: @photo %>
+    </section>
+  </section>
+</div>
+
+
+

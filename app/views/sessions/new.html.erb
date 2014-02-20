@@ -1,10 +1,10 @@
-<!-- /app/views/photos/show.html.erb -->
+<!-- app/views/sessions/new.html.erb -->
 
-<div class="content photo-show">
+<div class="content new-session">
 
 <header>
   <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
-  <h1 class="page-title"><%= link_to @photo.submitter.user_name, user_gallery_url(@photo.submitter) %>'s Photo</h1>
+  <h1 class="page-title">Sign In</h1>
   <nav>
     <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
     <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
@@ -18,8 +18,8 @@
   </section>
 
   <section class="middle-column">
-    <section class="photo-feed">
-      <%= render "photos/full_feed", photos: [@photo] %>
+    <section class="new-session-form">
+      <%= render 'new', user: @user %>
     </section>
   </section>
 </div>

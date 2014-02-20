@@ -1,0 +1,50 @@
+<!-- /app/views/photos/show.html.erb -->
+
+<h1 class="page-title"><%= link_to @photo.submitter.user_name, user_gallery_url(@photo.submitter) %>'s Photo</h1>
+
+<%= image_tag @photo.image.url(:big) %>
+
+<p>
+  <%= @photo.caption %>
+</p>
+
+<p>
+  Taken in <%= @photo.city.name %> at <%= friendly_time_format(@photo.created_at) %>
+</p>
+
+<p>
+  Tags
+  <ul>
+    <% @photo.tags.each do |tag| %>
+      <li><%= tag.body %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <ul>
+    <% @photo.comments.each do |comment| %>
+    <li>
+      <%= comment.author.user_name %>: <%= comment.body %>
+      <%= button_to "Delete", photo_comment_url(@photo, comment), method: :delete if current_user_can_delete?(comment) %>
+    </li>
+    <% end %>
+  </ul>
+
+  <form action="<%= photo_comments_url(@photo) %>" method="post">
+    <%= insert_form_authenticity_token %>
+    <p>
+      <label for="comment">Add a Comment:</label>
+      <textarea name="comment[body]" id="comment"></textarea>
+    </p>
+
+    <p><input type="submit" value="Post"></p>
+  </form>
+</p>
+
+
+<p>
+  <%= link_to "Edit Photo", edit_photo_url(@photo) if @photo.submitter == current_user%>
+  <br>
+  <%= button_to "Delete Photo", photo_url(@photo), method: :delete if @photo.submitter == current_user%>
+</p>

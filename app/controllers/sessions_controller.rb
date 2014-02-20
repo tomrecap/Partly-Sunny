@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   before_filter :require_not_signed_in!, except: :destroy
 
   def new
-
+    @cities = City.all
   end
 
   def create

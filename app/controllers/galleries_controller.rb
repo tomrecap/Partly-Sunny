@@ -3,6 +3,8 @@ class GalleriesController < ApplicationController
   def show
     starting_photo = (params[:offset] || 0)
 
+    @cities = City.all
+
     # make this less repetitive
     if params[:city_id]
       @subject = City.find(params[:city_id])
