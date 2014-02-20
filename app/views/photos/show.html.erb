@@ -1,4 +1,6 @@
-<h1 class="page-title"><%= @photo.submitter.user_name %>'s Photo</h1>
+<!-- /app/views/photos/show.html.erb -->
+
+<h1 class="page-title"><%= link_to @photo.submitter.user_name, user_gallery_url(@photo.submitter) %>'s Photo</h1>
 
 <%= image_tag @photo.image.url(:big) %>
 

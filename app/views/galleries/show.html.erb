@@ -1,0 +1,66 @@
+<!-- /app/views/galleries/show.html.erb -->
+
+<h1>Weather Photos for: <%= @name %></h1>
+
+<ul>
+  <% @photos.each do |photo| %>
+  <li>
+    <a href="<%= photo_url(photo) %>">
+      <%= image_tag photo.image.url(:small) %>
+    </a>
+    <figcaption>
+      <p>
+        <a href="<%= user_gallery_url(photo.submitter) %>"><%= image_tag photo.submitter.avatar.url(:thumbnail), class: "avatar" %></a>
+
+        <a href="<%= user_url(photo.submitter) %>">
+          <%= photo.submitter.user_name %></a>
+
+        <%= time_ago_in_words(photo.created_at) %>
+      </p>
+
+      <p>
+        <%= photo.caption %>
+      </p>
+
+      <p>
+        Tags:
+        <ul>
+          <% photo.tags.each do |tag| %>
+          <li><%= link_to tag.body, tag_gallery_url(tag) %></li>
+          <% end %>
+        </ul>
+      </p>
+
+      <p>
+        Comments:
+        <ul>
+          <% photo.comments.each do |comment| %>
+          <li><%= link_to comment.author.user_name, user_gallery_url(comment.author) %>: <%= comment.body %></li>
+          <% end %>
+        </ul>
+      </p>
+
+      <p>
+        <form action="<%= photo_comments_url(photo) %>" method="post">
+          <%= insert_form_authenticity_token %>
+          <p>
+            <label for="comment">Add a Comment:</label>
+            <textarea name="comment[body]" id="comment"></textarea>
+          </p>
+
+          <p><input type="submit" value="Post"></p>
+        </form>
+      </p>
+    </figcaption>
+
+    <br>
+    <br>
+    <br>
+    <br>
+  </li>
+  <% end %>
+</ul>
+
+<section class="user-profile-box">
+  <%= (render "user_details", user: @subject) if @subject.is_a?(User) %>
+</section>

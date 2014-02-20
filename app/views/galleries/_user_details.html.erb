@@ -1,0 +1,16 @@
+<!-- /app/views/galleries/_user_details.html.erb -->
+
+<p>
+  <a href="<%= user_gallery_url(user) %>">
+    <%= image_tag user.avatar.url(:thumbnail) %>
+    <%= user.user_name %></a>
+</p>
+
+<p>
+  <%= link_to city_url(user.home_city_id), user.home_city.name %>
+</p>
+
+<p>
+  Bio: <%= user.bio %>
+</p>
+

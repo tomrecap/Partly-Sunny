@@ -1,10 +1,14 @@
+<!-- /app/views/photos/_last_four_photos.html.erb -->
+
 <ul>
   <% photos.each do |photo| %>
   <li>
-    <%= image_tag photo.image.url(:small) %>
+    <a href="<%= photo_url(photo) %>">
+      <%= image_tag photo.image.url(:small) %>
+    </a>
     <figcaption>
       <p>
-        <%= image_tag photo.submitter.avatar.url(:thumbnail) %>
+        <a href="<%= user_url(photo.submitter) %>"><%= image_tag photo.submitter.avatar.url(:thumbnail) %></a>
 
         <%= photo.submitter.user_name %>
         <br>
