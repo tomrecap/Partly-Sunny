@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def new
     prepare_details_form_instance_variables
+
   end
 
   def create

@@ -1,30 +1,30 @@
 <!-- app/views/users/_details.html.erb -->
 <% action_url = (mode == :new ? users_url : user_url(@user)) %>
 
-<form action="<%= action_url %>" method="post" enctype="multipart/form-data">
+<form
+  action="<%= action_url %>"
+  method="post"
+  enctype="multipart/form-data"
+  class="input">
   <%= change_post_to_put if mode == :edit %>
 
   <%= insert_form_authenticity_token %>
 
-  <p>
+
     <label for="user_name">User Name</label>
     <input
       type="text"
       name="user[user_name]"
       value="<%= @user.try(:user_name) %>"
       id="user_name">
-  </p>
 
-  <p>
     <label for="email">Email</label>
     <input
       type="email"
       name="user[email]"
       value="<%= @user.try(:email) %>"
       id="email">
-  </p>
 
-  <p>
     <label for="password">Password</label>
     <input
       type="password"
@@ -36,9 +36,7 @@
       type="password"
       name="user[password_confirmation]"
       id="password_confirmation">
-  </p>
 
-  <p>
     <label for="home_city_id">Home City</label>
     <select name="user[home_city_id]" id="home_city_id">
       <% @cities.each do |city| %>
@@ -49,17 +47,13 @@
         </option>
       <% end %>
     </select>
-  </p>
 
-  <p>
     <label for="bio">Bio:</label>
     <br>
     <textarea name="user[bio]" id="bio"><%= @user.try(:bio) %></textarea>
     <br>
     <label for="bio">(140 characters max)</label>
-  </p>
 
-  <p>
     <label for="avatar">Avatar</label>
     <br>
     <%= image_tag @user.try(:avatar).try(:url, :full), class: "teaser-photo" %>
@@ -69,9 +63,7 @@
       name="user[avatar]"
       value=""
       id="avatar">
-  </p>
 
-  <p>
     Favorite Cities:
     <br>
     <input type="hidden" name="user[favorite_city_ids][]" value=" ">
@@ -86,10 +78,10 @@
     <label for="city_checkbox_<%= city.id %>"><%= city.name %></label>
     <br>
     <% end %>
-  </p>
+
 
   <% if mode == :edit %>
-    <p>
+
       Favorite Users:
       <br>
       <input type="hidden" name="user[favorited_user_ids][]" value=" ">
@@ -104,8 +96,11 @@
       <label for="fave_user_checkbox_<%= user.id %>"><%= user.user_name %></label>
       <br>
       <% end %>
-    </p>
+
   <% end %>
 
-  <p><input type="submit" value="<%= mode == :new ? 'Sign Up!' : 'Update Information' %>"></p>
+  <input
+    type="submit"
+    value="<%= mode == :new ? 'Sign Up!' : 'Update Information' %>"
+    class="submit">
 </form>

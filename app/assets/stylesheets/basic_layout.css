@@ -192,7 +192,7 @@ header nav li {
   border-color: #0b0;
 }
 
-input.submit {
+input.submit, button.submit {
   background: #a7ba5c;
   color:black;
 }

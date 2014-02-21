@@ -46,14 +46,17 @@
         </p>
 
         <p>
-          <form action="<%= photo_comments_url(photo) %>" method="post">
+          <form
+            class="input"
+            action="<%= photo_comments_url(photo) %>"
+            method="post">
             <%= insert_form_authenticity_token %>
-            <p>
+
               <label for="comment">Add a Comment:</label>
               <textarea name="comment[body]" id="comment"></textarea>
-            </p>
 
-            <p><input type="submit" value="Post"></p>
+
+            <input type="submit" value="Post">
           </form>
         </p>
       </figcaption>
