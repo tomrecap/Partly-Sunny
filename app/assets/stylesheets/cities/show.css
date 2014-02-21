@@ -1,0 +1,13 @@
+
+/* --------------- CURRENT WEATHER CONDITIONS --------------- */
+.current-conditions .current-weather-icon {
+  height:100px;
+  width: 100px;
+  margin-right: 25px;
+  vertical-align:-20px;
+}
+
+.current-conditions em {
+  font-style:normal;
+  font-size:42pt;
+}

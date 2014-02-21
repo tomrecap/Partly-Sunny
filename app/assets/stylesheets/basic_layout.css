@@ -1,0 +1,159 @@
+/* /app/assets/stylesheets/basic_layout.css */
+
+/*--------- TOP-MOST CONTAINERS ---------*/
+body {
+  font-family:Helvetica, sans-serif;
+  padding-top:1px;
+}
+
+.content {
+  width:900px;
+  padding-top: 49px;
+  margin-left:auto;
+  margin-right:auto;
+/*  border: 1px solid #999;*/
+  line-height:140%;
+}
+
+img.avatar {
+  height:15px;
+  width:15px;
+}
+
+img.teaser-photo {
+  height:150px;
+  width:150px;
+}
+
+img.content-photo {
+
+}
+
+/*--------- CLEARFIX ---------*/
+.group:after {
+  clear:both;
+  display:table;
+  content:"";
+}
+
+/*--------- HEADER ---------*/
+
+header {
+  display:block;
+  position:relative;
+  margin-bottom:50px;
+}
+
+header a {
+
+}
+
+header img.logo {
+  float:left;
+  width:300px;
+}
+
+header h1.page-title {
+  display:inline-block;
+  float:left;
+  width:200px;
+  margin-left: 50px;
+  font-size:18px;
+  padding-top:75px;
+}
+
+header nav {
+  float:right;
+  margin-right:50px;
+}
+
+header nav ul {
+
+}
+
+header nav li {
+
+}
+
+/*--------- CONTENT ---------*/
+.main-columns {
+  display:block;
+  position:relative;
+  margin-bottom:50px;
+}
+
+.main-columns:after {
+  content:"";
+  clear:both;
+  display:table;
+}
+
+/*--------- LEFT COLUMN ---------*/
+
+.left-column {
+
+}
+
+.city-picker {
+  display:block;
+  float:left;
+  width:200px;
+}
+
+/*--------- CENTER COLUMN ---------*/
+.middle-column {
+  display:block;
+  float:left;
+  width:450px;
+  padding-left:25px;
+  padding-right:25px;
+}
+
+.photo-feed
+  li {
+    display:block;
+    width:350px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-bottom:10px;
+    margin-bottom:10px;
+  }
+
+  img.content-photo {
+    width:350px;
+    margin-bottom:25px;
+  }
+
+  figcaption {
+    font-size:10pt;
+  }
+
+  img.avatar {
+    width:25px;
+    height:25px;
+  }
+
+  ul.tag-list {
+    display:block;
+    position:relative;
+    height:40px;
+  }
+
+  ul.tag-list  li {
+      display:inline-block;
+      float:left;
+      padding:2px;
+      margin-left:2px;
+      margin-bottom:10px;
+      border: 1px solid #999;
+      width:50px;
+    }
+
+
+/*--------- RIGHT COLUMN ---------*/
+
+.right-column {
+  display:block;
+  float:left;
+  width:200px;
+}

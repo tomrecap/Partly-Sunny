@@ -14,6 +14,7 @@
 
 /* make this a scss file & user @import to import the other styles in order */
 
+/* - - - - RESETS - - - - */
 html, body, p, ul, li {
   margin:0;
   padding:0;
@@ -26,17 +27,22 @@ li {
   list-style:none;
 }
 
-body {
-  font-family:Helvetica, sans-serif;
-  padding-top:1px;
+a {
+  font-decoration:none;
+  color:inherit;
+  font:inherit;
 }
 
-.content {
-  width:900px;
-  padding-top: 49px;
-  margin-left:auto;
-  margin-right:auto;
-/*  border: 1px solid #999;*/
-  line-height:140%;
+figure {
+display: block;
+-webkit-margin-before: 0;
+-webkit-margin-after: 0;
+-webkit-margin-start: 0;
+-webkit-margin-end: 0;
 }
-
+/* - - - - IMPORT PAGE STYLES - - - - */
+@import 'basic_layout';
+@import 'cities/index';
+@import 'cities/show';
+@import 'users/dashboard';
+@import 'current_weather_summary';

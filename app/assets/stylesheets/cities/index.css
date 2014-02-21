@@ -86,10 +86,10 @@
   }
 
   .recent-photos li+li {
-   margin-left:50px;
+/*   margin-left:50px;*/
   }
 
-  .recent-photos img {
+  .recent-photos img.teaser {
     max-width:200px;
     height:200px;
   }

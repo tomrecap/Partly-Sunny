@@ -2,7 +2,7 @@
 
 <div class="content photo-gallery">
 
-<header>
+<header class="group">
   <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
   <h1 class="page-title">Weather Photos for: <%= @name %></h1>
   <nav>
@@ -13,8 +13,10 @@
 
 
 <section class="main-columns">
-  <section class="city-picker">
-    <%= render "cities/city_picker", cities: @cities %>
+  <section class="left-column">
+    <section class="city-picker">
+      <%= render "cities/city_picker", cities: @cities %>
+    </section>
   </section>
 
   <section class="middle-column">

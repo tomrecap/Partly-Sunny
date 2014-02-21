@@ -1,11 +1,15 @@
 <!-- app/view/cities/_current_weather_summary.html.erb -->
 
-<p>
-  <figure class="current-weather-icon">
+<section class="current-weather-summary group">
+
+  <figure class="icon">
     <%= image_tag top_weather_condition_icon(city).url(:thumbnail) %>
   </figure>
 
-  <%= link_to city.name, city_url(city) %>
-  <br>
-  <%= city.current_temperature %> <%= city.top_three_conditions.first.first %>
-</p>
+  <section class="stats">
+    <%= link_to city.name, city_url(city) %>
+    <br>
+    <%= city.current_temperature %> <%= city.top_three_conditions.first.first %>
+  </section>
+
+</section>
