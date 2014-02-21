@@ -27,6 +27,11 @@ class CitiesController < ApplicationController
 
     if @search_results.count == 1
       redirect_to city_url(@search_results.first)
+    else
+      @search_query = params[:search_query]
+
+      @cities = City.all
+      render :search
     end
   end
 
