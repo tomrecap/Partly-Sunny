@@ -11,12 +11,17 @@ gem "paperclip"
 gem "aws-sdk"
 gem 'figaro'
 
+gem 'kaminari'
+gem 'omniauth-twitter'
+
 gem 'faker'
+
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'annotate'
+  gem 'letter_opener'
 end
 
 # Gems used only for assets and not required

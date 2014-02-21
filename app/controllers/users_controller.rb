@@ -12,17 +12,19 @@ class UsersController < ApplicationController
     starting_photo = params[:offset] || 0
 
     @cities = City.all
-    @favorite_cities_without_home = current_user.favorite_cities.reject do |city|
+    @weather_conditions = WeatherCondition.all
+
+    favorite_cities = current_user.favorite_cities
+    @favorite_cities_without_home = favorite_cities.reject do |city|
       city.id == current_user.home_city_id
     end
-    @weather_conditions = WeatherCondition.all
 
     @photos = Photo
       .where(
         "(photos.submitter_id IN (?)) OR (photos.city_id IN (?))",
         current_user.favorited_user_ids,
         current_user.favorite_city_ids
-      ).limit(10).offset(starting_photo)
+      ).includes(:comments, :tags).limit(10).offset(starting_photo)
   end
 
   def new
