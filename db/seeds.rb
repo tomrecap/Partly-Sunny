@@ -29,20 +29,14 @@ WEATHER_PHOTO_URLS = ["http://www.sgi.com/solutions/research/images/weather.jpg"
 # WeatherCondition.create(description: "Cold")
 # WeatherCondition.create(description: "Snowing")
 #
-# WeatherCondition.find_by_description("Windy").icon = "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/windy.png
-# "
-# WeatherCondition.find_by_description("Rainy").icon = "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/rainy.png
-# "
-# WeatherCondition.find_by_description("Sunny").icon = "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/sunny.png
-# "
-# WeatherCondition.find_by_description("Cloudy").icon = "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/cloudy.png
-# "
-# WeatherCondition.find_by_description("Hot").icon = "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/hot.png
-# "
-# WeatherCondition.find_by_description("Cold").icon = "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/cold.png
-# "
-# WeatherCondition.find_by_description("Snowing").icon = "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/snowing.png
-# "
+
+WeatherCondition.find(1).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/windy.png")
+WeatherCondition.find(2).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/rainy.png")
+WeatherCondition.find(3).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/sunny.png")
+WeatherCondition.find(4).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/cloudy.png")
+WeatherCondition.find(5).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/hot.png")
+WeatherCondition.find(6).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/cold.png")
+WeatherCondition.find(7).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/snowing.png")
 #
 # Tag.create(body: "windy")
 # Tag.create(body: "rainy")
@@ -127,18 +121,18 @@ WEATHER_PHOTO_URLS = ["http://www.sgi.com/solutions/research/images/weather.jpg"
 #   )
 # end
 
-# randomize weather report times
-
-WeatherReport.all.each do |weather_report|
-  random_time_in_last_day = Time.now - rand(0...(24*60*60))
-  weather_report.created_at = random_time_in_last_day
-  weather_report.save!
-end
-
-# randomize pictures times
-
-Photo.all.each do |photo|
-  random_time_in_last_day = Time.now - rand(0...(24*60*60))
-  photo.created_at = random_time_in_last_day
-  photo.save!
-end
+# # randomize weather report times
+#
+# WeatherReport.all.each do |weather_report|
+#   random_time_in_last_day = Time.now - rand(0...(24*60*60))
+#   weather_report.created_at = random_time_in_last_day
+#   weather_report.save!
+# end
+#
+# # randomize pictures times
+#
+# Photo.all.each do |photo|
+#   random_time_in_last_day = Time.now - rand(0...(24*60*60))
+#   photo.created_at = random_time_in_last_day
+#   photo.save!
+# end
