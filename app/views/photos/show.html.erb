@@ -20,6 +20,10 @@
   <section class="middle-column">
     <section class="photo-feed">
       <%= render "photos/full_feed", photos: [@photo] %>
+
+        <%= link_to "Edit Photo", edit_photo_url(@photo) if @photo.submitter == current_user%>
+        <br>
+        <%= button_to "Delete Photo", photo_url(@photo), method: :delete if @photo.submitter == current_user%>
     </section>
   </section>
 </div>

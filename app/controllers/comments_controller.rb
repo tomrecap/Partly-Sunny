@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_filter :require_signed_in!
 
   def create
     @comment = Photo.find(params[:photo_id]).comments.new(params[:comment])

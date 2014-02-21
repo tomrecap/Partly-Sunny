@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  before_filter :require_signed_in!
 
   def new
     prepare_instance_variables_for_details_form
@@ -48,7 +49,7 @@ class PhotosController < ApplicationController
     Photo.destroy(params[:id])
 
     flash[:notice] = "Photo removed"
-    redirect_to user_url(current_user)
+    redirect_to user_gallery_url(current_user)
   end
 
   private

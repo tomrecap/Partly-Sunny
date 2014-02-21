@@ -75,7 +75,7 @@ class City < ActiveRecord::Base
 
 # use includes for city & city.joinsweatherreport here
   def recent_reports
-    @recent_reports ||= self.weather_reports.includes(:weather_condition).where("city_id = ? AND created_at >= ?", self.id, WeatherReport::TIME_HORIZON)
+    @recent_reports ||= self.weather_reports.includes(:weather_condition).where("city_id = ? AND created_at >= ?", self.id, WeatherReport::TIME_HORIZON).order("created_at DESC")
   end
 
   def current_temperature

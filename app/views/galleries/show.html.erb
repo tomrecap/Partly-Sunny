@@ -20,6 +20,10 @@
   <section class="middle-column">
     <section class="photo-feed">
       <%= render "photos/full_feed", photos: @photos %>
+
+      <% if @photos.nil? || @photos.length == 0 %>
+        This user hasn't uploaded any photos yet.
+      <% end %>
     </section>
   </section>
 

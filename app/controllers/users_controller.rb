@@ -30,10 +30,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    # TEST THIS
     @user = User.new(params[:user])
-    unless @user.favorite_city_ids.includes?(@user.home_city_id)
-      @user.favorite_city_ids << @user.home_city_id
+    unless @user.favorite_city_ids.include?(@user.home_city_id)
+      @user.favorite_city_ids = @user.favorite_city_ids.push(@user.home_city_id)
     end
 
     if @user.save
@@ -87,7 +86,7 @@ class UsersController < ApplicationController
   private
   def prepare_details_form_instance_variables
     @cities = City.all
-    @users = User.where("id <> ?", current_user.id) if signed_in?
+    @other_users = User.where("id <> ?", current_user.id) if signed_in?
   end
 
   def ignore_blank_password_entries

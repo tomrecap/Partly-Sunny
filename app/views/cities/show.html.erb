@@ -64,9 +64,7 @@
       <%= link_to "New Report for #{@city.name}", new_weather_report_url(city_id: @city.id) %>
     </p>
 
-    <p>
       <%= insert_approriate_favorite_city_button(@city.id) if signed_in? %>
-    </p>
 
     <section class="recent-photos">
       <h2 class="section-title"><%= link_to "Latest Photos", city_gallery_url(@city) %></h2>

@@ -9,9 +9,11 @@
 #
 
 class WeatherCondition < ActiveRecord::Base
-  attr_accessible :description
+  attr_accessible :description, :icon
 
+  has_attached_file :icon, styles: { thumbnail: '100x100', full: '600x600' }
   validates :description, presence: true, uniqueness: true
+  validates_attachment_content_type :icon, content_type: /\Aimage\/.*\Z/
 
   has_many(
     :weather_reports,

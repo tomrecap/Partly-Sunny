@@ -1,20 +1,23 @@
-<!-- /app/views/photos/_last_four_photos.html.erb -->
+<!-- /app/views/photos/_photo_list_minimal_caption.html.erb -->
 
 <ul>
   <% photos.each do |photo| %>
   <li>
-    <a href="<%= photo_url(photo) %>">
-      <%= image_tag photo.image.url(:small), class: "teaser-photo" %>
-    </a>
+    <figure>
+      <a href="<%= photo_url(photo) %>">
+        <%= image_tag photo.image.url(:small), class: "teaser-photo" %>
+      </a>
     <figcaption>
       <p>
-        <a href="<%= user_url(photo.submitter) %>"><%= image_tag photo.submitter.avatar.url(:thumbnail), class: "avatar" %></a>
+        <a href="<%= user_gallery_url(photo.submitter) %>"><%= image_tag photo.submitter.avatar.url(:thumbnail), class: "avatar" %></a>
 
-        <%= photo.submitter.user_name %>
+        <a href="<%= user_gallery_url(photo.submitter) %>">
+          <%= photo.submitter.user_name %></a>
         <br>
         <%= time_ago_in_words(photo.created_at) %>
       </p>
     </figcaption>
+  </figure>
   </li>
   <% end %>
 </ul>

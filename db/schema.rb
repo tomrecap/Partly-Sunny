@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140219195009) do
+ActiveRecord::Schema.define(:version => 20140221000121) do
 
   create_table "cities", :force => true do |t|
     t.string   "name",       :null => false
@@ -101,9 +101,13 @@ ActiveRecord::Schema.define(:version => 20140219195009) do
   add_index "users", ["session_token"], :name => "index_users_on_session_token", :unique => true
 
   create_table "weather_conditions", :force => true do |t|
-    t.string   "description", :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "description",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   create_table "weather_reports", :force => true do |t|

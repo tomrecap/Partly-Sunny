@@ -1,4 +1,5 @@
 class GalleriesController < ApplicationController
+  before_filter :require_signed_in!
 
   def show
     starting_photo = (params[:offset] || 0)

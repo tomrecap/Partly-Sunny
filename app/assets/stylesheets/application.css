@@ -12,6 +12,8 @@
  *= require_tree .
  */
 
+/* make this a scss file & user @import to import the other styles in order */
+
 html, body, p, ul, li {
   margin:0;
   padding:0;
@@ -26,14 +28,15 @@ li {
 
 body {
   font-family:Helvetica, sans-serif;
+  padding-top:1px;
 }
 
 .content {
   width:900px;
-  margin-top: 50px;
+  padding-top: 49px;
   margin-left:auto;
   margin-right:auto;
-  border: 1px solid #999;
+/*  border: 1px solid #999;*/
   line-height:140%;
 }
 
