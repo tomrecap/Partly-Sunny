@@ -31,6 +31,9 @@ class City < ActiveRecord::Base
   has_many(:photos, class_name: "Photo",
     foreign_key: :city_id, primary_key: :id)
 
+  include PgSearch
+  pg_search_scope :search_by_name, against: :name
+
 
   def self.find_with_current_data(city_id)
     City.includes(weather_reports: :weather_condition)

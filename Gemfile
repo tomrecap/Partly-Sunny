@@ -13,6 +13,7 @@ gem 'figaro'
 
 gem 'kaminari'
 gem 'omniauth-twitter'
+gem 'pg_search'
 
 gem 'faker'
 

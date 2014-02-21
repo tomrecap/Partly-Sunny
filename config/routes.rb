@@ -5,6 +5,7 @@ WeatherApp::Application.routes.draw do
 
   resources :cities, only: [:show, :index] do
     resource :gallery, only: :show
+    get "search", on: :collection
   end
 
   resources :favorite_city_links, only: [:create, :destroy]

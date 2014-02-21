@@ -4,3 +4,15 @@
     <li><%= link_to city.name, city_url(city) %></li>
   <% end %>
 </ul>
+
+- or -
+
+<form action="<%= search_cities_url %>" method="get">
+
+  <%= insert_form_authenticity_token %>
+
+  <label for="search_query">Search by City</label>
+  <input type="text" name="search_query" value="" id="search_query">
+
+  <p><input type="submit" value="Search"></p>
+</form>

@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_filter :require_signed_in!, except: [:show, :index]
+  before_filter :require_signed_in!, except: [:show, :index, :search]
 
   def index
     redirect_to dashboard_user_url(current_user) if signed_in?
@@ -20,6 +20,14 @@ class CitiesController < ApplicationController
     @weather_condition_frequencies = @city.top_three_conditions
 
     @photos = @city.photos.limit(2).order("created_at DESC")
+  end
+
+  def search
+    @search_results = City.search_by_name(params[:search_query])
+
+    if @search_results.count == 1
+      redirect_to city_url(@search_results.first)
+    end
   end
 
 end
