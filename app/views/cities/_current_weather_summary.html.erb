@@ -1,6 +1,10 @@
 <!-- app/view/cities/_current_weather_summary.html.erb -->
 
 <p>
+  <figure class="current-weather-icon">
+    <%= image_tag @top_weather_condition_icon.url(:thumbnail) %>
+  </figure>
+
   <%= link_to city.name, city_url(city) %>
   <br>
   <%= city.current_temperature %> <%= city.top_three_conditions.first.first %>

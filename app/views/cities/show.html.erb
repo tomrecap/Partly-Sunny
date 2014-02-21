@@ -20,14 +20,13 @@
   <section class="middle-column">
     <section class="current-conditions">
       <h2 class="section-title">Current Conditions</h2>
+
+      <figure class="current-weather-icon">
+        <%= image_tag @top_weather_condition_icon.url(:thumbnail) %>
+      </figure>
       <p><%= @current_temperature %></p>
 
-      <table>
-        <tr>
-          <th>Condition</th>
-          <th></th>
-        </tr>
-
+      <table class="percentages">
         <% @weather_condition_frequencies.each do |condition| %>
         <tr>
           <td><%= condition[0] %></td>

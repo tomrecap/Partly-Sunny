@@ -42,17 +42,19 @@ class City < ActiveRecord::Base
   end
 
   def top_three_conditions
-    condition_ids = recent_reports.map(&:weather_condition_id)
-    frequencies_by_id = build_frequency_hash(condition_ids)
-    frequency_array = hash_to_array_sorted_by_values(frequencies_by_id)
-
     frequencies_by_name = {}
-    frequency_array[0...3].each do |id, frequency|
+    array_of_frequencies_by_id[0...3].each do |id, frequency|
       name = condition_names_hash[id]
       frequencies_by_name[name] = frequency
     end
 
     frequencies_by_name
+  end
+
+  def array_of_frequencies_by_id
+    condition_ids = recent_reports.map(&:weather_condition_id)
+    frequencies_by_id = build_frequency_hash(condition_ids)
+    hash_to_array_sorted_by_values(frequencies_by_id)
   end
 
   def build_frequency_hash(array)
