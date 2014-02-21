@@ -2,7 +2,7 @@
 
 <p>
   <figure class="current-weather-icon">
-    <%= image_tag @top_weather_condition_icon.url(:thumbnail) %>
+    <%= image_tag top_weather_condition_icon(city).url(:thumbnail) %>
   </figure>
 
   <%= link_to city.name, city_url(city) %>

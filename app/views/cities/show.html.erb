@@ -22,7 +22,7 @@
       <h2 class="section-title">Current Conditions</h2>
 
       <figure class="current-weather-icon">
-        <%= image_tag @top_weather_condition_icon.url(:thumbnail) %>
+        <%= image_tag top_weather_condition_icon(@city).url(:thumbnail) %>
       </figure>
       <p><%= @current_temperature %></p>
 

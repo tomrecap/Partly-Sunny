@@ -19,10 +19,6 @@ class CitiesController < ApplicationController
     @recent_reports = @city.recent_reports
     @weather_condition_frequencies = @city.top_three_conditions
 
-    @top_weather_condition_icon = WeatherCondition.find(
-      @city.array_of_frequencies_by_id.first.first
-    ).icon
-
     @photos = @city.photos.limit(2).order("created_at DESC")
   end
 
