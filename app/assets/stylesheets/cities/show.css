@@ -1,3 +1,5 @@
+/* -------- /app/assets/stylesheets/cities/show.css --------- */
+
 
 /* --------------- CURRENT WEATHER CONDITIONS --------------- */
 .current-conditions .current-weather-icon {
@@ -11,3 +13,8 @@
   font-style:normal;
   font-size:42pt;
 }
+
+/* ---------- LATEST WEATHER REPORTS --------------------- */
+
+/* ---------- LATEST PHOTOS IN RIGHT-HAND COLUMN --------- */
+
