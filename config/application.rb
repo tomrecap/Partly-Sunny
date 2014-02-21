@@ -67,7 +67,7 @@ module WeatherApp
         :bucket => ENV["S3_BUCKET"],
         :access_key_id => ENV["ACCESS_KEY_ID"],
         :secret_access_key => ENV["SECRET_ACCESS_KEY"],
-        :s3_host_name => ENV["S3_HOST_NAME"] # or whatever your region host name is
+        :s3_host_name => 's3-us-east-1.amazonaws.com' # or whatever your region host name is
       }
     }
 
