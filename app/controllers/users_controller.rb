@@ -24,7 +24,10 @@ class UsersController < ApplicationController
         "(photos.submitter_id IN (?)) OR (photos.city_id IN (?))",
         current_user.favorited_user_ids,
         current_user.favorite_city_ids
-      ).includes(:comments, :tags).limit(10).offset(starting_photo)
+      ).includes(:comments, :tags)
+      .page(params[:page])
+      .per(10)
+      .order("created_at DESC")
   end
 
   def new

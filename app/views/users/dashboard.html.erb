@@ -27,7 +27,9 @@
 
     <section class="photo-feed">
       <h2 class="section-title">Weather Photos</h3>
-      <%= render "photos/full_feed", photos: @photos %>
+        <%= render "photos/full_feed", photos: @photos %>
+
+        <%= paginate @photos %>
     </section>
   </section>
 
