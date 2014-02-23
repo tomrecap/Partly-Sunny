@@ -15,8 +15,13 @@ class CitiesController < ApplicationController
     @cities = City.all
     @city = City.find_with_current_data(params[:id])
     # @city = City.find(params[:id])
-    @current_temperature = @city.current_temperature
+    @current_temperature = @city.current_temperature(current_user.celsius)
+
     @recent_reports = @city.recent_reports
+    @recent_reports.map do |report|
+      report.temperature = convert_to_celsius(report.temperature)
+    end if current_user.celsius
+
     @weather_condition_frequencies = @city.top_three_conditions
 
     @photos = @city.photos.limit(2).order("created_at DESC")

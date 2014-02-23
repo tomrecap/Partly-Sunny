@@ -10,6 +10,10 @@ class WeatherReportsController < ApplicationController
   def create
     @weather_report = WeatherReport.new(params[:weather_report])
 
+    if params[:temperature_scale] == "celsius"
+      @weather_report.temperature = convert_to_fahrenheit(@weather_report.temperature)
+    end
+
     if @weather_report.save
       redirect_to city_url(@weather_report.city_id)
     else

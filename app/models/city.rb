@@ -83,10 +83,16 @@ class City < ActiveRecord::Base
     @recent_reports ||= self.weather_reports.includes(:weather_condition).where("city_id = ? AND created_at >= ?", self.id, WeatherReport::TIME_HORIZON).order("created_at DESC")
   end
 
-  def current_temperature
+  def current_temperature(use_celsius = false)
     temperatures = recent_reports.map(&:temperature)
     average = (temperatures.inject(&:+) / temperatures.length)
-    average.round(1)
+
+    use_celsius ? (convert_to_celsius(average).round(1)) : average.round(1)
+
+  end
+
+  def convert_to_celsius(fahrenheit)
+    ((fahrenheit - 32) * 5 / 9.0)
   end
 
 end

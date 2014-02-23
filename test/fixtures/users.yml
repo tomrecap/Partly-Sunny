@@ -17,6 +17,7 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  uid                 :integer
+#  celsius             :boolean          default(FALSE), not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

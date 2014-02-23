@@ -23,7 +23,7 @@
 
 
       <%= image_tag top_weather_condition_icon(@city).url(:thumbnail), class: "current-weather-icon" %>
-      <em><%= @current_temperature %>&deg; F</em>
+      <em><%= @current_temperature %>&deg; <%= current_user.celsius ? "C" : "F" %></em>
 
       <table class="percentages">
         <% @weather_condition_frequencies.each do |condition| %>
@@ -47,7 +47,9 @@
 
         <% @recent_reports.take(10).each do |report| %>
         <tr>
-          <td><%= report.temperature %>&deg; F</td>
+          <td>
+            <%= report.temperature %> &deg; <%= current_user.celsius ? "C" : "F" %>
+          </td>
           <td><%= report.weather_condition.description %></td>
           <td><%= friendly_time_format(report.created_at) %></td>
         </tr>

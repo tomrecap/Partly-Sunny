@@ -9,7 +9,9 @@
   <section class="stats">
     <%= link_to city.name, city_url(city) %>
     <br>
-    <%= city.current_temperature %> <%= city.top_three_conditions.first.first %>
+    <%= city.current_temperature(current_user.try(:celsius)) %> &deg;
+    <%= current_user.try(:celsius) ? "C" : "F" %>
+    <%= city.top_three_conditions.first.first %>
   </section>
 
 </section>

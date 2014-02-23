@@ -37,6 +37,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.celsius = (params[:temperature_scale] == "celsius")
+
     unless @user.favorite_city_ids.include?(@user.home_city_id)
       @user.favorite_city_ids = @user.favorite_city_ids.push(@user.home_city_id)
     end
@@ -68,6 +70,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.celsius = (params[:temperature_scale] == "celsius")
 
     if @user.update_attributes(params[:user])
       flash.now[:notice] = "Your information has been updated."

@@ -9,10 +9,26 @@
 
     <label for="temperature">Temperature</label>
     <input
-      type="text"
+      type="number"
       name="weather_report[temperature]"
       value="<%= @weather_report.try(&:temperature) %>"
       id="temperature">
+
+    <input
+      type="radio"
+      name="temperature_scale"
+      value="fahrenheit"
+      id="fahrenheit"
+      <%= "checked" unless current_user.try(:celsius) %>>
+    <label for="fahrenheit">Fahrenheit</label>
+
+    <input
+      type="radio"
+      name="temperature_scale"
+      value="celsius"
+      id="celsius"
+      <%= "checked" if current_user.try(:celsius) %>>
+    <label for="celsius">Celsius</label>
 
 
 

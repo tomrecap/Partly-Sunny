@@ -42,9 +42,12 @@ display: block;
 }
 
 input[type="text"],
+input[type="number"],
+//input[type="radio"],
 input[type="email"],
 input[type="password"],
-input[type="submit"] {
+input[type="submit"],
+textarea {
   -webkit-appearance: none;
   display: inline-block;
   margin: 0;

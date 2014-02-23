@@ -17,12 +17,13 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  uid                 :integer
+#  celsius             :boolean          default(FALSE), not null
 #
 
 class User < ActiveRecord::Base
   attr_accessible :user_name, :email, :password, :bio, :session_token,
     :home_city_id, :password_confirmation, :favorite_city_ids,
-    :favorited_user_ids, :avatar, :uid
+    :favorited_user_ids, :avatar, :uid, :celsius
   attr_reader :password, :avatar_remote_url
 
   has_attached_file :avatar, styles: {

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user, :signed_in?, :current_user_can_delete?
+  helper_method :current_user, :signed_in?, :current_user_can_delete?,
+    :convert_to_celsius, :convert_to_fahrenheit
 
   private
 
@@ -38,6 +39,14 @@ class ApplicationController < ActionController::Base
 
   def current_user_can_delete?(comment)
     current_user == (comment.author || comment.photo.submitter)
+  end
+
+  def convert_to_celsius(fahrenheit)
+    ((fahrenheit - 32) * 5 / 9.0).round(1)
+  end
+
+  def convert_to_fahrenheit(celsius)
+    ((celsius * 1.8) + 32).round(1)
   end
 
 end

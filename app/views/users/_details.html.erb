@@ -48,6 +48,23 @@
       <% end %>
     </select>
 
+    <label>Temperature Scale</label>
+      <input
+        type="radio"
+        name="temperature_scale"
+        value="fahrenheit"
+        id="fahrenheit"
+        <%= "checked" unless @user.try(:celsius) %>>
+      <label for="fahrenheit">Fahrenheit</label>
+
+      <input
+        type="radio"
+        name="temperature_scale"
+        value="celsius"
+        id="celsius"
+        <%= "checked" if @user.try(:celsius) %>>
+      <label for="celsius">Celsius</label>
+
     <label for="bio">Bio:</label>
     <br>
     <textarea name="user[bio]" id="bio"><%= @user.try(:bio) %></textarea>
