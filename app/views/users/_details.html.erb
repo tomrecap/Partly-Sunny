@@ -11,33 +11,33 @@
   <%= insert_form_authenticity_token %>
 
 
-    <label for="user_name">User Name*</label>
+    <label for="user_name">User Name<%= "*" if mode == :new %></label>
     <input
       type="text"
       name="user[user_name]"
       value="<%= @user.try(:user_name) %>"
       id="user_name">
 
-    <label for="email">Email*</label>
+    <label for="email">Email</label>
     <input
       type="email"
       name="user[email]"
       value="<%= @user.try(:email) %>"
       id="email">
 
-    <label for="password">Password*</label>
+    <label for="password">Password<%= "*" if mode == :new %></label>
     <input
       type="password"
       name="user[password]"
       id="password">
     <br>
-    <label for="password_confirmation">Confirm*</label>
+    <label for="password_confirmation">Confirm<%= "*" if mode == :new %></label>
     <input
       type="password"
       name="user[password_confirmation]"
       id="password_confirmation">
 
-    <label for="home_city_id">Home City*</label>
+    <label for="home_city_id">Home City</label>
     <select name="user[home_city_id]" id="home_city_id">
       <% @cities.each do |city| %>
         <option

@@ -4,24 +4,25 @@
 #
 #  id                  :integer          not null, primary key
 #  user_name           :string(255)      not null
-#  email               :string(255)      not null
+#  email               :string(255)
 #  password_digest     :string(255)      not null
 #  bio                 :string(140)
 #  session_token       :string(255)      not null
 #  activated           :boolean          default(FALSE)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  home_city_id        :integer          not null
+#  home_city_id        :integer
 #  avatar_file_name    :string(255)
 #  avatar_content_type :string(255)
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
+#  uid                 :integer
 #
 
 class User < ActiveRecord::Base
   attr_accessible :user_name, :email, :password, :bio, :session_token,
     :home_city_id, :password_confirmation, :favorite_city_ids,
-    :favorited_user_ids, :avatar
+    :favorited_user_ids, :avatar, :uid
   attr_reader :password, :avatar_remote_url
 
   has_attached_file :avatar, styles: {
@@ -29,10 +30,9 @@ class User < ActiveRecord::Base
     full: "600x600"
   }, default_url: ActionController::Base.helpers.asset_path('avatar.png')
 
-  before_validation :ensure_session_token
-  validates :user_name, :email, :session_token, :home_city_id,
-    :password_digest, presence: true
-  validates :user_name, :email, :session_token, uniqueness: true
+  before_validation :ensure_session_token, :ensure_uid_or_password_digest
+  validates :user_name, :session_token, :password_digest, presence: true
+  validates :user_name, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }
   validates_confirmation_of :password
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
@@ -94,6 +94,13 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= self.class.new_token
+  end
+
+  def ensure_uid_or_password_digest
+    if self.uid
+      self.password_digest ||= self.class.new_token
+      @password = "none_needed_with_twitter"
+    end
   end
 
 end

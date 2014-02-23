@@ -7,7 +7,17 @@ class SessionsController < ApplicationController
 
   def create
     if request.env['omniauth.auth']
-      fail
+      twitter_info = request.env['omniauth.auth']
+      @user = User.find_by_uid(twitter_info[:uid])
+
+      unless @user
+        @user = User.create!(
+          uid: twitter_info[:uid],
+          user_name: twitter_info[:info][:nickname],
+          bio: twitter_info[:info][:description],
+          avatar: twitter_info[:info][:image]
+        )
+      end
     else
       @user = User.find_by_credentials(
         params[:user][:user_name],

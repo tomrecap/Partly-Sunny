@@ -7,7 +7,7 @@
 </p>
 
 <p>
-  <%= link_to user.home_city.name, city_url(user.home_city_id) %>
+  <%= link_to user.home_city.name, city_url(user.home_city_id) if !!user.home_city_id %>
 </p>
 
 <p>

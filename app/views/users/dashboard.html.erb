@@ -22,7 +22,11 @@
   <section class="middle-column">
     <section class="home-city-weather">
       <h2 class="section-title">My Weather</h3>
-      <%= render "cities/current_weather_summary", city: current_user.home_city %>
+        <% if !!current_user.home_city_id %>
+          <%= render "cities/current_weather_summary", city: current_user.home_city %>
+        <% else %>
+          <%= link_to "See your local weather here: add your home city.", edit_user_url(current_user) %>
+        <% end %>
     </section>
 
     <section class="photo-feed">

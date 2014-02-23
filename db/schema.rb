@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140221000121) do
+ActiveRecord::Schema.define(:version => 20140223191719) do
 
   create_table "cities", :force => true do |t|
     t.string   "name",       :null => false
@@ -83,18 +83,19 @@ ActiveRecord::Schema.define(:version => 20140221000121) do
 
   create_table "users", :force => true do |t|
     t.string   "user_name",                                             :null => false
-    t.string   "email",                                                 :null => false
+    t.string   "email"
     t.string   "password_digest",                                       :null => false
     t.string   "bio",                 :limit => 140
     t.string   "session_token",                                         :null => false
     t.boolean  "activated",                          :default => false
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
-    t.integer  "home_city_id",                                          :null => false
+    t.integer  "home_city_id"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "uid"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
