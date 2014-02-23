@@ -6,11 +6,15 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_credentials(
-      params[:user][:user_name],
-      params[:user][:password],
-    )
-    # fail
+    if request.env['omniauth.auth']
+      fail
+    else
+      @user = User.find_by_credentials(
+        params[:user][:user_name],
+        params[:user][:password],
+      )
+    end
+
     if @user
       login_user!(@user)
       redirect_to cities_url

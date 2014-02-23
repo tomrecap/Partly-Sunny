@@ -26,5 +26,5 @@ WeatherApp::Application.routes.draw do
   end
 
   resource :session, only: [:new, :create, :destroy]
-
+  get "auth/twitter/callback" => "sessions#create"
 end

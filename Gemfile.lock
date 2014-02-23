@@ -169,6 +169,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   letter_opener
+  omniauth
   omniauth-twitter
   paperclip
   pg
