@@ -3,21 +3,10 @@
 /*--------- TOP-MOST CONTAINERS ---------*/
 body {
   font-family:Helvetica, sans-serif;
-/*  padding-top:1px;*/
-/*  background:#5ca7ba;*/
+  padding-top:1px;
+  background:linen;
 }
 
-.content {
-  width:950px;
-  padding-top: 0px;
-  margin-left:auto;
-  margin-right:auto;
-/*  border: 1px solid #999;*/
-  line-height:140%;
-  background:#FFFFFF;
-  padding-left:0px;
-  padding-right:0px;
-}
 
 img.avatar {
   height:15px;
@@ -36,7 +25,7 @@ img.content-photo {
 /*--------- CLEARFIX ---------*/
 .group:after {
   clear:both;
-  display:table;
+  display:block;
   content:"";
 }
 
@@ -45,78 +34,149 @@ img.content-photo {
 header {
   display:block;
   position:relative;
-  padding-top:50px;
-  margin-bottom:50px;
-/*  background:#ba6f5c;*/
-/*  color:#FFFFFF;*/
+  background:#333;
+  color:#ffffff;
 }
 
-header a {
+.header-content {
+  width:950px;
+  margin-left:auto;
+  margin-right:auto;
+  padding-top:25px;
+}
+
+/*header a {
 
 }
 
 header img.logo {
   float:left;
   width:300px;
-}
+}*/
 
-header h1.page-title {
-  display:inline-block;
+header h1.site-logo {
+  display:block;
   float:left;
-  width:240px;
-  margin-left: 50px;
-  font-size:18px;
-  padding-top:75px;
+  font-size:24pt;
+  font-weight:bold;
+  padding:0;
 }
 
 header nav {
+  display:block;
   float:right;
-  margin-right:50px;
+  height: 70px;
+}
+
+
+header nav input[type="search"] {
+  display:block;
+  float:left;
+  margin:10px;
+  width:auto;
+  height:auto;
+  padding:5px 10px;
+/*  border:1px solid #ffffff;*/
+  border-radius:5px;
+  background:#ffffff;
+  color:#333;
 }
 
 header nav ul {
-
+  display:block;
+  float:left;
+  padding-right:10px;
 }
 
-header nav li {
-
+header nav li.icon {
+  display:block;
+  float:left;
+  margin:10px;
+  width:25px;
+  height:0px;
+  padding-top:25px;
+  overflow:hidden;
 }
 
+header nav li.new-post {
+  background: url("https://s3.amazonaws.com/weather-app-production/icons/new-post.png") no-repeat 0 0;
+  background-size:contain;
+}
+
+header nav li.notifications {
+  background: url("https://s3.amazonaws.com/weather-app-production/icons/notifications.png") no-repeat 0 0;
+  background-size:contain;
+}
+
+header nav li.user-menu {
+  background: url("https://s3.amazonaws.com/weather-app-production/icons/user-menu.png") no-repeat 0 0;
+  background-size:contain;
+}
+
+header nav li.settings-menu {
+  background: url("https://s3.amazonaws.com/weather-app-production/icons/settings.png") no-repeat 0 0;
+  background-size:contain;
+}
+
+header nav li.icon:hover {
+  cursor:pointer;
+  border-bottom:1px solid ghostwhite;
+/*  background:blue;*/
+}
 /*--------- CONTENT ---------*/
-.main-columns {
+.content {
   display:block;
   position:relative;
-  margin-bottom:50px;
-  padding-left:20px;
-  padding-right:20px;
+  width:910px;
+/*  padding-top: 0px;*/
+  margin-left:auto;
+  margin-right:auto;
+/*  border: 1px solid #999;*/
+  line-height:140%;
+  background:#FFFFFF;
+  padding:20px;
 }
-
-.main-columns:after {
-  content:"";
-  clear:both;
-  display:table;
-}
-
-/*--------- LEFT COLUMN ---------*/
 
 .left-column {
-
-}
-
-.city-picker {
   display:block;
   float:left;
   width:200px;
+  padding-right:20px;
 }
 
-/*--------- CENTER COLUMN ---------*/
-.middle-column {
+.main-column {
   display:block;
   float:left;
-  width:450px;
-  padding-left:25px;
-  padding-right:25px;
+  width:650px;
+  padding-left:20px;
+  border-left:1px solid #ccc;
 }
+
+.city-weather-left-column{
+  display:block;
+  float:left;
+  width:435px;
+  padding-right:20px;
+}
+
+.city-weather-right-column{
+  display:block;
+  float:left;
+  width:435px;
+  padding-left:20px;
+}
+
+h2.page-title{
+  font-size:24pt;
+  font-weight:bold;
+}
+
+h3.section-title {
+  font-size:20pt;
+  font-weight:bold;
+}
+
+/*------------------------------------*/
 
 .photo-feed
   li {

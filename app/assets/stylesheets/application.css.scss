@@ -15,7 +15,7 @@
 /* make this a scss file & user @import to import the other styles in order */
 
 /* - - - - RESETS - - - - */
-html, body, p, ul, li {
+html, body, p, ul, li, h1, h2, h3 {
   margin:0;
   padding:0;
   border:none;
@@ -47,6 +47,7 @@ input[type="number"],
 input[type="email"],
 input[type="password"],
 input[type="submit"],
+input[type="search"],
 textarea {
   -webkit-appearance: none;
   display: inline-block;
@@ -58,6 +59,30 @@ textarea {
   color: inherit;
   font: inherit;
   width: auto;
+}
+
+button {
+
+  /*
+  This is a full reset for a button,
+  making it as plain as inline text.
+  From here you could move on to style
+  it as a regular link, or anything
+  your beautiful mind can dream up.
+  */
+
+  -webkit-appearance: none;
+  display: inline;
+  box-sizing: content-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  width: auto;
+  font: inherit;
+  vertical-align: baseline;
+  background: transparent;
+  color: inherit;
 }
 
 /* - - - - IMPORT PAGE STYLES - - - - */

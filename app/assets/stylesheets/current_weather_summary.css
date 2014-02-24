@@ -27,7 +27,7 @@
 }
 
 /*---------- MAIN CITY WEATHER ON DASHBOARD PAGE ----------*/
-.home-city-weather .current-weather-summary .icon img {
+/*.home-city-weather .current-weather-summary .icon img {
   width:100px;
   height:100px;
 }
@@ -35,4 +35,4 @@
 .home-city-weather .current-weather-summary .stats {
   font-size: 16pt;
   line-height:140%;
-}
+}*/

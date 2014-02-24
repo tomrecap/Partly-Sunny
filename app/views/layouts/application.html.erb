@@ -8,9 +8,38 @@
 </head>
 <body>
 
+  <header>
+    <section class="header-content">
+      <a href="<%= root_url %>">
+        <h1 class="site-logo">Partly Sunny</h1>
+      <a>
 
+      <nav>
+        <input
+          type="search"
+          name="site_search"
+          value=""
+          id="site_search"
+          placeholder="Search & Favorites">
+        <ul>
+          <li class="icon new-post">Post a New Weather Report or Photo</li>
+          <li class="icon notifications">Notifications</li>
+          <li class="icon user-menu">User Menu</li>
+          <li class="icon settings-menu">Settings Menu</li>
+        </ul>
+      </nav>
+    </section>
+  </header>
 
-<%= yield %>
+  <div class="content group">
+
+  <!-- The body should consist of two columns: -->
+    <!-- left-column & main-column OR -->
+    <!-- city-weather-left-column & city-weather-right-column -->
+
+    <%= yield %>
+
+  </div>
 
 
 <!-- <p>params: <%= params %></p>
@@ -18,21 +47,6 @@
 
 <%= "<p>errors: #{flash[:errors]} </p>".html_safe if flash[:errors] %>
 <%= "<p>notice: #{flash[:notice]} </p>".html_safe if flash[:notice] %>
-
-<!-- <p>
-  <% if signed_in? %>
-    Currently logged in as:
-    <br>
-    <%= image_tag current_user.avatar.url(:thumbnail) %>
-    <br>
-    <%= link_to current_user.user_name, user_url(current_user) %>
-    <br>
-    <%= link_to "Settings", edit_user_url(current_user) %>
-    <%= button_to "Sign Out", session_url, method: :delete %>
-  <% else %>
-    <%= link_to "Sign In", new_session_url %> or <%= link_to "Sign Up", new_user_url %>
-  <% end %>
-</p> -->
 
 </body>
 </html>

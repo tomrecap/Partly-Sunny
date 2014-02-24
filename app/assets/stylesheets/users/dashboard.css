@@ -1,14 +1,12 @@
 /* -------- /app/assets/stylesheets/users/dashboard.css ---------- */
 
-h1.page-title {
 
+/*------------- MY HOME CITY WEATHER IN LEFT COLUMN ---------------- */
+
+section.home-city-weather {
+  margin-bottom:20px;
 }
 
-/*------------- MY HOME CITY WEATHER IN CENTER COLUMN ---------------- */
+/*------------- FAVORITE PLACES IN LEFT COLUMN ---------------- */
 
-
-/*------------- FAVORITE PLACES SIDEBAR ---------------- */
-
-
-/*------------- NEW WEATHER REPORT SIDEBAR ---------------- */
 

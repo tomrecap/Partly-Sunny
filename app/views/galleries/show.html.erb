@@ -1,47 +1,27 @@
 <!-- /app/views/galleries/show.html.erb -->
 
-<div class="content photo-gallery">
+<h1 class="page-title">Weather Photos for: <%= @name %></h1>
 
-<header class="group">
-  <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
-  <h1 class="page-title">Weather Photos for: <%= @name %></h1>
-  <nav>
-    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
-    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
-  </nav>
-</header>
-
-
-<section class="main-columns">
-  <section class="left-column">
-    <section class="city-picker">
-      <%= render "cities/city_picker", cities: @cities %>
-    </section>
+<section class="left-column">
+  <section class="user-profile-box">
+    <%= (render "user_details", user: @subject) if @subject.is_a?(User) %>
+    <%= (render "city_details", city: @subject) if @subject.is_a?(City) %>
   </section>
+</section>
 
-  <section class="middle-column">
-    <section class="photo-feed">
-      <% if @photos.nil? || @photos.length == 0 %>
-        This user hasn't uploaded any photos yet.
-      <% else %>
+<section class="main-column">
+  <section class="photo-feed">
+    <% if @photos.nil? || @photos.length == 0 %>
+      This user hasn't uploaded any photos yet.
+    <% else %>
 
-        <%= paginate @photos %>
+      <%= paginate @photos %>
 
-        <%= render "photos/full_feed", photos: @photos %>
+      <%= render "photos/full_feed", photos: @photos %>
 
-        <%= paginate @photos %>
+      <%= paginate @photos %>
 
-      <% end %>
+    <% end %>
 
-    </section>
   </section>
-
-  <section class="right-column">
-    <section class="user-profile-box">
-      <%= (render "user_details", user: @subject) if @subject.is_a?(User) %>
-      <%= (render "city_details", city: @subject) if @subject.is_a?(City) %>
-    </section>
-  </section>
-</div>
-
-
+</section>
