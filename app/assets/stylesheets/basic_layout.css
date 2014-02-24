@@ -3,8 +3,8 @@
 /*--------- TOP-MOST CONTAINERS ---------*/
 body {
   font-family:Helvetica, sans-serif;
-  padding-top:1px;
-  background:#5ca7ba;
+/*  padding-top:1px;*/
+/*  background:#5ca7ba;*/
 }
 
 .content {
@@ -47,8 +47,8 @@ header {
   position:relative;
   padding-top:50px;
   margin-bottom:50px;
-  background:#ba6f5c;
-  color:#FFFFFF;
+/*  background:#ba6f5c;*/
+/*  color:#FFFFFF;*/
 }
 
 header a {
@@ -193,7 +193,7 @@ header nav li {
 }
 
 input.submit, button.submit {
-  background: #a7ba5c;
+/*  background: #a7ba5c;*/
   color:black;
 }
 
