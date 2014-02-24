@@ -188,6 +188,10 @@ header nav li {
   background:#ffffff;
 }
 
+.input > input[type="radio"] {
+  display:block;
+}
+
 .input > input:focus {
   border-color: #0b0;
 }

@@ -6,13 +6,12 @@
 
   <%= insert_form_authenticity_token %>
 
-
-    <label for="temperature">Temperature</label>
     <input
       type="number"
       name="weather_report[temperature]"
       value="<%= @weather_report.try(&:temperature) %>"
-      id="temperature">
+      id="temperature"
+      placeholder="Temperature">
 
     <input
       type="radio"
