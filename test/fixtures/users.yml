@@ -11,13 +11,13 @@
 #  activated           :boolean          default(FALSE)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  home_city_id        :integer
 #  avatar_file_name    :string(255)
 #  avatar_content_type :string(255)
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  uid                 :integer
 #  celsius             :boolean          default(FALSE), not null
+#  home_zip_code_id    :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

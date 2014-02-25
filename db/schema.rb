@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140225140628) do
+ActiveRecord::Schema.define(:version => 20140225151534) do
 
   create_table "cities", :force => true do |t|
     t.string   "name",       :null => false
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(:version => 20140225140628) do
   add_index "favorite_user_links", ["favoriter_id", "favorited_id"], :name => "index_favorite_user_links_on_favoriter_id_and_favorited_id", :unique => true
   add_index "favorite_user_links", ["favoriter_id"], :name => "index_favorite_user_links_on_favoriter_id"
 
+  create_table "favorite_zip_code_links", :force => true do |t|
+    t.integer  "user_id",     :null => false
+    t.integer  "zip_code_id", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "favorite_zip_code_links", ["user_id", "zip_code_id"], :name => "index_favorite_zip_code_links_on_user_id_and_zip_code_id", :unique => true
+  add_index "favorite_zip_code_links", ["user_id"], :name => "index_favorite_zip_code_links_on_user_id"
+
   create_table "photo_taggings", :force => true do |t|
     t.integer  "photo_id",   :null => false
     t.integer  "tag_id",     :null => false
@@ -63,16 +73,15 @@ ActiveRecord::Schema.define(:version => 20140225140628) do
   create_table "photos", :force => true do |t|
     t.string   "caption"
     t.integer  "submitter_id",       :null => false
-    t.integer  "city_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "zip_code_id"
   end
 
-  add_index "photos", ["city_id"], :name => "index_photos_on_city_id"
   add_index "photos", ["submitter_id"], :name => "index_photos_on_submitter_id"
 
   create_table "tags", :force => true do |t|
@@ -90,13 +99,13 @@ ActiveRecord::Schema.define(:version => 20140225140628) do
     t.boolean  "activated",                          :default => false
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
-    t.integer  "home_city_id"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "uid"
     t.boolean  "celsius",                            :default => false, :null => false
+    t.integer  "home_zip_code_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -114,13 +123,11 @@ ActiveRecord::Schema.define(:version => 20140225140628) do
 
   create_table "weather_reports", :force => true do |t|
     t.integer  "temperature",          :null => false
-    t.integer  "city_id",              :null => false
     t.integer  "weather_condition_id", :null => false
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.integer  "zip_code_id"
   end
-
-  add_index "weather_reports", ["city_id"], :name => "index_weather_reports_on_city_id"
 
   create_table "zip_codes", :force => true do |t|
     t.integer  "zip_code",   :null => false

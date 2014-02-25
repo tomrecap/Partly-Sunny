@@ -4,36 +4,25 @@
 #
 #  id                   :integer          not null, primary key
 #  temperature          :integer          not null
-#  city_id              :integer          not null
 #  weather_condition_id :integer          not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  zip_code_id          :integer
 #
 
 class WeatherReport < ActiveRecord::Base
-  attr_accessible :temperature, :city_id, :weather_condition_id
+  attr_accessible :temperature, :zip_code_id, :weather_condition_id
 
-  validates :temperature, :city_id, :weather_condition_id, presence: true
+  validates :temperature, :zip_code_id, :weather_condition_id,
+    presence: true
 
-  belongs_to(
-    :city,
-    class_name: "City",
-    foreign_key: :city_id,
-    primary_key: :id
-  )
-
-  belongs_to(
-    :weather_condition,
-    class_name: "WeatherCondition",
-    foreign_key: :weather_condition_id,
-    primary_key: :id
-  )
-
+  belongs_to :zip_code
+  belongs_to :weather_condition
 
   TIME_HORIZON = 14.days.ago
 
   def self.recent_reports(city_id)
-    WeatherReport.where("created_at >= ? AND city_id = ?", TIME_HORIZON, city_id)
+    WeatherReport.where("created_at >= ? AND zip_code_id = ?", TIME_HORIZON, zip_code_id)
   end
 
 end
