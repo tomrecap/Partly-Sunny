@@ -1,0 +1,18 @@
+<!-- /app/views/layouts/nav_bar_dropdowns/notifications.html.erb -->
+
+<h3 class="section-title">
+  Notifications
+</h3>
+
+<ul>
+
+  <% unless signed_in? %>
+    <li>
+      Please <%= link_to "sign in", new_session_url %> to see your notifications.
+    </li>
+  <% else %>
+    <li>
+      Notifications will go here.
+    </li>
+  <% end %>
+</ul>

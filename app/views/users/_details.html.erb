@@ -49,6 +49,8 @@
     </select>
 
     <label>Temperature Scale</label>
+      <br>
+
       <input
         type="radio"
         name="temperature_scale"
@@ -57,6 +59,8 @@
         <%= "checked" unless @user.try(:celsius) %>>
       <label for="fahrenheit">Fahrenheit</label>
 
+      <br>
+
       <input
         type="radio"
         name="temperature_scale"
@@ -64,6 +68,8 @@
         id="celsius"
         <%= "checked" if @user.try(:celsius) %>>
       <label for="celsius">Celsius</label>
+
+      <br>
 
     <label for="bio">Bio:</label>
     <br>

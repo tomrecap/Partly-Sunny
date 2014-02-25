@@ -22,10 +22,36 @@
           id="site_search"
           placeholder="Search & Favorites">
         <ul>
-          <li class="icon new-post">Post a New Weather Report or Photo</li>
-          <li class="icon notifications">Notifications</li>
-          <li class="icon user-menu">User Menu</li>
-          <li class="icon settings-menu">Settings Menu</li>
+          <li class="icon" id="new-post">
+            Post a New Weather Report or Photo
+            <div class="nav-bar-dropdown hidden">
+              <div class="triangle-up">&nbsp;</div>
+              <%= render "nav_bar_dropdowns/post_button_explanation", current_user: current_user %>
+            </div>
+          </li>
+          <li class="icon" id="notifications">
+            <div class="relative-dummy-element">
+              Notifications
+              <div class="nav-bar-dropdown hidden">
+                <div class="triangle-up">&nbsp;</div>
+                <%= render "nav_bar_dropdowns/notifications", current_user: current_user %>
+              </div>
+            </div>
+          </li>
+          <li class="icon" id="user-menu">
+            User Menu
+            <div class="nav-bar-dropdown hidden">
+              <div class="triangle-up">&nbsp;</div>
+              <%= render "nav_bar_dropdowns/user_menu", current_user: current_user %>
+            </div>
+          </li>
+          <li class="icon" id="settings-menu">
+            Settings Menu
+            <div class="nav-bar-dropdown hidden">
+              <div class="triangle-up">&nbsp;</div>
+              <%= render "nav_bar_dropdowns/settings_menu", current_user: current_user %>
+            </div>
+          </li>
         </ul>
       </nav>
     </section>
@@ -47,6 +73,31 @@
 
 <%= "<p>errors: #{flash[:errors]} </p>".html_safe if flash[:errors] %>
 <%= "<p>notice: #{flash[:notice]} </p>".html_safe if flash[:notice] %>
+
+<%= render "layouts/navigation_bar_signed_in" if signed_in? %>
+<%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
+
+<script>
+
+  $(document).ready(function() {
+
+    console.log("in the on-page script")
+
+    // $("nav li.icon").on("click", function (event) {
+    //   console.log(event);
+    //   console.log(this);
+    //   $(this).find(".nav-bar-dropdown").toggleClass("hidden");
+    //   // $("nav li#user-menu .nav-bar-dropdown").toggleClass("hidden");
+    // });
+    //
+    // $("body").on("mouseout", function (event) {
+    //   console.log(event);
+    //   $(this).find(".nav-bar-dropdown").addClass("hidden");
+    //   // $("nav li#user-menu .nav-bar-dropdown").toggleClass("hidden");
+    // });
+
+  });
+</script>
 
 </body>
 </html>

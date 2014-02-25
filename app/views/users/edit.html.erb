@@ -1,32 +1,21 @@
 <!-- app/view/users/edit.html.erb -->
 
-<div class="content user-edit">
-
-<header>
-  <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
-  <h1 class="page-title">Settings</h1>
-  <nav>
-    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
-    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
-  </nav>
-</header>
+<h2 class="page-title">Settings</h2>
 
 
-<section class="main-columns">
-  <section class="city-picker">
-    <%= render "cities/city_picker", cities: @cities %>
+<section class="left-column">
+  &nbsp;
+</section>
+
+<section class="main-column">
+  <section class="user-edit-form">
+    <%= render 'details', mode: :edit %>
+
+    <p>
+      <%= button_to "Delete Account", user_url(@user), method: :delete %>
+    </p>
   </section>
-
-  <section class="middle-column">
-    <section class="user-edit-form">
-      <%= render 'details', mode: :edit %>
-
-      <p>
-        <%= button_to "Delete Account", user_url(@user), method: :delete %>
-      </p>
-    </section>
-  </section>
-</div>
+</section>
 
 
 

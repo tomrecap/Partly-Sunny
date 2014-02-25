@@ -14,6 +14,8 @@
 
 /* make this a scss file & user @import to import the other styles in order */
 
+
+
 /* - - - - RESETS - - - - */
 html, body, p, ul, li, h1, h2, h3 {
   margin:0;
@@ -48,6 +50,7 @@ input[type="email"],
 input[type="password"],
 input[type="submit"],
 input[type="search"],
+select, option
 textarea {
   -webkit-appearance: none;
   display: inline-block;

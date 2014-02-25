@@ -8,7 +8,7 @@
       <h3 class="section-title">Current Conditions</h2>
 
       <%= image_tag top_weather_condition_icon(@city).url(:thumbnail), class: "current-weather-icon" %>
-      <em><%= @current_temperature %>&deg; <%= current_user.try(:celsius) ? "C" : "F" %></em>
+      <em><%= @current_temperature %> <span class="degree-units">&deg; <%= current_user.try(:celsius) ? "C" : "F" %><span></em>
 
       <table class="percentages">
         <% @weather_condition_frequencies.each do |condition| %>

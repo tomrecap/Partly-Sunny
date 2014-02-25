@@ -9,6 +9,8 @@ class CitiesController < ApplicationController
     @recently_updated_cities = City.includes(:weather_reports).order("weather_reports.created_at DESC").uniq.limit(2)
 
     @recent_photos = @cities.sample(2).map { |city| city.photos.first }
+
+    render :index, layout: "public_index" unless signed_in?
   end
 
   def show

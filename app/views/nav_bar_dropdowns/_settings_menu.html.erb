@@ -1,0 +1,13 @@
+<!-- /app/views/layouts/nav_bar_dropdowns/_user_menu.html.erb -->
+
+<ul>
+  <li>
+    Temperature scale toggle goes here
+  </li>
+  <li>
+    <%= link_to "Account & Settings", edit_user_url(current_user) if signed_in? %>
+  </li>
+  <li>
+    <%= button_to "Sign Out", session_url, method: :delete, class: "submit" if signed_in? %>
+  </li>
+</ul>

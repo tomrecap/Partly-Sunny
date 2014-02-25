@@ -1,0 +1,30 @@
+<!-- /app/views/layouts/nav_bar_dropdowns/_user_menu.html.erb -->
+
+<% if signed_in? %>
+
+  <h3 class="section-title">
+    Hello, <%= link_to current_user.user_name, user_gallery_url(current_user) %>
+  </h3>
+
+
+  <ul>
+    <li>
+      <%= link_to "Home", dashboard_user_url(current_user) %>
+    </li>
+    <li>
+      <% if current_user.home_city_id %>
+        <%= link_to "Local Weather", city_url(current_user.home_city_id) %>
+      <% else %>
+        <%= link_to "Set your home city for local weather.", edit_user_url(current_user) %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to "My Photos", user_gallery_url(current_user) %>
+    </li>
+  </ul>
+
+<% else %>
+
+  <%= render "sessions/new", user: current_user %>
+
+<% end %>
