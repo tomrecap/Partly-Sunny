@@ -6,6 +6,10 @@ class PhotosController < ApplicationController
   end
 
   def create
+    params[:photo][:zip_code_id] = ZipCode.find_by_zip_code(
+      params[:zip_code_code_for_photo]
+    ).id
+
     @photo = current_user.photos.new(params[:photo])
 
     if @photo.save
@@ -22,7 +26,7 @@ class PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
-    @zip_codes = ZipCode.all
+    # @zip_codes = ZipCode.all
     @weather_conditions = WeatherCondition.all
   end
 
@@ -32,6 +36,10 @@ class PhotosController < ApplicationController
   end
 
   def update
+    params[:photo][:zip_code_id] = ZipCode.find_by_zip_code(
+      params[:zip_code_code_for_photo]
+    ).id
+
     @photo = Photo.find(params[:id])
 
     if @photo.update_attributes(params[:photo])
@@ -54,7 +62,7 @@ class PhotosController < ApplicationController
 
   private
   def prepare_instance_variables_for_details_form
-    @zip_codes = ZipCode.all
+    # @zip_codes = ZipCode.all
     @tags = Tag.all
   end
 end

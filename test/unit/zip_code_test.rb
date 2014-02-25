@@ -3,7 +3,7 @@
 # Table name: zip_codes
 #
 #  id         :integer          not null, primary key
-#  zip_code   :integer          not null
+#  zip_code   :string(255)      not null
 #  city       :string(255)      not null
 #  state_name :string(255)      not null
 #  state_code :string(255)      not null

@@ -10,7 +10,7 @@
 #
 
 class FavoriteZipCodeLink < ActiveRecord::Base
-  attr_accessible :user_id, :city_id
+  attr_accessible :user_id, :zip_code_id
 
   validates :user_id, :zip_code_id, presence: true
   validates :user_id, uniqueness: { scope: :zip_code_id }

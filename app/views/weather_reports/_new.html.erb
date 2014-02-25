@@ -4,7 +4,7 @@
 
 <form class="input" action="<%= weather_reports_url %>" method="post">
 
-  <%= insert_form_authentizip_code_token %>
+  <%= insert_form_authenticity_token %>
 
     <input
       type="number"
@@ -44,17 +44,13 @@
 
 
 
-    <label for="zip_code">City</label>
-    <select name="weather_report[zip_code_id]" id="zip_code">
-      <% zip_codes.each do |zip_code| %>
-        <option
-          value="<%= zip_code.id %>"
-          <%= "selected" if @weather_report.try(&:zip_code_id) == zip_code.id %>>
-          <%= zip_code.city %>
-        </option>
-      <% end %>
-    </select>
-
+    <label for="zip_code_code">Zip Code</label>
+    <input
+      type="text"
+      name="zip_code_for_weather_report"
+      value="<%= @weather_report.try(:zip_code).try(:zip_code) %>"
+      id="zip_code_code"
+      placeholder="Zip Code">
 
   <input class="submit" type="submit" value="Submit">
 </form>

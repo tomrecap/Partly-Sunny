@@ -3,7 +3,7 @@
 # Table name: zip_codes
 #
 #  id         :integer          not null, primary key
-#  zip_code   :integer          not null
+#  zip_code   :string(255)      not null
 #  city       :string(255)      not null
 #  state_name :string(255)      not null
 #  state_code :string(255)      not null
@@ -52,7 +52,7 @@ class ZipCode < ActiveRecord::Base
   # end
 
   def nearby_zip_codes
-    distance_range = 0.15
+    distance_range = 0.2
     min_longitude = self.longitude - distance_range
     max_longitude = self.longitude + distance_range
     min_latitude = self.latitude - distance_range
@@ -74,13 +74,16 @@ class ZipCode < ActiveRecord::Base
     min_latitude = self.latitude - distance_range
     max_latitude = self.latitude + distance_range
 
-    WeatherReport.joins(:zip_code).includes(:weather_condition).where(
-      "(zip_codes.latitude BETWEEN ? AND ?) AND (zip_codes.longitude BETWEEN ? AND ?)",
-      min_latitude,
-      max_latitude,
-      min_longitude,
-      max_longitude
-    )
+    WeatherReport.joins(:zip_code)
+      .includes(:weather_condition)
+      .where(
+        "(zip_codes.latitude BETWEEN ? AND ?) AND (zip_codes.longitude BETWEEN ? AND ?)",
+        min_latitude,
+        max_latitude,
+        min_longitude,
+        max_longitude
+      )
+      .order("weather_reports.created_at DESC")
   end
 
   def top_three_conditions

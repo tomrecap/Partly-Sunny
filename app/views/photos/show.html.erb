@@ -1,29 +1,17 @@
 <!-- /app/views/photos/show.html.erb -->
 
-<div class="content photo-show">
+<h2 class="page-title"><%= link_to @photo.submitter.user_name, user_gallery_url(@photo.submitter) %>&rsquo;s Photo</h2>
 
-<header>
-  <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
-  <h1 class="page-title"><%= link_to @photo.submitter.user_name, user_gallery_url(@photo.submitter) %>'s Photo</h1>
-  <nav>
-    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
-    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
-  </nav>
-</header>
+<section class="left-column">
+  &nbsp;
+</section>
 
+<section class="main-column">
+  <section class="photo-feed">
+    <%= render "photos/full_feed", photos: [@photo] %>
 
-<section class="main-columns">
-  <section class="zip_code-picker">
-    <%= render "zip_codes/zip_code_picker", zip_codes: @zip_codes %>
+      <%= link_to "Edit Photo", edit_photo_url(@photo) if @photo.submitter == current_user%>
+      <br>
+      <%= button_to "Delete Photo", photo_url(@photo), method: :delete if @photo.submitter == current_user%>
   </section>
-
-  <section class="middle-column">
-    <section class="photo-feed">
-      <%= render "photos/full_feed", photos: [@photo] %>
-
-        <%= link_to "Edit Photo", edit_photo_url(@photo) if @photo.submitter == current_user%>
-        <br>
-        <%= button_to "Delete Photo", photo_url(@photo), method: :delete if @photo.submitter == current_user%>
-    </section>
-  </section>
-</div>
+</section>

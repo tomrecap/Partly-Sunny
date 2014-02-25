@@ -38,8 +38,8 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  belongs_to(:home_zip_code, class_name: "ZipCode", foreign_key: :home_zip_code_id,
-    primary_key: :id)
+  belongs_to(:home_zip_code, class_name: "ZipCode",
+    foreign_key: :home_zip_code_id, primary_key: :id)
 
   has_many :favorite_zip_code_links
   has_many :favorite_zip_codes, through: :favorite_zip_code_links, source: :zip_code

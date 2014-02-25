@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def dashboard
     starting_photo = params[:offset] || 0
 
-    @zip_codes = ZipCode.all
+    # # @zip_codes = ZipCode.all
     @weather_conditions = WeatherCondition.all
 
     favorite_zip_codes = current_user.favorite_zip_codes
@@ -36,6 +36,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    params[:user][:home_zip_code_id] = ZipCode.find_by_zip_code(
+      params[:home_zip_code_code_for_user]
+    ).id
+
     @user = User.new(params[:user])
     @user.celsius = (params[:temperature_scale] == "celsius")
 
@@ -63,13 +67,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.includes(:favorited_users).find(params[:id])
 
     prepare_details_form_instance_variables
   end
 
   def update
     @user = User.find(params[:id])
+
+    params[:user][:home_zip_code_id] = ZipCode.find_by_zip_code(
+      params[:home_zip_code_code_for_user]
+    ).id
     @user.celsius = (params[:temperature_scale] == "celsius")
 
     if @user.update_attributes(params[:user])
@@ -94,7 +102,7 @@ class UsersController < ApplicationController
 
   private
   def prepare_details_form_instance_variables
-    @zip_codes = ZipCode.all
+    # # @zip_codes = ZipCode.all
     @other_users = User.where("id <> ?", current_user.id) if signed_in?
   end
 

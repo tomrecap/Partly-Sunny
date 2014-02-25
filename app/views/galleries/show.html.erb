@@ -5,14 +5,14 @@
 <section class="left-column">
   <section class="user-profile-box">
     <%= (render "user_details", user: @subject) if @subject.is_a?(User) %>
-    <%= (render "zip_code_details", zip_code: @subject) if @subject.is_a?(City) %>
+    <%= (render "zip_code_details", zip_code: @subject) if @subject.is_a?(ZipCode) %>
   </section>
 </section>
 
 <section class="main-column">
   <section class="photo-feed">
     <% if @photos.nil? || @photos.length == 0 %>
-      This user hasn't uploaded any photos yet.
+      This <%= @subject.class.to_s.underscore.humanize.downcase %> doesn't have any photos yet.
     <% else %>
 
       <%= paginate @photos %>

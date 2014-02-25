@@ -109,10 +109,6 @@ header nav li.icon {
   overflow:hidden;
 }
 
-.relative-dummy-element{
-
-}
-
 header nav li#new-post {
   background: url("https://s3.amazonaws.com/weather-app-production/icons/new-post.png") no-repeat 0 0;
   background-size:contain;
@@ -142,10 +138,10 @@ header nav li.icon:hover {
 header .nav-bar-dropdown {
   display:block;
   position:absolute;
-  z-index:3;
+  z-index: 999;
   width:180px;
   padding:9px;
-  background:#ffffff;
+  background:white;
   color:#333;
   border: 1px solid #ccc;
   border-radius:5px;
@@ -179,8 +175,8 @@ header .nav-bar-dropdown input[type="text"] {
   border-top:18px solid transparent;
   border-left:18px solid transparent;
   border-right:18px solid transparent;
-  border-bottom: 18px solid #ffffff;
-  z-index:2;
+  border-bottom: 18px solid #fff;
+  z-index: 2;
   top:-28px;
   right:00px;
 }
@@ -206,6 +202,7 @@ header .nav-bar-dropdown input[type="text"] {
   display:block;
   position:relative;
   width:910px;
+  min-height:600px;
 /*  padding-top: 0px;*/
   margin-left:auto;
   margin-right:auto;

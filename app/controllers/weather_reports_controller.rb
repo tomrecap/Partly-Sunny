@@ -4,11 +4,14 @@ class WeatherReportsController < ApplicationController
     @weather_report = WeatherReport.new(zip_code_id: params[:zip_code_id])
 
     @weather_conditions = WeatherCondition.all
-    @zip_codes = ZipCode.all
+    # @zip_codes = ZipCode.all
   end
 
   def create
     @weather_report = WeatherReport.new(params[:weather_report])
+    @weather_report.zip_code_id = ZipCode.find_by_zip_code(
+      params[:zip_code_for_weather_report]
+    ).id
 
     if params[:temperature_scale] == "celsius"
       @weather_report.temperature = convert_to_fahrenheit(@weather_report.temperature)

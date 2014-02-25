@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   before_filter :require_not_signed_in!, except: :destroy
 
   def new
-    @zip_codes = ZipCode.all
+    # @zip_codes = ZipCode.all
   end
 
   def create

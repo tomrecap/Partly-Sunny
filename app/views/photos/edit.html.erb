@@ -1,28 +1,16 @@
 <!-- /app/views/photos/edit.html.erb -->
 
-<div class="content photo-edit">
+<h2 class="page-title">Edit Photo</h2>
 
-<header>
-  <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
-  <h1 class="page-title">Edit Photo</h1>
-  <nav>
-    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
-    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
-  </nav>
-</header>
+<section class="left-column">
+  &nbsp;
+</section>
 
-
-<section class="main-columns">
-  <section class="zip_code-picker">
-    <%= render "zip_codes/zip_code_picker", zip_codes: @zip_codes %>
+<section class="main-column">
+  <section class="edit-photo-form">
+    <%= render "details", mode: :edit, zip_codes: @zip_codes, photo: @photo %>
   </section>
-
-  <section class="middle-column">
-    <section class="edit-photo-form">
-      <%= render "details", mode: :edit, zip_codes: @zip_codes, photo: @photo %>
-    </section>
-  </section>
-</div>
+</section>
 
 
 

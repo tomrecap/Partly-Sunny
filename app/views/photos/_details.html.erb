@@ -6,50 +6,39 @@
 
   <%= insert_form_authenticity_token %>
 
-  <p>
-    <%= image_tag photo.try(:image).try(:url, :small) %>
-    <br>
-    <label for="image">Choose a Photo</label>
-    <input type="file" name="photo[image]" value="" id="image">
-  </p>
+  <%= image_tag photo.try(:image).try(:url, :small) %>
+  <br>
+  <label for="image">Choose a Photo</label>
+  <input type="file" name="photo[image]" value="" id="image">
 
-  <p>
-    <label for="caption">Caption</label>
-    <textarea name="photo[caption]" id="caption"><%= photo.try(:caption) %></textarea>
-  </p>
+  <label for="caption">Caption</label>
+  <textarea name="photo[caption]" id="caption"><%= photo.try(:caption) %></textarea>
 
-  <p>
-    <label for="zip_code_id">City</label>
-    <select name="photo[zip_code_id]" id="zip_code_id">
-      <% zip_codes.each do |zip_code| %>
-        <option
-          value="<%= zip_code.id %>"
-          <%= "selected" if current_user.try(:home_zip_code_id) == zip_code.id %>>
-          <%= zip_code.city %>
-        </option>
-      <% end %>
-    </select>
-  </p>
+  <label for="zip_code_code">Zip Code</label>
+  <input
+    type="text"
+    name="zip_code_code_for_photo"
+    value="<%= @photo.try(:zip_code).try(:zip_code) %>"
+    id="zip_code_code"
+    placeholder="Zip Code">
 
-  <p>
-    Tags:
-    <br>
-    <input type="hidden" name="photo[tag_ids][]" value=" ">
-    <% @tags.each do |tag| %>
-    <input
-      type="checkbox"
-      name="photo[tag_ids][]"
-      value="<%= tag.id %>"
-      id="tag_checkbox_<%= tag.id %>"
-      <%= "checked" if @photo.try(:tag_ids) && @photo.tag_ids.include?(tag.id) %>
-      >
-    <label for="tag_checkbox_<%= tag.id %>"><%= tag.body %></label>
-    <br>
-    <% end %>
-  </p>
+  Tags:
+  <br>
+  <input type="hidden" name="photo[tag_ids][]" value=" ">
+  <% @tags.each do |tag| %>
+  <input
+    type="checkbox"
+    name="photo[tag_ids][]"
+    value="<%= tag.id %>"
+    id="tag_checkbox_<%= tag.id %>"
+    <%= "checked" if @photo.try(:tag_ids) && @photo.tag_ids.include?(tag.id) %>
+    >
+  <label for="tag_checkbox_<%= tag.id %>"><%= tag.body %></label>
+  <br>
+  <% end %>
 
 
-  <p><input type="submit" value="<%= mode == :new ? 'Add' : 'Update' %> Photo"></p>
+  <input type="submit" value="<%= mode == :new ? 'Add' : 'Update' %> Photo">
 </form>
 
 <p>

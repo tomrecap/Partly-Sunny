@@ -3,7 +3,6 @@ class ZipCodesController < ApplicationController
 
   def index
     redirect_to dashboard_user_url(current_user) if signed_in?
-    # @zip_codes = ZipCode.includes(:photos).all
     @weather_conditions = WeatherCondition.all
 
     @recently_updated_zip_codes = [WeatherReport.last.zip_code]# ZipCode.includes(:weather_reports).order("weather_reports.created_at DESC").uniq.limit(2)
@@ -16,8 +15,7 @@ class ZipCodesController < ApplicationController
   end
 
   def show
-    # @zip_codes = ZipCode.all
-    # @zip_code = ZipCode.find_with_current_data(params[:id])
+
     @zip_code = ZipCode.find(params[:id])
     @current_temperature = @zip_code.current_temperature(current_user.try(:celsius))
 
@@ -29,6 +27,8 @@ class ZipCodesController < ApplicationController
     @weather_condition_frequencies = @zip_code.top_three_conditions
 
     @photos = @zip_code.photos.limit(2).order("created_at DESC")
+
+    # @photos = Photo.where
   end
 
   def search
@@ -39,7 +39,7 @@ class ZipCodesController < ApplicationController
     else
       @search_query = params[:search_query]
 
-      @zip_codes = ZipCode.all
+      # @zip_codes = ZipCode.all
       render :search
     end
   end
