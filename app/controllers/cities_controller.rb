@@ -3,18 +3,18 @@ class CitiesController < ApplicationController
 
   def index
     redirect_to dashboard_user_url(current_user) if signed_in?
-    @cities = City.includes(:photos).all
+    @zip_codes = City.includes(:photos).all
     @weather_conditions = WeatherCondition.all
 
-    @recently_updated_cities = City.includes(:weather_reports).order("weather_reports.created_at DESC").uniq.limit(2)
+    @recently_updated_zip_codes = City.includes(:weather_reports).order("weather_reports.created_at DESC").uniq.limit(2)
 
-    @recent_photos = @cities.sample(2).map { |city| city.photos.first }
+    @recent_photos = @zip_codes.sample(2).map { |city| city.photos.first }
 
     render :index, layout: "public_index" unless signed_in?
   end
 
   def show
-    @cities = City.all
+    @zip_codes = City.all
     @city = City.find_with_current_data(params[:id])
     # @city = City.find(params[:id])
     @current_temperature = @city.current_temperature(current_user.try(:celsius))
@@ -37,7 +37,7 @@ class CitiesController < ApplicationController
     else
       @search_query = params[:search_query]
 
-      @cities = City.all
+      @zip_codes = City.all
       render :search
     end
   end

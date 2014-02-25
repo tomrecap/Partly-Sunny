@@ -30,11 +30,11 @@ class ApplicationController < ActionController::Base
   end
 
   def require_not_signed_in!
-    redirect_to cities_url if signed_in?
+    redirect_to zip_codes_url if signed_in?
   end
 
   def prevent_users_from_modifying_others
-    redirect_to cities_url unless params[:id].to_i == current_user.id
+    redirect_to zip_codes_url unless params[:id].to_i == current_user.id
   end
 
   def current_user_can_delete?(comment)

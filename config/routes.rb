@@ -1,9 +1,14 @@
 WeatherApp::Application.routes.draw do
-  root to: 'cities#index'
+  root to: 'zip_codes#index'
 
   resources :weather_reports, only: [:new, :create]
 
   resources :cities, only: [:show, :index] do
+    resource :gallery, only: :show
+    get "search", on: :collection
+  end
+
+  resources :zip_codes, only: [:show, :index] do
     resource :gallery, only: :show
     get "search", on: :collection
   end

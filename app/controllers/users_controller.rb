@@ -11,19 +11,19 @@ class UsersController < ApplicationController
   def dashboard
     starting_photo = params[:offset] || 0
 
-    @cities = City.all
+    @zip_codes = ZipCode.all
     @weather_conditions = WeatherCondition.all
 
-    favorite_cities = current_user.favorite_cities
-    @favorite_cities_without_home = favorite_cities.reject do |city|
-      city.id == current_user.home_city_id
+    favorite_zip_codes = current_user.favorite_zip_codes
+    @favorite_zip_codes_without_home = favorite_zip_codes.reject do |zip_code|
+      zip_code.id == current_user.home_zip_code_id
     end
 
     @photos = Photo
       .where(
-        "(photos.submitter_id IN (?)) OR (photos.city_id IN (?))",
+        "(photos.submitter_id IN (?)) OR (photos.zip_code_id IN (?))",
         current_user.favorited_user_ids,
-        current_user.favorite_city_ids
+        current_user.favorite_zip_code_ids
       ).includes(:comments, :tags)
       .page(params[:page])
       .per(10)
@@ -39,13 +39,13 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.celsius = (params[:temperature_scale] == "celsius")
 
-    unless @user.favorite_city_ids.include?(@user.home_city_id)
-      @user.favorite_city_ids = @user.favorite_city_ids.push(@user.home_city_id)
+    unless @user.favorite_zip_code_ids.include?(@user.home_zip_code_id)
+      @user.favorite_zip_code_ids = @user.favorite_zip_code_ids.push(@user.home_zip_code_id)
     end
 
     if @user.save
       login_user!(@user)
-      redirect_to cities_url
+      redirect_to zip_codes_url
     else
       flash.now[:errors] = @user.errors.full_messages
 
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:favorite_cities, :favorited_users).find(params[:id])
+    @user = User.includes(:favorite_zip_codes, :favorited_users).find(params[:id])
   end
 
   def edit
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
 
   private
   def prepare_details_form_instance_variables
-    @cities = City.all
+    @zip_codes = ZipCode.all
     @other_users = User.where("id <> ?", current_user.id) if signed_in?
   end
 

@@ -1,0 +1,17 @@
+<!-- app/view/zip_codes/_current_weather_summary.html.erb -->
+
+<section class="current-weather-summary group">
+
+  <figure class="icon">
+    <%= image_tag top_weather_condition_icon(zip_code).url(:thumbnail) %>
+  </figure>
+
+  <section class="stats">
+    <%= link_to zip_code.city, zip_code_url(zip_code) %>
+    <br>
+    <%= zip_code.current_temperature(current_user.try(:celsius)) %> &deg;
+    <%= current_user.try(:celsius) ? "C" : "F" %>
+    <%= zip_code.top_three_conditions.first.first %>
+  </section>
+
+</section>

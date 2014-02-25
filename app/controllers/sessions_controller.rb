@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   before_filter :require_not_signed_in!, except: :destroy
 
   def new
-    @cities = City.all
+    @zip_codes = ZipCode.all
   end
 
   def create
@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
 
     if @user
       login_user!(@user)
-      redirect_to cities_url
+      redirect_to zip_codes_url
     else
       flash.now[:errors] = "User name and password do not match"
       render :new

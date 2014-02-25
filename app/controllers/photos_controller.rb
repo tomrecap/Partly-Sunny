@@ -22,7 +22,7 @@ class PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
-    @cities = City.all
+    @zip_codes = ZipCode.all
     @weather_conditions = WeatherCondition.all
   end
 
@@ -54,7 +54,7 @@ class PhotosController < ApplicationController
 
   private
   def prepare_instance_variables_for_details_form
-    @cities = City.all
+    @zip_codes = ZipCode.all
     @tags = Tag.all
   end
 end

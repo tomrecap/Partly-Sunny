@@ -1,0 +1,61 @@
+<!-- app/views/zip_codes/show.html.erb -->
+
+<h2 class="page-title">Current Weather in <%= @zip_code.city %></h1>
+  <%= insert_approriate_favorite_zip_code_button(@zip_code.id) if signed_in? %>
+
+<section class="zip_code-weather-left-column">
+  <section class="current-conditions">
+      <h3 class="section-title">Current Conditions</h2>
+
+      <%= image_tag top_weather_condition_icon(@zip_code).url(:thumbnail), class: "current-weather-icon" %>
+      <em><%= @current_temperature %> <span class="degree-units">&deg; <%= current_user.try(:celsius) ? "C" : "F" %><span></em>
+
+      <table class="percentages">
+        <% @weather_condition_frequencies.each do |condition| %>
+        <tr>
+          <td><%= condition[0] %></td>
+          <td><%= number_to_percentage(condition[1], precision: 0) %></td>
+        </tr>
+        <% end %>
+
+      </table>
+  </section>
+
+  <section class="recent-reports">
+    <h2 class="section-title">Latest Reports</h2>
+     <table>
+      <tr>
+        <th>Temperature</th>
+        <th>Condition</th>
+        <th>Submission Time</th>
+      </tr>
+
+      <% @recent_reports.take(10).each do |report| %>
+      <tr>
+        <td>
+          <%= report.temperature %> &deg; <%= current_user.try(:celsius) ? "C" : "F" %>
+        </td>
+        <td><%= report.weather_condition.description %></td>
+        <td><%= friendly_time_format(report.created_at) %></td>
+      </tr>
+      <% end %>
+
+    </table>
+  </section>
+</section>
+
+<section class="zip_code-weather-right-column">
+
+  <p>
+    <%= link_to "New Report for #{@zip_code.city}", new_weather_report_url(zip_code_id: @zip_code.id) %>
+  </p>
+
+  <section class="recent-photos">
+    <h2 class="section-title"><%= link_to "Latest Photos", zip_code_gallery_url(@zip_code) %></h2>
+    <%= render "photos/photo_list_minimal_caption", photos: @photos %>
+  </section>
+
+
+
+</section>
+

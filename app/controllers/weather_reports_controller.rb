@@ -1,10 +1,10 @@
 class WeatherReportsController < ApplicationController
 
   def new
-    @weather_report = WeatherReport.new(city_id: params[:city_id])
+    @weather_report = WeatherReport.new(zip_code_id: params[:zip_code_id])
 
     @weather_conditions = WeatherCondition.all
-    @cities = City.all
+    @zip_codes = ZipCode.all
   end
 
   def create
@@ -15,7 +15,7 @@ class WeatherReportsController < ApplicationController
     end
 
     if @weather_report.save
-      redirect_to city_url(@weather_report.city_id)
+      redirect_to zip_code_url(@weather_report.zip_code_id)
     else
       flash.now[:errors] << @weather_report.errors.full_messages
 
