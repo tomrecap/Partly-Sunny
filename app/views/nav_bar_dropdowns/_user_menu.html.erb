@@ -12,10 +12,10 @@
       <%= link_to "Home", dashboard_user_url(current_user) %>
     </li>
     <li>
-      <% if current_user.home_city_id %>
-        <%= link_to "Local Weather", city_url(current_user.home_city_id) %>
+      <% if current_user.home_zip_code_id %>
+        <%= link_to "Local Weather", zip_code_url(current_user.home_zip_code_id) %>
       <% else %>
-        <%= link_to "Set your home city for local weather.", edit_user_url(current_user) %>
+        <%= link_to "Set your home zip_code for local weather.", edit_user_url(current_user) %>
       <% end %>
     </li>
     <li>

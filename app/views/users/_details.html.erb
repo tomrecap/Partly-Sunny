@@ -37,13 +37,13 @@
       name="user[password_confirmation]"
       id="password_confirmation">
 
-    <label for="home_city_id">Home City</label>
-    <select name="user[home_city_id]" id="home_city_id">
-      <% @cities.each do |city| %>
+    <label for="home_zip_code_id">Home City</label>
+    <select name="user[home_zip_code_id]" id="home_zip_code_id">
+      <% @zip_codes.each do |zip_code| %>
         <option
-          value="<%= city.id %>"
-          <%= "selected" if @user.try(:home_city_id) == city.id %>>
-          <%= city.name %>
+          value="<%= zip_code.id %>"
+          <%= "selected" if @user.try(:home_zip_code_id) == zip_code.id %>>
+          <%= zip_code.city %>
         </option>
       <% end %>
     </select>
@@ -89,16 +89,16 @@
 
     Favorite Cities:
     <br>
-    <input type="hidden" name="user[favorite_city_ids][]" value=" ">
-    <% @cities.each do |city| %>
+    <input type="hidden" name="user[favorite_zip_code_ids][]" value=" ">
+    <% @zip_codes.each do |zip_code| %>
     <input
       type="checkbox"
-      name="user[favorite_city_ids][]"
-      value="<%= city.id %>"
-      id="city_checkbox_<%= city.id %>"
-      <%= "checked" if @user.try(:favorite_city_ids) && @user.favorite_city_ids.include?(city.id) %>
+      name="user[favorite_zip_code_ids][]"
+      value="<%= zip_code.id %>"
+      id="zip_code_checkbox_<%= zip_code.id %>"
+      <%= "checked" if @user.try(:favorite_zip_code_ids) && @user.favorite_zip_code_ids.include?(zip_code.id) %>
       >
-    <label for="city_checkbox_<%= city.id %>"><%= city.name %></label>
+    <label for="zip_code_checkbox_<%= zip_code.id %>"><%= zip_code.city %></label>
     <br>
     <% end %>
 

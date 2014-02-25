@@ -1,6 +1,6 @@
-<!-- /app/views/cities/index.html.erb -->
+<!-- /app/views/zip_codes/index.html.erb -->
 
-<div class="content cities-index">
+<div class="content zip_codes-index">
 
 <header class="group">
   <section class="logo-and-tagline">
@@ -13,7 +13,7 @@
   </section>
 
   <section class="city-picker">
-    <%= render "city_picker", cities: @cities %>
+    <%= render "city_picker", zip_codes: @zip_codes %>
   </section>
 </header>
 
@@ -25,7 +25,7 @@
   <section class="new-report">
     <%= render "weather_reports/new",
       weather_conditions: @weather_conditions,
-      cities: @cities %>
+      zip_codes: @zip_codes %>
   </section>
 </section>
 
@@ -33,7 +33,7 @@
   <section class="latest-reports">
     <h2>Latest Reports</h2>
     <ul>
-    <% @recently_updated_cities.each do |city| %>
+    <% @recently_updated_zip_codes.each do |city| %>
       <li><%= render "current_weather_summary", city: city %></li>
     <% end %>
     </ul>
@@ -50,7 +50,7 @@
         </a>
         <figcaption>
           <a href="<%= city_gallery_url(photo.city_id) %>">
-            <%= photo.city.name %>
+            <%= photo.zip_code.city %>
           </a>
         </figcaption>
       </li>

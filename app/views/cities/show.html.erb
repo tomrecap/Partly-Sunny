@@ -1,6 +1,6 @@
-<!-- app/views/cities/show.html.erb -->
+<!-- app/views/zip_codes/show.html.erb -->
 
-<h2 class="page-title">Current Weather in <%= @city.name %></h1>
+<h2 class="page-title">Current Weather in <%= @zip_code.city %></h1>
   <%= insert_approriate_favorite_city_button(@city.id) if signed_in? %>
 
 <section class="city-weather-left-column">
@@ -47,7 +47,7 @@
 <section class="city-weather-right-column">
 
   <p>
-    <%= link_to "New Report for #{@city.name}", new_weather_report_url(city_id: @city.id) %>
+    <%= link_to "New Report for #{@zip_code.city}", new_weather_report_url(city_id: @city.id) %>
   </p>
 
   <section class="recent-photos">

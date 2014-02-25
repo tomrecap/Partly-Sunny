@@ -2,21 +2,21 @@
 
 <section class="left-column">
 
-  <section class="home-city-weather">
+  <section class="home-zip_code-weather">
     <h3 class="section-title">My Weather</h3>
-      <% if !!current_user.home_city_id %>
-        <%= render "cities/current_weather_summary", city: current_user.home_city %>
+      <% if !!current_user.home_zip_code_id %>
+        <%= render "zip_codes/current_weather_summary", zip_code: current_user.home_zip_code %>
       <% else %>
-        <%= link_to "See your local weather here: add your home city.", edit_user_url(current_user) %>
+        <%= link_to "See your local weather here: add your home zip_code.", edit_user_url(current_user) %>
       <% end %>
   </section>
 
-  <section class="favorite-cities-weather">
+  <section class="favorite-zip_codes-weather">
     <h3 class="section-title">Favorite Cities</h3>
       <ul>
-        <% @favorite_cities_without_home.each do |city| %>
+        <% @favorite_zip_codes_without_home.each do |zip_code| %>
           <li>
-            <%= render "cities/current_weather_summary", city: city %>
+            <%= render "zip_codes/current_weather_summary", zip_code: zip_code %>
           </li>
         <% end %>
       </ul>
@@ -25,7 +25,7 @@
   <!-- <section>
     <%#= render "weather_reports/new",
       weather_conditions: @weather_conditions,
-      cities: @cities %>
+      zip_codes: @zip_codes %>
   </section> -->
 
 </section>

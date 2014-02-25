@@ -13,7 +13,7 @@
   </section>
 
   <section class="zip_code-picker">
-    <%= render "zip_code_picker", zip_codes: @zip_codes %>
+    <%= render "zip_code_picker" %>
   </section>
 </header>
 
@@ -23,7 +23,7 @@
   </section>
 
   <section class="new-report">
-    <%= render "weather_reports/new",
+    <%#= render "weather_reports/new",
       weather_conditions: @weather_conditions,
       zip_codes: @zip_codes %>
   </section>

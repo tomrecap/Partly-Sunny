@@ -1,0 +1,2 @@
+module FavoriteZipCodeLinksHelper
+end

@@ -17,8 +17,8 @@
 
           in
 
-          <a href="<%= city_url(photo.city_id) %>">
-            <%= photo.city.name %></a>
+          <a href="<%= zip_code_url(photo.zip_code_id) %>">
+            <%= photo.zip_code.city %></a>
 
           <%= time_ago_in_words(photo.created_at) %> ago
         </p>

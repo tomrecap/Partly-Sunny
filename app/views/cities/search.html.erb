@@ -1,4 +1,4 @@
-<!-- app/views/cities/search.html.erb -->
+<!-- app/views/zip_codes/search.html.erb -->
 
 <div class="content city-weather">
 
@@ -14,7 +14,7 @@
 
 <section class="main-columns">
   <section class="city-picker">
-    <%= render "cities/city_picker", cities: @cities %>
+    <%= render "zip_codes/city_picker", zip_codes: @zip_codes %>
   </section>
 
   <section class="middle-column">
@@ -23,7 +23,7 @@
 
       <% if @search_results.empty? %>
         <p>
-          We don't have a city with that name in our database. Please check back as we expand to more cities.
+          We don't have a city with that name in our database. Please check back as we expand to more zip_codes.
         </p>
       <% else %>
         <ul>

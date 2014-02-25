@@ -1,13 +1,13 @@
 <h2 class="section-title">Get the weather!</h2>
 <ul>
-  <% cities.each do |city| %>
-    <li><%= link_to city.name, city_url(city) %></li>
+  <% zip_codes.each do |city| %>
+    <li><%= link_to zip_code.city, city_url(city) %></li>
   <% end %>
 </ul>
 
 - or -
 
-<form action="<%= search_cities_url %>" method="get" class="input">
+<form action="<%= search_zip_codes_url %>" method="get" class="input">
 
   <%= insert_form_authenticity_token %>
 

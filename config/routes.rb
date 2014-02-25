@@ -14,6 +14,9 @@ WeatherApp::Application.routes.draw do
   end
 
   resources :favorite_city_links, only: [:create, :destroy]
+  resources :favorite_zip_code_links, only: [:create, :destroy]
+
+
   resources :favorite_user_links, only: [:create, :destroy]
   resources :photos do
     resources :comments, only: [:create, :destroy]

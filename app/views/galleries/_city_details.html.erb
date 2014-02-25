@@ -1,9 +1,9 @@
-<!-- /app/views/galleries/_city_details.html.erb -->
+<!-- /app/views/galleries/_zip_code_details.html.erb -->
 
 <p>
-  <%= render "cities/current_weather_summary", city: city %>
+  <%= render "zip_codes/current_weather_summary", zip_code: zip_code %>
 </p>
 
 <p>
-    <%= insert_approriate_favorite_city_button(city.id) if signed_in? %>
+    <%= insert_approriate_favorite_zip_code_button(zip_code.id) if signed_in? %>
 </p>

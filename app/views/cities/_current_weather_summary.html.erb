@@ -1,4 +1,4 @@
-<!-- app/view/cities/_current_weather_summary.html.erb -->
+<!-- app/view/zip_codes/_current_weather_summary.html.erb -->
 
 <section class="current-weather-summary group">
 
@@ -7,7 +7,7 @@
   </figure>
 
   <section class="stats">
-    <%= link_to city.name, city_url(city) %>
+    <%= link_to zip_code.city, city_url(city) %>
     <br>
     <%= city.current_temperature(current_user.try(:celsius)) %> &deg;
     <%= current_user.try(:celsius) ? "C" : "F" %>

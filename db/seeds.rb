@@ -82,17 +82,25 @@ GOOD_ZIP_CODES = NYC_ZIP_CODES + SAN_FRANCISCO_ZIP_CODES +
 # Tag.create(body: "hot")
 # Tag.create(body: "cold")
 # Tag.create(body: "snowing")
+#
+# # Make fake weather reports
+#
+# 1000.times do |i|
+#   fake_zip_code_id = ZipCode.find_by_zip_code(GOOD_ZIP_CODES.sample).id
+#   fake_temperature = rand(15..45)
+#   fake_weather_condition_id = [1, 2, 3, 4, 6, 7].sample
+#
+#   WeatherReport.create(
+#     temperature: fake_temperature,
+#     zip_code_id: fake_zip_code_id,
+#     weather_condition_id: fake_weather_condition_id
+#   )
+# end
+#
 
-1000.times do |i|
-  fake_zip_code_id = ZipCode.find_by_zip_code(GOOD_ZIP_CODES.sample).id
-  fake_temperature = rand(15..45)
-  fake_weather_condition_id = [1, 2, 3, 4, 6, 7].sample
-
-  WeatherReport.create(
-    temperature: fake_temperature,
-    zip_code_id: fake_zip_code_id,
-    weather_condition_id: fake_weather_condition_id
-  )
+User.all.each do |user|
+  user.home_zip_code_id = ZipCode.find_by_zip_code(GOOD_ZIP_CODES.sample)
+  user.save!
 end
 
 # city_ids = [1, 2, 3, 4, 5, 6]

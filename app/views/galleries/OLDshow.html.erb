@@ -8,5 +8,5 @@
 
 <section class="user-profile-box">
   <%= (render "user_details", user: @subject) if @subject.is_a?(User) %>
-  <%= (render "city_details", city: @subject) if @subject.is_a?(City) %>
+  <%= (render "zip_code_details", zip_code: @subject) if @subject.is_a?(City) %>
 </section>

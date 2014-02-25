@@ -1,17 +1,10 @@
 <h2 class="section-title">Get the weather!</h2>
-<ul>
-  <% zip_codes.each do |zip_code| %>
-    <li><%= link_to zip_code.city, zip_code_url(zip_code) %></li>
-  <% end %>
-</ul>
-
-- or -
 
 <form action="<%= search_zip_codes_url %>" method="get" class="input">
 
   <%= insert_form_authenticity_token %>
 
-  <input type="text" name="search_query" value="" id="search_query" placeholder="Search by City">
+  <input type="text" name="search_query" value="" id="search_query" placeholder="Zip Code">
 
   <input class="submit" type="submit" value="Search">
 </form>
