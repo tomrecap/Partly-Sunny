@@ -30,7 +30,7 @@ class ZipCode < ActiveRecord::Base
   has_many(:residents, class_name: "User",
     foreign_key: :home_zip_code_id, primary_key: :id)
 
-  has_many(:favorite_city_links, class_name: "FavoriteCityLink",
+  has_many(:favorite_zip_code_links, class_name: "FavoriteZipCodeLink",
     foreign_key: :zip_code_id, primary_key: :id)
 
   has_many(:favoriters, through: :favorite_zip_code_links,
@@ -52,10 +52,11 @@ class ZipCode < ActiveRecord::Base
   # end
 
   def nearby_zip_codes
-    min_longitude = self.longitude - 0.1
-    max_longitude = self.longitude + 0.1
-    min_latitude = self.latitude - 0.1
-    max_latitude = self.latitude + 0.1
+    distance_range = 0.15
+    min_longitude = self.longitude - distance_range
+    max_longitude = self.longitude + distance_range
+    min_latitude = self.latitude - distance_range
+    max_latitude = self.latitude + distance_range
 
     ZipCode.includes(:weather_reports).where(
       "(latitude BETWEEN ? AND ?) AND (longitude BETWEEN ? AND ?)",
@@ -66,10 +67,26 @@ class ZipCode < ActiveRecord::Base
     )
   end
 
+  def nearby_weather_reports
+    distance_range = 0.15
+    min_longitude = self.longitude - distance_range
+    max_longitude = self.longitude + distance_range
+    min_latitude = self.latitude - distance_range
+    max_latitude = self.latitude + distance_range
+
+    WeatherReport.joins(:zip_code).includes(:weather_condition).where(
+      "(zip_codes.latitude BETWEEN ? AND ?) AND (zip_codes.longitude BETWEEN ? AND ?)",
+      min_latitude,
+      max_latitude,
+      min_longitude,
+      max_longitude
+    )
+  end
+
   def top_three_conditions
     frequencies_by_name = {}
-    array_of_frequencies_by_id[0...3].each do |id, frequency|
-      name = condition_names_hash[id]
+    self.array_of_frequencies_by_id[0...3].each do |id, frequency|
+      name = self.condition_names_hash[id]
       frequencies_by_name[name] = frequency
     end
 
@@ -77,7 +94,7 @@ class ZipCode < ActiveRecord::Base
   end
 
   def array_of_frequencies_by_id
-    condition_ids = recent_reports.map(&:weather_condition_id)
+    condition_ids = nearby_weather_reports.map(&:weather_condition_id)
     frequencies_by_id = build_frequency_hash(condition_ids)
     hash_to_array_sorted_by_values(frequencies_by_id)
   end
@@ -93,23 +110,23 @@ class ZipCode < ActiveRecord::Base
   end
 
   def condition_names_hash
-    unless @conditions_names_hash
-      @conditions_names_hash = {}
-      weather_conditions.each do |condition|
-        @conditions_names_hash[condition.id] ||= condition.description
+    unless @condition_names_hash
+      @condition_names_hash = {}
+      WeatherCondition.all.each do |condition|
+        @condition_names_hash[condition.id] ||= condition.description
       end
     end
 
-    @conditions_names_hash
+    @condition_names_hash
   end
 
-# use includes for city & city.joinsweatherreport here
-  def recent_reports
-    @recent_reports ||= self.weather_reports.includes(:weather_condition).where("city_id = ? AND created_at >= ?", self.id, WeatherReport::TIME_HORIZON).order("created_at DESC")
-  end
+# # use includes for city & city.joinsweatherreport here
+#   def recent_reports
+#     @recent_reports ||= self.weather_reports.includes(:weather_condition).where("city_id = ? AND created_at >= ?", self.id, WeatherReport::TIME_HORIZON).order("created_at DESC")
+#   end
 
   def current_temperature(use_celsius = false)
-    temperatures = recent_reports.map(&:temperature)
+    temperatures = nearby_weather_reports.map(&:temperature)
     average = (temperatures.inject(&:+) / temperatures.length)
 
     use_celsius ? (convert_to_celsius(average).round(1)) : average.round(1)

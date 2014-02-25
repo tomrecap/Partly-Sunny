@@ -21,7 +21,7 @@ class WeatherReport < ActiveRecord::Base
 
   TIME_HORIZON = 14.days.ago
 
-  def self.recent_reports(city_id)
+  def self.recent_reports(zip_code_id)
     WeatherReport.where("created_at >= ? AND zip_code_id = ?", TIME_HORIZON, zip_code_id)
   end
 
