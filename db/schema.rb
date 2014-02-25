@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140223220524) do
+ActiveRecord::Schema.define(:version => 20140225140628) do
 
   create_table "cities", :force => true do |t|
     t.string   "name",       :null => false
@@ -121,5 +121,21 @@ ActiveRecord::Schema.define(:version => 20140223220524) do
   end
 
   add_index "weather_reports", ["city_id"], :name => "index_weather_reports_on_city_id"
+
+  create_table "zip_codes", :force => true do |t|
+    t.integer  "zip_code",   :null => false
+    t.string   "city",       :null => false
+    t.string   "state_name", :null => false
+    t.string   "state_code", :null => false
+    t.float    "longitude",  :null => false
+    t.float    "latitude",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "zip_codes", ["city"], :name => "index_zip_codes_on_city"
+  add_index "zip_codes", ["latitude"], :name => "index_zip_codes_on_latitude"
+  add_index "zip_codes", ["longitude"], :name => "index_zip_codes_on_longitude"
+  add_index "zip_codes", ["zip_code"], :name => "index_zip_codes_on_zip_code", :unique => true
 
 end
