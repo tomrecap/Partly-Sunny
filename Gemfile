@@ -18,6 +18,9 @@ gem 'pg_search'
 
 gem 'faker'
 
+gem 'geocoder'
+gem 'chart-js-rails'
+
 
 group :development do
   gem 'better_errors'

@@ -11,4 +11,12 @@ module ZipCodesHelper
     ).icon
   end
 
+  def array_to_javascript_array_string(array)
+    array_with_apostrophes = array.map do |element|
+      "'#{element}'"
+    end
+
+    "[#{array_with_apostrophes.join(", ")}]"
+  end
+
 end

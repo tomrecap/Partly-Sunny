@@ -1,16 +1,30 @@
 <!-- app/views/zip_codes/show.html.erb -->
 
-<h2 class="page-title">Current Weather in <%= @zip_code.city %></h1>
-  <%= insert_approriate_favorite_zip_code_button(@zip_code.id) if signed_in? %>
+<h2 class="page-title"><%= @zip_code.city %>, <%= @zip_code.state_code %>
+  <a
+    href="#"
+    data-remote="true"
+    class="favorite <% if signed_in? && current_user.favorite_zip_code_ids.include?(@zip_code.id) %>
+      <%= true %>
+    <% else %>
+      <%= false %>
+    <% end %>">
+    &#9733;
+  </a>
+</h2>
 
-<section class="zip_code-weather-left-column">
+<h3 class="section-title">(<%= @zip_code.zip_code %>)</h3>
+
+  <div class="favorite-form"><%= insert_approriate_favorite_zip_code_button(@zip_code.id) if signed_in? %></div>
+
+<section class="zip-code-weather-left-column">
   <section class="current-conditions">
-      <h3 class="section-title">Current Conditions</h2>
+      <h3 class="section-title">Current Conditions</h3>
 
       <%= image_tag top_weather_condition_icon(@zip_code).url(:thumbnail), class: "current-weather-icon" %>
       <em><%= @current_temperature %> <span class="degree-units">&deg; <%= current_user.try(:celsius) ? "C" : "F" %><span></em>
 
-      <table class="percentages">
+      <table id="conditions-table" class="percentages">
         <% @weather_condition_frequencies.each do |condition| %>
         <tr>
           <td><%= condition[0] %></td>
@@ -19,10 +33,14 @@
         <% end %>
 
       </table>
+
+      <canvas
+        id="conditions-chart"
+        class="percentages hidden"></canvas>
   </section>
 
   <section class="recent-reports">
-    <h2 class="section-title">Latest Reports</h2>
+    <h3 class="section-title">Latest Reports</h3>
      <table>
       <tr>
         <th>Temperature</th>
@@ -44,14 +62,14 @@
   </section>
 </section>
 
-<section class="zip_code-weather-right-column">
+<section class="zip-code-weather-right-column">
 
   <p>
     <%= link_to "New Report for #{@zip_code.city}", new_weather_report_url(zip_code_id: @zip_code.id) %>
   </p>
 
   <section class="recent-photos">
-    <h2 class="section-title"><%= link_to "Latest Photos", zip_code_gallery_url(@zip_code) %></h2>
+    <h3 class="section-title"><%= link_to "Latest Photos", zip_code_gallery_url(@zip_code) %></h3>
     <%= render "photos/photo_list_minimal_caption", photos: @photos %>
   </section>
 
@@ -59,3 +77,75 @@
 
 </section>
 
+
+<script>
+
+var ctx = $("#conditions-chart").get(0).getContext("2d");
+var data = {
+  labels: <%= array_to_javascript_array_string(@weather_condition_frequencies.keys).html_safe %>,
+	datasets: [
+		{
+			fillColor : "rgba(230,230,250,1)",
+			strokeColor : "rgba(51,51,51,1)",
+			data : <%= array_to_javascript_array_string(@weather_condition_frequencies.values).html_safe %>
+		}
+	]
+};
+
+var conditionsChart = new Chart(ctx).Bar(data, {
+  scaleFontFamily: "'Fira Sans'",
+  scaleFontSize: 16,
+  scaleOverride:true,
+  scaleSteps:<%= ((@weather_condition_frequencies.values.first / 5) + 1).round %>,
+  scaleStepWidth:5,
+  scaleStartValue: 0,
+  barValueSpacing: 5,
+  scaleLabel : "<%%= value %> %",
+});
+
+var swapPercentagesWithChart = function () {
+  $("#conditions-table").toggleClass("hidden");
+  $("#conditions-chart").toggleClass("hidden");
+};
+
+var changeStarToFavorited = function (element) {
+  $(element).addClass("true");
+  $(element).removeClass("false");
+  console.log("star is now favorited");
+};
+
+var changeStarToUnfavorited = function (element) {
+  $(element).removeClass("true");
+  $(element).addClass("false");
+  console.log("star is now un-favorited");
+};
+
+$(document).ready(function(){
+  swapPercentagesWithChart();
+
+  $(".favorite-form").addClass("hidden");
+
+  $("h2.page-title").on("click","a.favorite", function(event) {
+    event.preventDefault();
+    console.log("clicked a non-favorite star");
+    var that = this;
+
+    if ($(this).hasClass("true")) {
+        $.ajax({
+          url: '<%= modify_favorite_zip_code_links_url + "?zip_code_id=#{@zip_code.id}" %>',
+          type: "DELETE",
+          success: changeStarToUnfavorited(that)
+        });
+    } else {
+        $.ajax({
+          url: '<%= modify_favorite_zip_code_links_url + "?zip_code_id=#{@zip_code.id}" %>',
+          type: "POST",
+          success: changeStarToFavorited(that)
+        });
+    };
+  });
+});
+
+
+
+</script>

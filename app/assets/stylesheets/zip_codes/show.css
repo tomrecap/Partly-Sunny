@@ -1,0 +1,33 @@
+/*----------- favorite star -----------------*/
+
+a.favorite {
+  display:inline;
+  font-size:75%;
+  text-decoration:none;
+}
+
+a.favorite.false {
+  color:#eee;
+}
+
+a.favorite.true {
+  color:#ffb92f;
+}
+
+a.favorite:hover {
+  text-shadow: 1px 1px 1px #ccc;
+}
+
+
+/*---------- Weather conditions percentages numbers & chart -------------*/
+.percentages {
+  display:block;
+  position:relative;
+  width:300px;
+  height:200px;
+}
+
+
+.hidden {
+  display:none;
+}

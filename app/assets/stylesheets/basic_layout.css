@@ -76,11 +76,19 @@ header nav {
   height: auto;
 }
 
+header nav form{
+  display:block;
+  float:left;
+  margin-top:0px;
+  margin-bottom:0px;
+  padding:0;
+}
 
 header nav input[type="search"] {
   display:block;
   float:left;
-  margin:10px;
+  margin:0;
+  margin-right:10px;
   width:auto;
   height:auto;
   padding:5px 10px;
@@ -88,6 +96,16 @@ header nav input[type="search"] {
   border-radius:5px;
   background:#ffffff;
   color:#333;
+}
+
+header nav input[type="search"] {
+  display:block;
+  float:left;
+  margin:0;
+  margin-left:10px;
+  width:auto;
+  height:auto;
+  padding:5px 10px;
 }
 
 header nav ul {
@@ -148,6 +166,12 @@ header .nav-bar-dropdown {
 /*  top:59px;*/
   top:75px;
   right:0px;
+}
+
+header .nav-bar-dropdown li {
+  display:block;
+  width:180px;
+  height:50px;
 }
 
 header .nav-bar-dropdown.hidden {
@@ -227,14 +251,14 @@ header .nav-bar-dropdown input[type="text"] {
   border-left:1px solid #ccc;
 }
 
-.city-weather-left-column{
+.zip-code-weather-left-column{
   display:block;
   float:left;
   width:435px;
   padding-right:20px;
 }
 
-.city-weather-right-column{
+.zip-code-weather-right-column{
   display:block;
   float:left;
   width:435px;

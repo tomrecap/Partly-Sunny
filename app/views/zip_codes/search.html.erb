@@ -1,43 +1,26 @@
 <!-- app/views/zip_codes/search.html.erb -->
 
-<div class="content zip_code-weather">
+  <h2 class="page-title">Search Results for &ldquo;<%= @search_query %>&rdquo;</h2>
 
-<header>
-  <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
-  <h1 class="page-title">Search Results for &ldquo;<%= @search_query %>&rdquo;</h1>
-  <nav>
-    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
-    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
-  </nav>
-</header>
-
-
-<section class="main-columns">
-  <section class="zip_code-picker">
-    <%= render "zip_codes/zip_code_picker", zip_codes: @zip_codes %>
-  </section>
-
-  <section class="middle-column">
-    <section class="search-results">
-      <h2 class="section-title"></h2>
-
-      <% if @search_results.empty? %>
-        <p>
-          We don't have a zip_code with that name in our database. Please check back as we expand to more cities.
-        </p>
-      <% else %>
-        <ul>
-          <% @search_results.each do |result| %>
-            <li><%= result %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </section>
-  </section>
-
-  <section class="right-column">
-
-  </section>
+<section class="left-column">
+  &nbsp;
 </section>
 
-</div>
+<section class="main-column">
+  <section class="search-results">
+    <h2 class="section-title"></h2>
+
+    <% if @search_results.empty? %>
+      <p>
+        We don't have a zip_code with that name in our database. Please check back as we expand to more cities.
+      </p>
+    <% else %>
+      <ul>
+        <% @search_results.each do |result| %>
+          <% result_string = "#{result.city}, #{result.state_code} (#{result.zip_code})" %>
+        <li><%= link_to result_string, zip_code_url(result)%></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </section>
+</section>

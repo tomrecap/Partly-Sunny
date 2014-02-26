@@ -15,12 +15,27 @@
       <a>
 
       <nav>
-        <input
+
+        <form action="<%= search_zip_codes_url %>" method="get" class="input">
+
+          <%= insert_form_authenticity_token %>
+
+          <input
+            type="search"
+            name="search_query"
+            value=""
+            id="search_query"
+            placeholder="Search & Favorites">
+
+          <input class="submit" type="submit" value="Search">
+        </form>
+
+        <!-- <input
           type="search"
           name="site_search"
           value=""
           id="site_search"
-          placeholder="Search & Favorites">
+          placeholder="Search & Favorites"> -->
         <ul>
           <li class="icon" id="new-post">
             Post a New Weather Report or Photo

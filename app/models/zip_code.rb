@@ -41,6 +41,7 @@ class ZipCode < ActiveRecord::Base
 
   include PgSearch
   pg_search_scope :search_by_zip_code, against: :zip_code
+  pg_search_scope :search_by_city, against: :city
 
 
   # RE-DO FOR ZIP CODES

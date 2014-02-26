@@ -32,7 +32,11 @@ class ZipCodesController < ApplicationController
   end
 
   def search
-    @search_results = ZipCode.search_by_zip_code(params[:search_query])
+    if params[:search_query][0] =~ /\d/
+      @search_results = ZipCode.search_by_zip_code(params[:search_query])
+    else
+      @search_results = ZipCode.search_by_city(params[:search_query])
+    end
 
     if @search_results.count == 1
       redirect_to zip_code_url(@search_results.first)

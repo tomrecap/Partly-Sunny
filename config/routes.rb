@@ -14,7 +14,11 @@ WeatherApp::Application.routes.draw do
   end
 
   resources :favorite_city_links, only: [:create, :destroy]
-  resources :favorite_zip_code_links, only: [:create, :destroy]
+
+  resources :favorite_zip_code_links, only: [:create, :destroy] do
+    post "modify", on: :collection
+    delete "modify", on: :collection
+  end
 
 
   resources :favorite_user_links, only: [:create, :destroy]

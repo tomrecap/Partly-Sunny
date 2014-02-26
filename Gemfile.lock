@@ -44,6 +44,8 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    chart-js-rails (0.0.6)
+      railties (> 3.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -64,6 +66,7 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    geocoder (1.1.9)
     hashie (2.0.5)
     hike (1.2.3)
     i18n (0.6.9)
@@ -163,9 +166,11 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   better_errors
   binding_of_caller
+  chart-js-rails
   coffee-rails (~> 3.2.1)
   faker
   figaro
+  geocoder
   jquery-rails
   kaminari
   letter_opener
