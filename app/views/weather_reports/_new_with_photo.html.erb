@@ -4,7 +4,8 @@
   class="input combined"
   action="<%= create_with_photo_weather_reports_url %>"
   method="post"
-  enctype="multipart/form-data">
+  enctype="multipart/form-data"
+  data-remote="true">
 
   <%= insert_form_authenticity_token %>
 
@@ -89,6 +90,19 @@
       id="zip_code_code"
       placeholder="Zip Code">
 
-    <input class="submit" type="submit" value="Post">
+    <input class="submit" name="commit" type="submit" value="Post">
   </section>
 </form>
+
+<script>
+
+$(document).ready(function(){
+
+  $("form.combined").on("ajax:success", function(event, data){
+    console.log(data);
+    this.reset();
+    $("body").removeClass("has-active-modal")
+  });
+});
+
+</script>
