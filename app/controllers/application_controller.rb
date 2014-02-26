@@ -56,4 +56,11 @@ class ApplicationController < ActionController::Base
     @weather_conditions = WeatherCondition.all
   end
 
+  def convert_tag_string_to_tags_array(string)
+    tag_texts = string.split(",").map(&:strip)
+    tag_ids = tag_texts.map do |tag_text|
+      Tag.find_or_create_by_body(tag_text).id
+    end
+  end
+
 end

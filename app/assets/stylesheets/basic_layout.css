@@ -381,6 +381,10 @@ input.submit:hover, button.submit:hover {
   cursor:pointer;
 }
 
+input.submit.delete:hover, button.submit.delete:hover {
+  background: red;
+}
+
 .submit > input {
   position: relative;
   background: #a7ba5c;

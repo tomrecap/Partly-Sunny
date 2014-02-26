@@ -1,7 +1,7 @@
 <!-- /app/view/photos/_details.html.erb -->
 <% action_url = (mode == :new ? photos_url : photo_url(@photo)) %>
 
-<form action="<%= action_url %>" method="post" enctype="multipart/form-data">
+<form class="input" action="<%= action_url %>" method="post" enctype="multipart/form-data">
   <%= change_post_to_put if mode == :edit %>
 
   <%= insert_form_authenticity_token %>
@@ -22,25 +22,21 @@
     id="zip_code_code"
     placeholder="Zip Code">
 
-  Tags:
-  <br>
-  <input type="hidden" name="photo[tag_ids][]" value=" ">
-  <% @tags.each do |tag| %>
+    <label for="tags">Tags</label>
     <input
-      type="checkbox"
-      name="photo[tag_ids][]"
-      value="<%= tag.id %>"
-      id="tag_checkbox_<%= tag.id %>"
-      <%= "checked" if @photo.try(:tag_ids) && @photo.tag_ids.include?(tag.id) %>
-      >
-    <label for="tag_checkbox_<%= tag.id %>"><%= tag.body %></label>
-    <br>
-  <% end %>
+      type="text"
+      name="tags"
+      value="<%= @photo.tags.map(&:body).join(", ") if @tags %>"
+      id="tags">
 
-
-  <input type="submit" value="<%= mode == :new ? 'Add' : 'Update' %> Photo">
+  <input
+    type="submit"
+    class="submit"
+    value="<%= mode == :new ? 'Add' : 'Update' %> Photo">
 </form>
 
-<p>
-  <%= button_to "Delete Photo", photo_url(@photo), method: :delete if @photo.try(:submitter) == current_user%>
-</p>
+<div class="input">
+  <%= button_to "Delete Photo", photo_url(@photo),
+    method: :delete,
+    class: "submit delete" if @photo.try(:submitter) == current_user %>
+</div>

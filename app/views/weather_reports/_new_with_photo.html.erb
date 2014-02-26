@@ -63,21 +63,29 @@
     <label for="caption">Caption</label>
     <textarea name="photo[caption]" id="caption"><%#= photo.try(:caption) %></textarea>
 
-    <label>Tags:</label>
+    <label for="tags">Tags</label>
+    <input
+      type="text"
+      name="tags"
+      value=""
+      id="tags">
+
+
+    <!-- <label>Tags:</label>
     <section class="checkbox-group">
       <input type="hidden" name="photo[tag_ids][]" value=" ">
-      <% @tags.each do |tag| %>
+      <%# @tags.each do |tag| %>
         <input
           type="checkbox"
           name="photo[tag_ids][]"
-          value="<%= tag.id %>"
-          id="tag_checkbox_<%= tag.id %>"
-          <%= "checked" if @photo.try(:tag_ids) && @photo.tag_ids.include?(tag.id) %>
+          value="<%#= tag.id %>"
+          id="tag_checkbox_<%#= tag.id %>"
+          <%#= "checked" if @photo.try(:tag_ids) && @photo.tag_ids.include?(tag.id) %>
           >
-        <label for="tag_checkbox_<%= tag.id %>"><%= tag.body %></label>
+        <label for="tag_checkbox_<%#= tag.id %>"><%#= tag.body %></label>
         <br>
-      <% end %>
-    </section>
+      <%# end %>
+    </section> -->
 
   </section>
 

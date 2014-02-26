@@ -10,8 +10,17 @@
   <section class="photo-feed">
     <%= render "photos/full_feed", photos: [@photo] %>
 
-      <%= link_to "Edit Photo", edit_photo_url(@photo) if @photo.submitter == current_user%>
+    <div class="input">
+
+      <%= button_to "Edit Photo",
+        edit_photo_url(@photo),
+        class: "submit" if @photo.submitter == current_user%>
       <br>
-      <%= button_to "Delete Photo", photo_url(@photo), method: :delete if @photo.submitter == current_user%>
+      <%= button_to "Delete Photo",
+        photo_url(@photo),
+        method: :delete,
+        class: "submit delete" if @photo.submitter == current_user%>
+    </div>
+
   </section>
 </section>

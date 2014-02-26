@@ -30,6 +30,7 @@ class WeatherReportsController < ApplicationController
 
     if params[:photo][:image]
       @photo = current_user.photos.new(params[:photo])
+      @photo.tag_ids = convert_tag_string_to_tags_array(params[:tags])
       models << @photo
     end
 

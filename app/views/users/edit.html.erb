@@ -11,9 +11,13 @@
   <section class="user-edit-form">
     <%= render 'details', mode: :edit %>
 
-    <p>
-      <%= button_to "Delete Account", user_url(@user), method: :delete %>
-    </p>
+    <div class="input">
+      <%= button_to "Delete Account",
+        user_url(@user),
+        method: :delete,
+        class: "submit delete" %>
+    </div>
+
   </section>
 </section>
 
