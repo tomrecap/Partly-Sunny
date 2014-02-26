@@ -6,7 +6,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="">
 
   <header>
     <section class="header-content">
@@ -37,7 +37,7 @@
           id="site_search"
           placeholder="Search & Favorites"> -->
         <ul>
-          <li class="icon" id="new-post">
+          <li class="icon show-modal" id="new-post">
             Post a New Weather Report or Photo
             <div class="nav-bar-dropdown hidden">
               <div class="triangle-up">&nbsp;</div>
@@ -82,6 +82,16 @@
 
   </div>
 
+  <section class="modal">
+    <section class="modal-box">
+      <span class="modal-close-button">&times;</span>
+
+      <div id="modal-container">
+        <%= render "weather_reports/new_with_photo",
+          weather_conditions: @weather_conditions %>
+      </div>
+    </section>
+  </section>
 
 <!-- <p>params: <%= params %></p>
 <p>session: <%= session %></p> -->
@@ -94,23 +104,32 @@
 
 <script>
 
-  $(document).ready(function() {
+$(document).ready(function() {
 
+  window.modal = {
+    show: function(){
+      $("body").addClass("has-active-modal");
+    },
+    hide: function(){
+      $("body").removeClass("has-active-modal");
+    }
+  };
 
-    // $("nav li.icon").on("click", function (event) {
-    //   console.log(event);
-    //   console.log(this);
-    //   $(this).find(".nav-bar-dropdown").toggleClass("hidden");
-    //   // $("nav li#user-menu .nav-bar-dropdown").toggleClass("hidden");
-    // });
-    //
-    // $("body").on("mouseout", function (event) {
-    //   console.log(event);
-    //   $(this).find(".nav-bar-dropdown").addClass("hidden");
-    //   // $("nav li#user-menu .nav-bar-dropdown").toggleClass("hidden");
-    // });
-
+  $("body").on("click", ".show-modal", function(event){
+    event.preventDefault();
+    window.modal.show();
   });
+
+  $(".modal").on("click", function(event){
+
+    $target = $(event.target);
+    if($target.is(".modal") || $target.is(".modal-close-button")){
+      event.preventDefault();
+      window.modal.hide();
+    }
+  });
+});
+
 </script>
 
 </body>

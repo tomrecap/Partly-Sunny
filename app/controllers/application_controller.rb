@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :prepare_instance_variables_for_layout
+
   helper_method :current_user, :signed_in?, :current_user_can_delete?,
     :convert_to_celsius, :convert_to_fahrenheit
 
@@ -47,6 +49,11 @@ class ApplicationController < ActionController::Base
 
   def convert_to_fahrenheit(celsius)
     ((celsius * 1.8) + 32).round(1)
+  end
+
+  def prepare_instance_variables_for_layout
+    @tags = Tag.all
+    @weather_conditions = WeatherCondition.all
   end
 
 end

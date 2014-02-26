@@ -1,0 +1,61 @@
+/*------ MODAL BOX STYLES ---------------*/
+
+.modal-box {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+
+  width:541px;
+  min-height:300px;
+
+  padding:30px;
+
+  margin-top:-200px;
+  margin-left:-300px;
+
+  background:#fff;
+}
+
+.modal-close-button {
+  position:absolute;
+  display:block;
+  top:0;
+  right:10px;
+  font-size:40px;
+  line-height:1.0;
+  font-weight:bold;
+  color:#999;
+  cursor:pointer;
+}
+
+.modal-close-button:hover {
+  color:#000;
+}
+
+/*------ WEATHER REPORT SECTION ---------*/
+
+form.combined .weather-report {
+  display:block;
+  float:left;
+  width:250px;
+  padding-right:20px;
+}
+
+/*------ PHOTO SECTION ------------------*/
+
+form.combined .photo {
+  display:block;
+  float:left;
+  width:250px;
+  padding-left:20px;
+  border-left:1px solid #999;
+}
+
+/*------ SHARED SECTION -----------------*/
+
+form.combined .shared {
+  display:block;
+  float:left;
+  width:250px;
+  padding-left:150px;
+}
