@@ -11,6 +11,7 @@ class PhotosController < ApplicationController
     ).id
 
     @photo = current_user.photos.new(params[:photo])
+    @photo.tag_ids = convert_tag_string_to_tags_array(params[:tags])
 
     if @photo.save
       flash[:notice] = "Photo added successfully"
@@ -41,6 +42,7 @@ class PhotosController < ApplicationController
     ).id
 
     @photo = Photo.find(params[:id])
+    @photo.tag_ids = convert_tag_string_to_tags_array(params[:tags])
 
     if @photo.update_attributes(params[:photo])
       flash.now[:notice] = "Your photo has been updated."
