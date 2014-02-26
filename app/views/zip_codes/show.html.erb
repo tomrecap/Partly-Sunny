@@ -1,6 +1,7 @@
 <!-- app/views/zip_codes/show.html.erb -->
 
 <h2 class="page-title"><%= @zip_code.city %>, <%= @zip_code.state_code %>
+  <span class="page-subtitle">(<%= @zip_code.zip_code %>)</span>
   <a
     href="#"
     data-remote="true"
@@ -13,7 +14,7 @@
   </a>
 </h2>
 
-<h3 class="section-title">(<%= @zip_code.zip_code %>)</h3>
+
 
   <div class="favorite-form">
     <%= insert_approriate_favorite_zip_code_button(@zip_code.id) if signed_in? %>

@@ -1,7 +1,9 @@
 WeatherApp::Application.routes.draw do
   root to: 'zip_codes#index'
 
-  resources :weather_reports, only: [:new, :create]
+  resources :weather_reports, only: [:new, :create] do
+    post "create_with_photo", on: :collection
+  end
 
   # resources :cities, only: [:show, :index] do
   #   resource :gallery, only: :show

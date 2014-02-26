@@ -1,5 +1,7 @@
 <!-- /app/views/users/dashboard.html.erb -->
 
+<h2 class="page-title">Welcome, <%= link_to current_user.user_name, user_gallery_url(current_user) %>!</h2>
+
 <section class="left-column">
 
   <section class="home-zip_code-weather">

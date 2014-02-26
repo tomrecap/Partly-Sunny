@@ -46,27 +46,28 @@
       id="home_zip_code_code_for_user">
 
     <label>Temperature Scale</label>
-      <br>
+    <section class="radio-group">
+        <br>
 
-      <input
-        type="radio"
-        name="temperature_scale"
-        value="fahrenheit"
-        id="fahrenheit"
-        <%= "checked" unless @user.try(:celsius) %>>
-      <label for="fahrenheit">Fahrenheit</label>
+        <input
+          type="radio"
+          name="temperature_scale"
+          value="fahrenheit"
+          id="fahrenheit"
+          <%= "checked" unless @user.try(:celsius) %>>
+        <label for="fahrenheit">Fahrenheit</label>
 
-      <br>
+        <br>
 
-      <input
-        type="radio"
-        name="temperature_scale"
-        value="celsius"
-        id="celsius"
-        <%= "checked" if @user.try(:celsius) %>>
-      <label for="celsius">Celsius</label>
+        <input
+          type="radio"
+          name="temperature_scale"
+          value="celsius"
+          id="celsius"
+          <%= "checked" if @user.try(:celsius) %>>
+        <label for="celsius">Celsius</label>
+    </section>
 
-      <br>
 
     <label for="bio">Bio:</label>
     <br>
@@ -84,8 +85,8 @@
       value=""
       id="avatar">
 
-    Favorite Cities:
-    <br>
+    <!-- Favorite Cities:
+    <br> -->
     <!-- <input type="hidden" name="user[favorite_zip_code_ids][]" value=" ">
     <%# @zip_codes.each do |zip_code| %>
     <input
@@ -100,7 +101,7 @@
     <%# end %> -->
 
 
-  <% if mode == :edit %>
+  <% if mode == :edit && false %>
 
       Favorite Users:
       <br>

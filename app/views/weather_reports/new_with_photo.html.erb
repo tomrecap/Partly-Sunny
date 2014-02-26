@@ -1,6 +1,6 @@
 <!-- /app/views/photos/new.html.erb -->
 
-<h2 class="page-title">New Weather Report</h2>
+<h2 class="page-title">New Post</h2>
 
 <section class="left-column">
   &nbsp;
@@ -8,6 +8,8 @@
 
 <section class="main-column">
   <section class="new-weather-report-form">
-    <%= render "new", zip_codes: @zip_codes, weather_conditions: @weather_conditions %>
+    <%= render "new_with_photo",
+      weather_conditions: @weather_conditions,
+      tags: @tags %>
   </section>
 </section>

@@ -1,56 +1,57 @@
 <!-- app/views/weather_reports/_new.html.erb -->
 
-<h2 class="section-title">How is the weather?</h2>
+<!-- <h2 class="section-title">How is the weather?</h2> -->
 
 <form class="input" action="<%= weather_reports_url %>" method="post">
 
   <%= insert_form_authenticity_token %>
 
-    <input
-      type="number"
-      name="weather_report[temperature]"
-      value="<%= @weather_report.try(&:temperature) %>"
-      id="temperature"
-      placeholder="Temperature">
+  <label for="temperature">Temperature</label>
+  <input
+    type="number"
+    name="weather_report[temperature]"
+    value="<%= @weather_report.try(&:temperature) %>"
+    id="temperature"
+    placeholder="Temperature">
 
+  <section class="radio-group">
     <input
       type="radio"
       name="temperature_scale"
       value="fahrenheit"
-      id="fahrenheit"
+      id="fahrenheit-radio-button"
       <%= "checked" unless current_user.try(:celsius) %>>
-    <label for="fahrenheit">Fahrenheit</label>
+    <label for="fahrenheit-radio-button">&deg; F</label>
 
     <input
       type="radio"
       name="temperature_scale"
       value="celsius"
-      id="celsius"
+      id="celsius-radio-button"
       <%= "checked" if current_user.try(:celsius) %>>
-    <label for="celsius">Celsius</label>
+    <label for="celsius-radio-button">&deg; C</label>
+  </section>
+
+  <label for="condition">Condition</label>
+  <select name="weather_report[weather_condition_id]" id="condition">
+    <% weather_conditions.each do |condition| %>
+      <option
+        value="<%= condition.id %>"
+        "<%= "selected" if @weather_report.try(&:weather_condition_id) == condition.id %>">
+        <%= condition.description %>
+      </option>
+    <% end %>
+  </select>
 
 
 
-    <label for="condition">Condition</label>
-    <select name="weather_report[weather_condition_id]" id="condition">
-      <% weather_conditions.each do |condition| %>
-        <option
-          value="<%= condition.id %>"
-          "<%= "selected" if @weather_report.try(&:weather_condition_id) == condition.id %>">
-          <%= condition.description %>
-        </option>
-      <% end %>
-    </select>
-
-
-
-    <label for="zip_code_code">Zip Code</label>
-    <input
-      type="text"
-      name="zip_code_for_weather_report"
-      value="<%= @weather_report.try(:zip_code).try(:zip_code) %>"
-      id="zip_code_code"
-      placeholder="Zip Code">
+  <label for="zip_code_code">Zip Code</label>
+  <input
+    type="text"
+    name="zip_code_for_weather_report"
+    value="<%= @weather_report.try(:zip_code).try(:zip_code) %>"
+    id="zip_code_code"
+    placeholder="Zip Code">
 
   <input class="submit" type="submit" value="Submit">
 </form>

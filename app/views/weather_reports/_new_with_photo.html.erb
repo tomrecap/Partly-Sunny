@@ -2,7 +2,7 @@
 
 <form
   class="input combined"
-  action="<%= weather_reports_url %>"
+  action="<%= create_with_photo_weather_reports_url %>"
   method="post"
   enctype="multipart/form-data">
 
@@ -11,6 +11,7 @@
   <section class="weather-report">
     <h3 class="section-title">New Weather Report</h3>
 
+    <label for="temperature">Temperature</label>
     <input
       type="number"
       name="weather_report[temperature]"
@@ -18,22 +19,23 @@
       id="temperature"
       placeholder="Temperature">
 
-    <input
-      type="radio"
-      name="temperature_scale"
-      value="fahrenheit"
-      id="fahrenheit"
-      <%= "checked" unless current_user.try(:celsius) %>>
-    <label for="fahrenheit">Fahrenheit</label>
+    <section class="radio-group">
+      <input
+        type="radio"
+        name="temperature_scale"
+        value="fahrenheit"
+        id="fahrenheit-radio-button-modal"
+        <%= "checked" unless current_user.try(:celsius) %>>
+      <label for="fahrenheit-radio-button-modal">&deg; F</label>
 
-    <input
-      type="radio"
-      name="temperature_scale"
-      value="celsius"
-      id="celsius"
-      <%= "checked" if current_user.try(:celsius) %>>
-    <label for="celsius">Celsius</label>
-
+      <input
+        type="radio"
+        name="temperature_scale"
+        value="celsius"
+        id="celsius-radio-button-modal"
+        <%= "checked" if current_user.try(:celsius) %>>
+      <label for="celsius-radio-button-modal">&deg; C</label>
+    </section>
 
 
     <label for="condition">Condition</label>
@@ -60,27 +62,29 @@
     <label for="caption">Caption</label>
     <textarea name="photo[caption]" id="caption"><%#= photo.try(:caption) %></textarea>
 
-    Tags:
-    <br>
-    <input type="hidden" name="photo[tag_ids][]" value=" ">
-    <% @tags.each do |tag| %>
-      <input
-        type="checkbox"
-        name="photo[tag_ids][]"
-        value="<%= tag.id %>"
-        id="tag_checkbox_<%= tag.id %>"
-        <%= "checked" if @photo.try(:tag_ids) && @photo.tag_ids.include?(tag.id) %>
-        >
-      <label for="tag_checkbox_<%= tag.id %>"><%= tag.body %></label>
-      <br>
-    <% end %>
+    <label>Tags:</label>
+    <section class="checkbox-group">
+      <input type="hidden" name="photo[tag_ids][]" value=" ">
+      <% @tags.each do |tag| %>
+        <input
+          type="checkbox"
+          name="photo[tag_ids][]"
+          value="<%= tag.id %>"
+          id="tag_checkbox_<%= tag.id %>"
+          <%= "checked" if @photo.try(:tag_ids) && @photo.tag_ids.include?(tag.id) %>
+          >
+        <label for="tag_checkbox_<%= tag.id %>"><%= tag.body %></label>
+        <br>
+      <% end %>
+    </section>
+
   </section>
 
   <section class="shared">
     <label for="zip_code_code">Zip Code</label>
     <input
       type="text"
-      name="zip_code_for_weather_report"
+      name="zip_code_code"
       value="<%= current_user.try(:home_zip_code).try(:zip_code) %>"
       id="zip_code_code"
       placeholder="Zip Code">
