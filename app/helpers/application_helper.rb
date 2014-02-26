@@ -12,12 +12,12 @@ module ApplicationHelper
     favorite_zip_code_link = FavoriteZipCodeLink.find_by_zip_code_id_and_user_id(zip_code_id, current_user.id)
 
     if !!favorite_zip_code_link
-      button_to 'Remove zip_code from favorites', favorite_zip_code_link_url(favorite_zip_code_link), method: :delete
+      button_to 'Remove zip code from favorites', favorite_zip_code_link_url(favorite_zip_code_link), method: :delete
     else
       tag = "<form action='#{favorite_zip_code_links_url}' method='post'>
         <input type='hidden' name='favorite_zip_code_link[zip_code_id]' value='#{zip_code_id}'>
         #{insert_form_authenticity_token}
-        <input type='submit' value='Add zip_code to favorites'>
+        <input type='submit' value='Add zip code to favorites'>
       </form>"
       tag.html_safe
     end

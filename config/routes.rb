@@ -3,17 +3,17 @@ WeatherApp::Application.routes.draw do
 
   resources :weather_reports, only: [:new, :create]
 
-  resources :cities, only: [:show, :index] do
-    resource :gallery, only: :show
-    get "search", on: :collection
-  end
+  # resources :cities, only: [:show, :index] do
+  #   resource :gallery, only: :show
+  #   get "search", on: :collection
+  # end
 
   resources :zip_codes, only: [:show, :index] do
     resource :gallery, only: :show
     get "search", on: :collection
   end
 
-  resources :favorite_city_links, only: [:create, :destroy]
+  # resources :favorite_city_links, only: [:create, :destroy]
 
   resources :favorite_zip_code_links, only: [:create, :destroy] do
     post "modify", on: :collection
