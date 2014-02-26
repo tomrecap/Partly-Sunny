@@ -7,8 +7,11 @@ class CommentsController < ApplicationController
 
     if @comment.save
       flash[:notice] = "Comment added successfully"
-
-      redirect_to photo_url(params[:photo_id])
+      if request.xhr?
+        render partial: "comments/comment", locals: { comment: @comment }
+      else
+        redirect_to photo_url(params[:photo_id])
+      end
     else
       flash[:errors] = @comment.errors.full_messages
 

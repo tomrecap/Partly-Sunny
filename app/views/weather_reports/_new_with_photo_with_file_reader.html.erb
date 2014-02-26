@@ -1,0 +1,100 @@
+<!-- /app/views/weather_reports/_new_with_photo.html.erb -->
+
+<form
+  class="input combined"
+  action="<%= create_with_photo_weather_reports_url %>"
+  method="post"
+  enctype="multipart/form-data"
+  data-remote="true">
+
+  <%= insert_form_authenticity_token %>
+
+  <section class="weather-report">
+    <h3 class="section-title">New Weather Report</h3>
+
+    <label for="temperature">Temperature</label>
+    <input
+      type="number"
+      name="weather_report[temperature]"
+      value="<%= @weather_report.try(&:temperature) %>"
+      id="temperature"
+      placeholder="Temperature">
+
+    <section class="radio-group">
+      <input
+        type="radio"
+        name="temperature_scale"
+        value="fahrenheit"
+        id="fahrenheit-radio-button-modal"
+        <%= "checked" unless current_user.try(:celsius) %>>
+      <label for="fahrenheit-radio-button-modal">&deg; F</label>
+
+      <input
+        type="radio"
+        name="temperature_scale"
+        value="celsius"
+        id="celsius-radio-button-modal"
+        <%= "checked" if current_user.try(:celsius) %>>
+      <label for="celsius-radio-button-modal">&deg; C</label>
+    </section>
+
+
+    <label for="condition">Condition</label>
+    <select name="weather_report[weather_condition_id]" id="condition">
+      <% weather_conditions.each do |condition| %>
+        <option
+          value="<%= condition.id %>"
+          "<%= "selected" if @weather_report.try(&:weather_condition_id) == condition.id %>">
+          <%= condition.description %>
+        </option>
+      <% end %>
+    </select>
+
+  </section>
+
+  <section class="photo">
+    <h3 class="section-title">New Photo</h3>
+
+    <%#= image_tag photo.try(:image).try(:url, :small) %>
+    <br>
+    <label for="image">Choose a Photo</label>
+    <input type="file" name="photo[image]" value="" id="image">
+
+    <label for="caption">Caption</label>
+    <textarea name="photo[caption]" id="caption"><%#= photo.try(:caption) %></textarea>
+
+    <label for="tags">Tags</label>
+    <input
+      type="text"
+      name="tags"
+      value=""
+      id="tags">
+  </section>
+
+  <section class="shared">
+    <label for="zip_code_code">Zip Code</label>
+    <input
+      type="text"
+      name="zip_code_code"
+      value="<%= current_user.try(:home_zip_code).try(:zip_code) %>"
+      id="zip_code_code"
+      placeholder="Zip Code">
+
+    <input class="submit" name="commit" type="submit" value="Post">
+  </section>
+</form>
+
+<script>
+
+$(document).ready(function(){
+
+  $("#image").fileupload();
+
+  $("form.combined").on("ajax:success", function(event, data){
+    console.log(data);
+    this.reset();
+    $("body").removeClass("has-active-modal")
+  });
+});
+
+</script>

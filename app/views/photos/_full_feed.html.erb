@@ -36,30 +36,51 @@
           </ul>
         </p>
 
-        <p>
-          Comments:
-          <ul>
-            <% photo.comments.each do |comment| %>
-            <li><%= link_to comment.author.user_name, user_gallery_url(comment.author) %>: <%= comment.body %></li>
-            <% end %>
-          </ul>
-        </p>
 
-        <p>
-          <form
-            class="input"
-            action="<%= photo_comments_url(photo) %>"
-            method="post">
-            <%= insert_form_authenticity_token %>
-
-              <textarea name="comment[body]" id="comment" placeholder="Add a Comment:"></textarea>
+        Comments:
+        <ul id="comments-for-<%= photo.id %>">
+          <% photo.comments.each do |comment| %>
+          <li>
+            <%= render comment %>
+          </li>
+          <% end %>
+        </ul>
 
 
-            <input type="submit" value="Post">
-          </form>
-        </p>
+        <form
+          class="input comment"
+          id="comment-form-<%= photo.id %>"
+          action="<%= photo_comments_url(photo) %>"
+          method="post"
+          data-remote="true">
+          <%= insert_form_authenticity_token %>
+
+            <textarea name="comment[body]" id="comment" placeholder="Add a Comment:"></textarea>
+
+
+          <input type="submit" name="commit" value="Post">
+        </form>
+
       </figcaption>
     </figure>
   </li>
   <% end %>
 </ul>
+
+
+<script>
+
+
+$(document).ready(function(){
+  console.log('in the full feed script')
+
+  $("form.comment").on("ajax:success", function(event, data){
+    console.log("in the ajax success function")
+    console.log(event);
+    console.log(data);
+    $(this).prev().append(data);
+    this.reset();
+  });
+});
+
+</script>

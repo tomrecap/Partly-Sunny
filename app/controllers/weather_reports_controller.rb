@@ -68,7 +68,7 @@ class WeatherReportsController < ApplicationController
       @errors = models.map(&:errors.full_messages)
 
       if request.xhr?
-        render json: @errors, status: 200
+        render json: @errors, status: 422
       else
         render :new_with_photo
       end
