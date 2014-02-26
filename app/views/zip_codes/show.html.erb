@@ -15,7 +15,9 @@
 
 <h3 class="section-title">(<%= @zip_code.zip_code %>)</h3>
 
-  <div class="favorite-form"><%= insert_approriate_favorite_zip_code_button(@zip_code.id) if signed_in? %></div>
+  <div class="favorite-form">
+    <%= insert_approriate_favorite_zip_code_button(@zip_code.id) if signed_in? %>
+  </div>
 
 <section class="zip-code-weather-left-column">
   <section class="current-conditions">

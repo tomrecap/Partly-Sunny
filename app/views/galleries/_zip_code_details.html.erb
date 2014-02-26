@@ -1,9 +1,7 @@
 <!-- /app/views/galleries/_zip_code_details.html.erb -->
 
-<p>
-  <%= render "zip_codes/current_weather_summary", zip_code: zip_code %>
-</p>
+<%= render "zip_codes/current_weather_summary", zip_code: zip_code %>
 
-<p>
-    <%= insert_approriate_favorite_zip_code_button(zip_code.id) if signed_in? %>
-</p>
+<section class="favorite-form">
+  <%= insert_approriate_favorite_zip_code_button(zip_code.id) if signed_in? %>
+</section>

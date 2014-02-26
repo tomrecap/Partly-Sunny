@@ -308,8 +308,13 @@ h3.section-title {
 }
 
 input.submit, button.submit {
-/*  background: #a7ba5c;*/
+  background: #ccc;
   color:black;
+}
+
+input.submit:hover, button.submit:hover {
+  background: lightgreen;
+  cursor:pointer;
 }
 
 .submit > input {
