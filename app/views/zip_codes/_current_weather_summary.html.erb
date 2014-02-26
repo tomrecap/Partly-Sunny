@@ -9,6 +9,7 @@
   <section class="stats">
     <%= link_to zip_code.city, zip_code_url(zip_code) %> <a
     href="#"
+    id="<%= zip_code.id %>"
     data-remote="true"
     class="favorite <% if signed_in? && current_user.favorite_zip_code_ids.include?(zip_code.id) %>
       <%= true %>
@@ -27,45 +28,29 @@
 
 <script type="text/javascript" charset="utf-8">
   var changeStarToFavorited = function (element) {
-    console.log("about to add favorite")
-    console.log(element);
-
     $(element).addClass("true");
     $(element).removeClass("false");
-
-    console.log("star is now favorited");
-    console.log(element);
   };
 
   var changeStarToUnfavorited = function (element) {
-    console.log("about to remove favorite")
-    console.log(element);
-
     $(element).removeClass("true");
     $(element).addClass("false");
-
-    console.log("star is now un-favorited");
-    console.log(element);
   };
 
   $(document).ready(function(){
     $(".favorite-form").addClass("hidden");
 
-    $(".current-weather-summary").on("click","a.favorite", function(event) {
+    $(".current-weather-summary").on("click","a.favorite#<%= zip_code.id %>", function(event) {
       event.preventDefault();
-      console.log("clicked the favorite star");
-      console.log(this)
       var that = this;
 
       if ($(this).hasClass("true")) {
-        console.log("the star was favorited, now sending unfavorite request");
         $.ajax({
           url: '<%= modify_favorite_zip_code_links_url + "?zip_code_id=#{zip_code.id}" %>',
           type: "DELETE",
           success: changeStarToUnfavorited(that)
         });
       } else {
-        console.log("the star was not favorited; now sending favorite request");
         $.ajax({
           url: '<%= modify_favorite_zip_code_links_url + "?zip_code_id=#{zip_code.id}" %>',
           type: "POST",
