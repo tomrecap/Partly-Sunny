@@ -1,7 +1,6 @@
 <!-- app/views/zip_codes/show.html.erb -->
 
 <h2 class="page-title"><%= @zip_code.city %>, <%= @zip_code.state_code %>
-  <span class="page-subtitle">(<%= @zip_code.zip_code %>)</span>
   <a
     href="#"
     data-remote="true"
@@ -14,6 +13,7 @@
   </a>
 </h2>
 
+<span class="page-subtitle">(<%= @zip_code.zip_code %>)</span>
 
 
   <div class="favorite-form">
@@ -42,10 +42,27 @@
         class="percentages hidden"></canvas>
   </section>
 
+
+</section>
+
+<section class="zip-code-weather-right-column">
+
+  <section class="new-report-dumb-link">
+    <%= link_to "New Report for #{@zip_code.city}", new_weather_report_url(zip_code_id: @zip_code.id) %>
+  </section>
+
+  <section class="recent-photos">
+    <h3 class="section-title"><%= link_to "Latest Photos", zip_code_gallery_url(@zip_code) %></h3>
+    <%= render "photos/photo_list_minimal_caption", photos: @photos %>
+  </section>
+</section>
+
+<section class="zip-code-weather-full-column">
   <section class="recent-reports">
     <h3 class="section-title">Latest Reports</h3>
      <table>
       <tr>
+        <th>Location</th>
         <th>Temperature</th>
         <th>Condition</th>
         <th>Submission Time</th>
@@ -53,8 +70,10 @@
 
       <% @recent_reports.take(10).each do |report| %>
       <tr>
+        <% location = "#{report.zip_code.city}, #{report.zip_code.state_code} (#{report.zip_code.zip_code})" %>
+        <td><%= link_to location, zip_code_url(report.zip_code) %></td>
         <td>
-          <%= report.temperature %> &deg; <%= current_user.try(:celsius) ? "C" : "F" %>
+          <pre><%= report.temperature %>&deg;<%= current_user.try(:celsius) ? "C" : "F" %></pre>
         </td>
         <td><%= report.weather_condition.description %></td>
         <td><%= friendly_time_format(report.created_at) %></td>
@@ -64,22 +83,6 @@
     </table>
   </section>
 </section>
-
-<section class="zip-code-weather-right-column">
-
-  <p>
-    <%= link_to "New Report for #{@zip_code.city}", new_weather_report_url(zip_code_id: @zip_code.id) %>
-  </p>
-
-  <section class="recent-photos">
-    <h3 class="section-title"><%= link_to "Latest Photos", zip_code_gallery_url(@zip_code) %></h3>
-    <%= render "photos/photo_list_minimal_caption", photos: @photos %>
-  </section>
-
-
-
-</section>
-
 
 <script>
 
@@ -98,6 +101,7 @@ var data = {
 var conditionsChart = new Chart(ctx).Bar(data, {
   scaleFontFamily: "'Fira Sans'",
   scaleFontSize: 16,
+  scaleFontColor: "#000",
   scaleOverride:true,
   scaleSteps:<%= ((@weather_condition_frequencies.values.first / 5) + 1).round %>,
   scaleStepWidth:5,
@@ -124,6 +128,7 @@ var changeStarToUnfavorited = function (element) {
 };
 
 $(document).ready(function(){
+  $(".new-report-dumb-link").addClass("hidden");
   swapPercentagesWithChart();
 
   $(".favorite-form").addClass("hidden");

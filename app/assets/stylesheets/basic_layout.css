@@ -12,6 +12,10 @@ a:hover {
   text-decoration:underline;
 }
 
+pre {
+  font-family:'Fira Mono', Courier, monospace;
+}
+
 img.avatar {
   height:15px;
   width:15px;
@@ -274,6 +278,14 @@ header .nav-bar-dropdown input[type="text"] {
   float:left;
   width:435px;
   padding-left:20px;
+}
+
+.zip-code-weather-full-column {
+  display:block;
+  float:left;
+  width:910px;
+  padding-top:20px;
+
 }
 
 h2.page-title{

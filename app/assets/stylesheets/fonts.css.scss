@@ -21,6 +21,17 @@
 }
 
 @font-face{
+    font-family: 'Fira Mono';
+    src: url('http://mozilla.github.io/Fira/eot/FiraMono-Regular.eot');
+    src: local('Fira Mono Regular'),
+         url('http://mozilla.github.io/Fira/eot/FiraMono-Regular.eot') format('embedded-opentype'),
+         url('http://mozilla.github.io/Fira/woff/FiraMono-Regular.woff') format('woff'),
+         url('http://mozilla.github.io/Fira/ttf/FiraMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face{
     font-family: 'Fira Sans';
     src: url('http://mozilla.github.io/Fira/eot/FiraSans-Medium.eot');
     src: local('Fira Sans Medium'),
