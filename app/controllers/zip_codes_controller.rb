@@ -33,9 +33,13 @@ class ZipCodesController < ApplicationController
 
   def search
     if params[:search_query][0] =~ /\d/
-      @search_results = ZipCode.search_by_zip_code(params[:search_query])
+      @search_results = ZipCode
+        .search_by_zip_code(params[:search_query])
     else
-      @search_results = ZipCode.search_by_city(params[:search_query])
+      @search_results = ZipCode
+        .search_by_city(params[:search_query])
+        .all
+        .uniq { |zip| zip.city }
     end
 
     if @search_results.count == 1
