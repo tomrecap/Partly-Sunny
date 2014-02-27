@@ -1,20 +1,65 @@
 <!-- /app/views/galleries/_user_details.html.erb -->
 
-<p>
-  <a href="<%= user_gallery_url(user) %>">
-    <%= image_tag user.avatar.url(:thumbnail) %>
-    <%= user.user_name %></a>
-</p>
+<section class="user-details-box">
+    <a href="<%= user_gallery_url(user) %>">
+      <%= image_tag user.avatar.url(:thumbnail) %>
+      <%= user.user_name %></a>
+      <a
+          href="#"
+          id="<%= user.id %>"
+          data-remote="true"
+          class="favorite <% if signed_in? && current_user.favorited_user_ids.include?(user.id) %>
+            <%= true %>
+          <% else %>
+            <%= false %>
+          <% end %>">
+          &#9733;
+        </a>
+  <p>
+    <%= link_to user.home_zip_code.city, zip_code_url(user.home_zip_code_id) if !!user.home_zip_code_id %>
+  </p>
 
-<p>
-  <%= link_to user.home_zip_code.city, zip_code_url(user.home_zip_code_id) if !!user.home_zip_code_id %>
-</p>
+  <p>
+    Bio: <%= user.bio %>
+  </p>
 
-<p>
-  Bio: <%= user.bio %>
-</p>
+</section>
 
-<p>
+<section class="favorite-user-form">
   <%= insert_approriate_favorite_user_button(user.id) if signed_in? %>
-</p>
+</section>
 
+<script type="text/javascript" charset="utf-8">
+  var changeStarToFavorited = function (element) {
+    $(element).addClass("true");
+    $(element).removeClass("false");
+  };
+
+  var changeStarToUnfavorited = function (element) {
+    $(element).removeClass("true");
+    $(element).addClass("false");
+  };
+
+  $(document).ready(function(){
+    $(".favorite-user-form").addClass("hidden");
+
+    $(".user-details-box").on("click","a.favorite#<%= user.id %>", function(event) {
+      event.preventDefault();
+      var that = this;
+
+      if ($(this).hasClass("true")) {
+        $.ajax({
+          url: '<%= modify_favorite_user_links_url + "?user_id=#{user.id}" %>',
+          type: "DELETE",
+          success: changeStarToUnfavorited(that)
+        });
+      } else {
+        $.ajax({
+          url: '<%= modify_favorite_user_links_url + "?user_id=#{user.id}" %>',
+          type: "POST",
+          success: changeStarToFavorited(that)
+        });
+      };
+    });
+  });
+</script>
