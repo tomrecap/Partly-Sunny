@@ -27,7 +27,8 @@ class SessionsController < ApplicationController
 
     if @user
       login_user!(@user)
-      redirect_to zip_codes_url
+
+      redirect_to session[:redirect_url] || zip_codes_url
     else
       flash.now[:errors] = "User name and password do not match"
       render :new

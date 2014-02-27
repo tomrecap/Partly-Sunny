@@ -28,7 +28,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_signed_in!
-    redirect_to new_session_url unless signed_in?
+    unless signed_in?
+      session[:redirect_url] = request.env["REQUEST_URI"]
+      redirect_to new_session_url
+    end
   end
 
   def require_not_signed_in!

@@ -16,15 +16,21 @@ WEATHER_PHOTO_URLS = ["http://www.sgi.com/solutions/research/images/weather.jpg"
 
 # create zip codes
 #
+
+GOOD_STATES = [ "CA", "NY", "MA", "NH", "RI",
+                "CT", "NJ", "IL", "IN", "WI", "FL" ]
+
 File.foreach("vendor/assets/us_zips.txt") do |zip_entry|
   zip_details = zip_entry.split("  ")
 
   zip_code = zip_details[1]
   city_name = zip_details[2]
   state_name = zip_details[3]
-  state_code = zip_details[4]
+  state_code = zip_details[4].upcase
   latitude = zip_details[8].to_f
   longitude = zip_details[9].to_f
+
+  next unless GOOD_STATES.include?(state_code)
 
   ZipCode.create(
     zip_code: zip_code,
@@ -67,13 +73,13 @@ WeatherCondition.create(description: "Hot")
 WeatherCondition.create(description: "Cold")
 WeatherCondition.create(description: "Snowing")
 
-WeatherCondition.find(1).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/windy.png")
-WeatherCondition.find(2).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/rainy.png")
-WeatherCondition.find(3).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/sunny.png")
-WeatherCondition.find(4).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/cloudy.png")
-WeatherCondition.find(5).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/hot.png")
-WeatherCondition.find(6).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/cold.png")
-WeatherCondition.find(7).update_attributes!(icon: "https://s3-us-west-2.amazonaws.com/weather-app-dev/icons-stash/snowing.png")
+WeatherCondition.find(1).update_attributes!(icon: "https://s3.amazonaws.com/weather-app-production/icons/weather_conditions/windy.png")
+WeatherCondition.find(2).update_attributes!(icon: "https://s3.amazonaws.com/weather-app-production/icons/weather_conditions/rainy.png")
+WeatherCondition.find(3).update_attributes!(icon: "https://s3.amazonaws.com/weather-app-production/icons/weather_conditions/sunny.png")
+WeatherCondition.find(4).update_attributes!(icon: "https://s3.amazonaws.com/weather-app-production/icons/weather_conditions/cloudy.png")
+WeatherCondition.find(5).update_attributes!(icon: "https://s3.amazonaws.com/weather-app-production/icons/weather_conditions/hot.png")
+WeatherCondition.find(6).update_attributes!(icon: "https://s3.amazonaws.com/weather-app-production/icons/weather_conditions/cold.png")
+WeatherCondition.find(7).update_attributes!(icon: "https://s3.amazonaws.com/weather-app-production/icons/weather_conditions/snowing.png")
 
 Tag.create(body: "windy")
 Tag.create(body: "rainy")
