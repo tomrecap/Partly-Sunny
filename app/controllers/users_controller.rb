@@ -36,9 +36,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    params[:user][:home_zip_code_id] = ZipCode.find_by_zip_code(
-      params[:home_zip_code_code_for_user]
-    ).id
+    unless params[:home_zip_code_code_for_user].empty?
+      params[:user][:home_zip_code_id] = ZipCode.find_by_zip_code(
+        params[:home_zip_code_code_for_user]
+      ).id
+    end
 
     @user = User.new(params[:user])
     @user.celsius = (params[:temperature_scale] == "celsius")

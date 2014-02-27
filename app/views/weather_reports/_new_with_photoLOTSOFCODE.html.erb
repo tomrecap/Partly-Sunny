@@ -119,10 +119,57 @@ $(document).ready(function(){
           // postAttachment(picData, $fileInput);
           $(input).siblings('img').attr('src', picData);
         };
+        reader.onerror = function(e) {
+          // $fileInput.parent().addClass('errors');
+          // var oopsMsg = 'Oops. Something went wrong. Please close \
+          //                this dialog box and try again.';
+          // $fileInput.siblings('.errors').find('.message').html(oopsMsg);
+        };
+
+
         reader.readAsDataURL(input.files[0]);
-      };
+      }
+      else {
+        // $fileInput.parent().addClass('errors');
+      }
     }
   };
+
+
+  function postAttachment(picData, $fileInput) {
+    $.ajax({
+      method: 'POST',
+      enctype: 'multipart/form-data',
+      url: "<%= photos_url %>",
+      data: {pic_data: picData},
+      xhr: function () {
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.onprogress = progressHandler.bind($fileInput);
+        return xhr;
+      },
+      beforeSend: function() {
+
+      },
+      success: function(data) {
+        console.log("in ajax success callback");
+        console.log(data);
+        $fileInput.siblings('input.photo_token').val(data['token']);
+      },
+      error: function(xhr) {
+        console.log("in ajax error callback");
+        // $fileInput.parent().addClass('errors');
+      },
+      complete: function () {
+        console.log("in ajax complete callback");
+        // $bar = $fileInput.siblings('.progress')
+        // liftProgressVeil($bar, 100, 500, function() {
+        //   $fileInput.removeAttr('name');
+        //   $fileInput.parent().removeClass('busy');
+        // });
+      }
+    });
+  };
+
 
   $('form.combined').on('change', 'input.image-file-picker', function() {
     readUrl(this);

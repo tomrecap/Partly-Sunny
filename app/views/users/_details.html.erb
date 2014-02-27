@@ -6,7 +6,7 @@
   action="<%= action_url %>"
   method="post"
   enctype="multipart/form-data"
-  class="input">
+  class="input user-details">
   <%= change_post_to_put if mode == :edit %>
 
   <%= insert_form_authenticity_token %>
@@ -75,15 +75,26 @@
     <br>
     <label for="bio">(140 characters max)</label>
 
-    <label for="avatar">Avatar</label>
-    <br>
-    <%= image_tag @user.try(:avatar).try(:url, :full), class: "teaser-photo" %>
-    <br>
+    <section class="avatars group">
+      <% if mode == :edit %>
+        <section class="current-avatar">
+          <label for="current-avatar">Current Avatar</label>
+          <%= image_tag @user.try(:avatar).try(:url, :full), class: "teaser-photo current-avatar", id: "current-avatar" %>
+        </section>
+      <% end %>
+
+      <section class="new-avatar">
+        <label for="new-avatar">New Avatar</label>
+        <%= image_tag "", class: "teaser-photo new-avatar empty" %>
+      </section>
+    </section>
+
     <input
       type="file"
       name="user[avatar]"
       value=""
-      id="avatar">
+      id="avatar"
+      class="avatar-file-picker">
 
   <% if mode == :edit && false %>
 
@@ -111,3 +122,34 @@
 
 </form>
     <p>*Required</p>
+
+<script>
+
+$(document).ready(function(){
+
+  function readUrl(input) {
+    if (input.files && input.files[0]) {
+      var file = input.files[0]
+      var $fileInput = $(input);
+
+      if (/jpg|jpeg|png|bmp/.exec(file.type)) {
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var picData = e.target.result;
+
+          // postAttachment(picData, $fileInput);
+          $('img.new-avatar').attr('src', picData);
+          $('img.new-avatar').removeClass("empty");
+        };
+        reader.readAsDataURL(input.files[0]);
+      };
+    }
+  };
+
+  $('form.user-details').on('change', 'input.avatar-file-picker', function() {
+    readUrl(this);
+  });
+});
+
+</script>

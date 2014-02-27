@@ -5,3 +5,30 @@ h1.page-title {
 }
 
 /*------------ FORM IN CENTER COLUMN ---------------*/
+
+.avatars {
+  display:block;
+  position:relative;
+  width:100%;
+  margin-bottom:20px;
+}
+
+section.current-avatar {
+  display:block;
+  float:left;
+}
+
+section.new-avatar {
+  display:block;
+  float:left;
+  margin-left:20px;
+}
+
+.avatars img {
+  display:block;
+}
+
+img.new-avatar.empty {
+  background:#ccc;
+  content:"Preview your new avatar here.";
+}

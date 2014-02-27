@@ -3,7 +3,7 @@
 <% if signed_in? %>
 
   <h3 class="section-title">
-    Hello, <%= link_to current_user.user_name, user_gallery_url(current_user) %>
+    <a href="<%= user_gallery_url(current_user) %>">Hello, <%= current_user.user_name %></a>
   </h3>
 
 

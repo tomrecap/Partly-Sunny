@@ -69,6 +69,24 @@
       name="tags"
       value=""
       id="tags">
+
+
+    <!-- <label>Tags:</label>
+    <section class="checkbox-group">
+      <input type="hidden" name="photo[tag_ids][]" value=" ">
+      <%# @tags.each do |tag| %>
+        <input
+          type="checkbox"
+          name="photo[tag_ids][]"
+          value="<%#= tag.id %>"
+          id="tag_checkbox_<%#= tag.id %>"
+          <%#= "checked" if @photo.try(:tag_ids) && @photo.tag_ids.include?(tag.id) %>
+          >
+        <label for="tag_checkbox_<%#= tag.id %>"><%#= tag.body %></label>
+        <br>
+      <%# end %>
+    </section> -->
+
   </section>
 
   <section class="shared">
@@ -87,8 +105,6 @@
 <script>
 
 $(document).ready(function(){
-
-  $("#image").fileupload();
 
   $("form.combined").on("ajax:success", function(event, data){
     console.log(data);

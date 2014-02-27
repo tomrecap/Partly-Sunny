@@ -6,6 +6,25 @@ class PhotosController < ApplicationController
   end
 
   def create
+    # # TURN ON FOR REAL AJAX UPLOADING
+    # if request.xhr?
+    #   extension = params[:pic_data][11..14][/jpeg|jpg|png/]
+    #   file = Tempfile.new(["photo", ".#{extension}"])
+    #
+    #   raw_data = params[:photo]["data:image/#{extension};base64,".length..-1]
+    #   file.binmode
+    #   file.write(Base64.decode64(raw_data))
+    #
+    #   @new_photo = Photo.new(file: file)
+    #
+    #   if @new_photo.save
+    #     render json: @new_photo
+    #   else
+    #     render json: @new_photo.errors.full_messages, status: 422
+    #   end
+    #   return
+    # end
+
     params[:photo][:zip_code_id] = ZipCode.find_by_zip_code(
       params[:zip_code_code_for_photo]
     ).id

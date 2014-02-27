@@ -72,12 +72,7 @@
 
 
 $(document).ready(function(){
-  console.log('in the full feed script')
-
   $("form.comment").on("ajax:success", function(event, data){
-    console.log("in the ajax success function")
-    console.log(event);
-    console.log(data);
     $(this).prev().append(data);
     this.reset();
   });
