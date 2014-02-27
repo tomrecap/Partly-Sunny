@@ -54,7 +54,10 @@
             </div>
           </li>
           <li class="icon" id="user-menu">
-            User Menu
+            <a href="<%= user_gallery_url(current_user) %>">
+              User Menu
+            </a>
+
             <div class="nav-bar-dropdown hidden">
               <div class="triangle-up">&nbsp;</div>
               <%= render "nav_bar_dropdowns/user_menu", current_user: current_user %>

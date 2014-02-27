@@ -133,6 +133,11 @@ header nav li.icon {
   overflow:hidden;
 }
 
+header nav li.icon:active {
+  margin-top:7px;
+  margin-bottom:3px;
+}
+
 header nav li#new-post {
   background: url("https://s3.amazonaws.com/weather-app-production/icons/new-post.png") no-repeat 0 0;
   background-size:contain;
