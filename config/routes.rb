@@ -23,7 +23,11 @@ WeatherApp::Application.routes.draw do
   end
 
 
-  resources :favorite_user_links, only: [:create, :destroy]
+  resources :favorite_user_links, only: [:create, :destroy] do
+    post "modify", on: :collection
+    delete "modify", on: :collection
+  end
+
   resources :photos do
     resources :comments, only: [:create, :destroy]
     resources :tags, only: [:create, :destroy]
