@@ -11,7 +11,7 @@
     href="#"
     id="<%= zip_code.id %>"
     data-remote="true"
-    class="favorite <% if signed_in? && current_user.favorite_zip_code_ids.include?(zip_code.id) %>
+    class="favorite summary-partial<% if signed_in? && current_user.favorite_zip_code_ids.include?(zip_code.id) %>
       <%= true %>
     <% else %>
       <%= false %>

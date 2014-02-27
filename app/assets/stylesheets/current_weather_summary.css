@@ -26,6 +26,10 @@
   margin-top:10px;
 }
 
+a.favorite.summary-partial {
+  font-size:100%;
+}
+
 /*---------- MAIN CITY WEATHER ON DASHBOARD PAGE ----------*/
 /*.home-city-weather .current-weather-summary .icon img {
   width:100px;

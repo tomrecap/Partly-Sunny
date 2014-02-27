@@ -12,61 +12,75 @@
     <section class="header-content">
       <a href="<%= root_url %>">
         <h1 class="site-logo">Partly Sunny</h1>
-      <a>
+      </a>
 
       <nav>
 
-        <form action="<%= search_zip_codes_url %>" method="get" class="input">
-
-          <%= insert_form_authenticity_token %>
-
-          <input
-            type="search"
-            name="search_query"
-            value=""
-            id="search_query"
-            placeholder="Search & Favorites">
-
-          <input class="submit" type="submit" value="Search">
-        </form>
-
-        <!-- <input
-          type="search"
-          name="site_search"
-          value=""
-          id="site_search"
-          placeholder="Search & Favorites"> -->
         <ul>
+          <li>
+            <form action="<%= search_zip_codes_url %>" method="get" class="input">
+
+              <input
+                type="search"
+                name="search_query"
+                value=""
+                id="search_query"
+                placeholder="Search & Favorites">
+
+              <div class="nav-bar-dropdown favorites hidden">
+                <%= render "nav_bar_dropdowns/favorite_zip_codes_weather", current_user: current_user %>
+              </div>
+
+              <%= insert_form_authenticity_token %>
+
+              <input class="submit" type="submit" value="Search">
+
+
+            </form>
+          </li>
+
           <li class="icon show-modal" id="new-post">
-            Post a New Weather Report or Photo
-            <div class="nav-bar-dropdown hidden">
-              <div class="triangle-up">&nbsp;</div>
+            <a href="#">
+              <i id="new-post"></i>
+              Post a New Weather Report or Photo
+            </a>
+
+            <div class="nav-bar-dropdown triangle-up">
               <%= render "nav_bar_dropdowns/post_button_explanation", current_user: current_user %>
             </div>
           </li>
-          <li class="icon" id="notifications">
-            <div class="relative-dummy-element">
+
+          <li class="icon">
+            <a href="">
+              <i id="notifications"></i>
               Notifications
-              <div class="nav-bar-dropdown hidden">
-                <div class="triangle-up">&nbsp;</div>
-                <%= render "nav_bar_dropdowns/notifications", current_user: current_user %>
-              </div>
+            </a>
+
+            <div class="nav-bar-dropdown">
+              <%= render "nav_bar_dropdowns/notifications", current_user: current_user %>
             </div>
           </li>
-          <li class="icon" id="user-menu">
+
+          <li class="icon">
             <a href="<%= user_gallery_url(current_user) %>">
+              <i id="user-menu"></i>
               User Menu
             </a>
 
-            <div class="nav-bar-dropdown hidden">
-              <div class="triangle-up">&nbsp;</div>
+            <div class="nav-bar-dropdown" id="user-menu-box">
+              <div class="triangle-up"></div>
               <%= render "nav_bar_dropdowns/user_menu", current_user: current_user %>
             </div>
           </li>
-          <li class="icon" id="settings-menu">
-            Settings Menu
-            <div class="nav-bar-dropdown hidden">
-              <div class="triangle-up">&nbsp;</div>
+
+          <li class="icon">
+            <a href="<%= edit_user_url(current_user) %>">
+              <i id="settings-menu"></i>
+              Settings Menu
+            </a>
+
+            <div class="nav-bar-dropdown">
+              <div class="triangle-up"></div>
               <%= render "nav_bar_dropdowns/settings_menu", current_user: current_user %>
             </div>
           </li>

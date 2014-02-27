@@ -76,17 +76,32 @@ header h1.site-logo {
   font-size:24pt;
   font-weight:bold;
   padding:0;
+  letter-spacing:1px;
 }
 
 header nav {
   display:block;
   float:right;
-  height: auto;
+}
+
+
+header nav ul {
+/*  display:block;*/
+/*  position:relative;*/
+  padding-right:10px;
+/*  padding-bottom:10px;*/
+}
+
+nav > ul > li {
+  display:block;
+  float:left;
+  position:relative;
+  padding-bottom:10px;
 }
 
 header nav form{
   display:block;
-  float:left;
+/*  float:left;*/
   margin-top:0px;
   margin-bottom:0px;
   padding:0;
@@ -116,71 +131,92 @@ header nav input[type="search"] {
   padding:5px 10px;
 }
 
-header nav ul {
+nav form:focus {
+  background:red;
+}
+
+nav input[type="search"]:focus + .nav-bar-dropdown.favorites {
   display:block;
-  float:left;
-  padding-right:10px;
-  padding-bottom:10px;
+}
+
+.nav-bar-dropdown.favorites:hover {
+ display:block;
 }
 
 header nav li.icon {
-  display:block;
-  float:left;
+  position:relative;
   margin-left:10px;
   margin-right:10px;
   margin-top:5px;
   margin-bottom:5px;
   width:25px;
-  height:0px;
-  padding-top:25px;
+  height:25px;
+  padding-top:0px;
 /*  padding-bottom:30px;*/
-  overflow:hidden;
 }
 
-header nav li.icon:active {
+header nav .icon:active {
   margin-top:7px;
   margin-bottom:3px;
 }
 
-header nav li#new-post {
-  background: url("https://s3.amazonaws.com/weather-app-production/icons/new-post.png") no-repeat 0 0;
-  background-size:contain;
+header nav .icon > a {
+  color:transparent;
 }
 
-header nav li#notifications {
-  background: url("https://s3.amazonaws.com/weather-app-production/icons/notifications.png") no-repeat 0 0;
-  background-size:contain;
+header nav i {
+  display:block;
+  height:25px;
+  width:25px;
 }
 
-header nav li#user-menu {
-  background: url("https://s3.amazonaws.com/weather-app-production/icons/user-menu.png") no-repeat 0 0;
-  background-size:contain;
+header nav i#new-post {
+  content: url("https://s3.amazonaws.com/weather-app-production/icons/new-post.png") no-repeat 0 0;
 }
 
-header nav li#settings-menu {
-  background: url("https://s3.amazonaws.com/weather-app-production/icons/settings.png") no-repeat 0 0;
-  background-size:contain;
+header nav i#notifications {
+  content: url("https://s3.amazonaws.com/weather-app-production/icons/notifications.png") no-repeat 0 0;
 }
 
-header nav li.icon:hover {
+header nav i#user-menu {
+  content: url("https://s3.amazonaws.com/weather-app-production/icons/user-menu.png") no-repeat 0 0;
+}
+
+header nav i#settings-menu {
+  content: url("https://s3.amazonaws.com/weather-app-production/icons/settings.png") no-repeat 0 0;
+}
+
+header nav .icon:hover {
   cursor:pointer;
-/*  border-bottom:1px solid red;*/
-/*  background:blue;*/
 }
 
 header .nav-bar-dropdown {
-  display:block;
+  display:none;
   position:absolute;
-  z-index: 999;
+  z-index: 10;
   width:180px;
   padding:9px;
-  background:#ccc;
-  color:#333;
+  background:#F6F6F6;
+  color:black;
   border: 1px solid #ccc;
   border-radius:5px;
-/*  top:59px;*/
-  top:75px;
-  right:0px;
+  top:45px;
+  right:-35px;
+}
+
+
+.nav-bar-dropdown.favorites {
+  display:none;
+  top:35px;
+  left:11px;
+  width:254px;
+}
+
+.nav-bar-dropdown.favorites li{
+  display:block;
+  position:relative;
+  width:234px;
+  height:auto;
 }
 
 header .nav-bar-dropdown li {
@@ -189,14 +225,10 @@ header .nav-bar-dropdown li {
   height:50px;
 }
 
-header .nav-bar-dropdown.hidden {
-  display:none;
-}
-
-
 nav .icon:hover .nav-bar-dropdown {
   display:block;
 }
+
 
 header .nav-bar-dropdown h3 {
   font-size:14pt;
@@ -206,7 +238,8 @@ header .nav-bar-dropdown input[type="text"] {
   width:150px;
 }
 
-.nav-bar-dropdown .triangle-up {
+.nav-bar-dropdown .triangle-up:before {
+  content:"";
   display:block;
   position:absolute;
   height:0px;
@@ -215,26 +248,11 @@ header .nav-bar-dropdown input[type="text"] {
   border-left:18px solid transparent;
   border-right:18px solid transparent;
   border-bottom: 18px solid #ccc;
-  z-index: 2;
-  top:-28px;
-  right:00px;
+  z-index: 4;
+  top:-40px;
+  right:27px;
 }
 
-#new-post .triangle-up {
-  right:150px;
-}
-
-#notifications .triangle-up {
-  right:105px;
-}
-
-#user-menu .triangle-up {
-  right:60px;
-}
-
-#settings-menu .triangle-up {
-  right:15px;
-}
 
 /*--------- CONTENT ---------*/
 .content {
