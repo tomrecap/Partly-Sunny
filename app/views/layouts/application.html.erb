@@ -46,6 +46,7 @@
             </a>
 
             <div class="nav-bar-dropdown triangle-up">
+              <div class="inner-triangle-up"></div>
               <%= render "nav_bar_dropdowns/post_button_explanation", current_user: current_user %>
             </div>
           </li>
@@ -56,7 +57,8 @@
               Notifications
             </a>
 
-            <div class="nav-bar-dropdown">
+            <div class="nav-bar-dropdown triangle-up">
+              <div class="inner-triangle-up"></div>
               <%= render "nav_bar_dropdowns/notifications", current_user: current_user %>
             </div>
           </li>
@@ -67,8 +69,8 @@
               User Menu
             </a>
 
-            <div class="nav-bar-dropdown" id="user-menu-box">
-              <div class="triangle-up"></div>
+            <div class="nav-bar-dropdown triangle-up" id="user-menu-box">
+              <div class="inner-triangle-up"></div>
               <%= render "nav_bar_dropdowns/user_menu", current_user: current_user %>
             </div>
           </li>
@@ -79,8 +81,8 @@
               Settings Menu
             </a>
 
-            <div class="nav-bar-dropdown">
-              <div class="triangle-up"></div>
+            <div class="nav-bar-dropdown triangle-up">
+              <div class="inner-triangle-up"></div>
               <%= render "nav_bar_dropdowns/settings_menu", current_user: current_user %>
             </div>
           </li>

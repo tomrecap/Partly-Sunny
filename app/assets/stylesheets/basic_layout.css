@@ -200,14 +200,15 @@ header .nav-bar-dropdown {
   color:black;
   border: 1px solid #ccc;
   border-radius:5px;
-  top:45px;
+  top:47px;
   right:-35px;
+  box-shadow: 0 1px 5px #ccc;
 }
 
 
 .nav-bar-dropdown.favorites {
   display:none;
-  top:35px;
+  top:37px;
   left:11px;
   width:254px;
 }
@@ -238,19 +239,33 @@ header .nav-bar-dropdown input[type="text"] {
   width:150px;
 }
 
-.nav-bar-dropdown .triangle-up:before {
+.nav-bar-dropdown.triangle-up:before {
   content:"";
   display:block;
   position:absolute;
   height:0px;
   width:0px;
-  border-top:18px solid transparent;
-  border-left:18px solid transparent;
-  border-right:18px solid transparent;
-  border-bottom: 18px solid #ccc;
+  border-top:19px solid transparent;
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-bottom: 19px solid #ccc;
   z-index: 4;
-  top:-40px;
-  right:27px;
+  top:-36px;
+  right:32px;
+}
+
+.inner-triangle-up {
+  display:block;
+  position:absolute;
+  height:0px;
+  width:0px;
+  border-top:19px solid transparent;
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-bottom: 19px solid #f6f6f6;
+  z-index:5;
+  top:-33px;
+  right:32px;
 }
 
 
