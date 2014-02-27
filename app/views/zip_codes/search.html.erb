@@ -7,20 +7,40 @@
 </section>
 
 <section class="main-column">
-  <section class="search-results">
-    <h2 class="section-title"></h2>
+  <section class="location-search-results">
+    <h3 class="section-title">Places</h3>
 
-    <% if @search_results.empty? %>
+    <% if @zip_code_search_results.empty? %>
       <p>
-        We don't have a zip_code with that name in our database. Please check back as we expand to more cities.
+        We don't have any cities with that name in our database. Please check back as we expand to more cities.
       </p>
     <% else %>
       <ul>
-        <% @search_results.each do |result| %>
+        <% @zip_code_search_results.each do |result| %>
           <% result_string = "#{result.city}, #{result.state_code} (#{result.zip_code})" %>
         <li><%= link_to result_string, zip_code_url(result)%></li>
         <% end %>
       </ul>
     <% end %>
   </section>
+
+  <% if @user_search_results %>
+
+    <section class="user-search-results">
+      <h3 class="section-title">Users</h3>
+
+      <% if @user_search_results.empty? %>
+        <p>
+          We couldn't find anyone by that name.
+        </p>
+      <% else %>
+        <ul>
+          <% @user_search_results.each do |user| %>
+          <li class="user-info-box group"><%= render "users/minimal_user_info", user: user %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </section>
+
+  <% end %>
 </section>

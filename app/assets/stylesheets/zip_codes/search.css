@@ -1,0 +1,24 @@
+/*---- user info boxes -------*/
+
+
+.user-search-results > ul {
+  display:block;
+  position:relative;
+}
+
+.user-search-results > ul > li.user-info-box {
+  display:block;
+  position:relative;
+}
+
+.user-info-box img {
+  display:block;
+  float:left;
+}
+
+.user-info-box ul {
+  display:block;
+  float:left;
+  margin-left:20px;
+}
+

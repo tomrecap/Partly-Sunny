@@ -33,21 +33,22 @@ class ZipCodesController < ApplicationController
 
   def search
     if params[:search_query][0] =~ /\d/
-      @search_results = ZipCode
+      @zip_code_search_results = ZipCode
         .search_by_zip_code(params[:search_query])
     else
-      @search_results = ZipCode
+      @zip_code_search_results = ZipCode
         .search_by_city(params[:search_query])
         .all
         .uniq { |zip| zip.city }
+      @user_search_results = User
+        .search_by_user_name(params[:search_query])
     end
 
-    if @search_results.count == 1
+    if @zip_code_search_results.count == 1
       redirect_to zip_code_url(@search_results.first)
     else
       @search_query = params[:search_query]
 
-      # @zip_codes = ZipCode.all
       render :search
     end
   end

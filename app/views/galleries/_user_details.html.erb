@@ -15,6 +15,6 @@
 </p>
 
 <p>
-  <%= insert_approriate_favorite_user_button(user.id) %>
+  <%= insert_approriate_favorite_user_button(user.id) if signed_in? %>
 </p>
 
