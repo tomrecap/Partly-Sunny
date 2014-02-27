@@ -131,6 +131,7 @@ class ZipCode < ActiveRecord::Base
 
   def current_temperature(use_celsius = false)
     temperatures = nearby_weather_reports.map(&:temperature)
+    return nil unless nearby_weather_reports.any?
     average = (temperatures.inject(&:+) / temperatures.length)
 
     use_celsius ? (convert_to_celsius(average).round(1)) : average.round(1)

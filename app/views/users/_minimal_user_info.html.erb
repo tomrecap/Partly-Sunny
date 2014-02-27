@@ -9,6 +9,6 @@
     <%= link_to user.user_name, user_gallery_url(user) %>
   </li>
 
-  <li><%= link_to user.home_zip_code.city, zip_code_url(user.home_zip_code_id) if !!user.home_zip_code_id %>
+  <li><%= link_to "#{user.home_zip_code.city}, #{user.home_zip_code.state_code}", zip_code_url(user.home_zip_code_id) if !!user.home_zip_code_id %>
   </li>
 </ul>

@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   include PgSearch
-  pg_search_scope :search_by_user_name, against: :user_name
+  pg_search_scope :search_by_user_name, against: :user_name, using: :trigram
 
   def self.find_by_credentials(user_name, entered_password)
     user = User.find_by_user_name(user_name)
