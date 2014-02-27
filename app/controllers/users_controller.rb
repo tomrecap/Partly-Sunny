@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login_user!(@user)
-      redirect_to zip_codes_url
+      redirect_to session[:redirect_url] || zip_codes_url
     else
       flash.now[:errors] = @user.errors.full_messages
 
