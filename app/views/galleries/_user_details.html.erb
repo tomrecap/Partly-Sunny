@@ -1,28 +1,37 @@
 <!-- /app/views/galleries/_user_details.html.erb -->
 
 <section class="user-details-box">
-    <a href="<%= user_gallery_url(user) %>">
-      <%= image_tag user.avatar.url(:thumbnail) %>
-      <%= user.user_name %></a>
+  <ul class="group">
+    <li>
+      <a href="<%= user_gallery_url(user) %>">
+        <%= image_tag user.avatar.url(:thumbnail) %>
+      </a>
+    </li>
+    <li>
+      <a href="<%= user_gallery_url(user) %>">
+        <%= user.user_name %>
+      </a>
       <a
-          href="#"
-          id="<%= user.id %>"
-          data-remote="true"
-          class="favorite <% if signed_in? && current_user.favorited_user_ids.include?(user.id) %>
-            <%= true %>
-          <% else %>
-            <%= false %>
-          <% end %>">
-          &#9733;
-        </a>
-  <p>
-    <%= link_to "#{user.home_zip_code.city}, #{user.home_zip_code.state_code}", zip_code_url(user.home_zip_code_id) if !!user.home_zip_code_id %>
-  </p>
+        href="#"
+        id="<%= user.id %>"
+        data-remote="true"
+        class="favorite <% if signed_in? && current_user.favorited_user_ids.include?(user.id) %>
+          <%= true %>
+        <% else %>
+          <%= false %>
+        <% end %>">
+        &#9733;
+      </a>
+    </li>
 
-  <p>
+    <li>
+      <%= link_to "#{user.home_zip_code.city}, #{user.home_zip_code.state_code}", zip_code_url(user.home_zip_code_id) if !!user.home_zip_code_id %>
+    </li>
+
+    <li>
     Bio: <%= user.bio %>
-  </p>
-
+    </li>
+  </ul>
 </section>
 
 <section class="favorite-user-form">

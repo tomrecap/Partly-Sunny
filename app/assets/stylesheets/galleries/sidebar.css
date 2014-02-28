@@ -1,0 +1,21 @@
+.user-details-box ul {
+  display:block;
+  position:relative;
+  margin-top:10px;
+}
+
+.user-details-box ul li {
+  display:block;
+  float:left;
+  position:relative;
+  width:220px;
+  padding-bottom:10px;
+}
+
+.user-details-box img {
+  display:block;
+  position:relative;
+  margin-left:auto;
+  margin-right:auto;
+  border: 2px solid #333;
+}

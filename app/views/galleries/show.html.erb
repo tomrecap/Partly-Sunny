@@ -10,7 +10,7 @@
   </section>
 </section>
 
-<section class="main-column">
+<section class="main-column <%= 'no-border' if @subject.is_a?(Tag) %>">
   <section class="photo-feed">
     <% if @photos.nil? || @photos.length == 0 %>
       This <%= @subject.class.to_s.underscore.humanize.downcase %> doesn't have any photos yet.
