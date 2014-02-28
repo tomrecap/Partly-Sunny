@@ -44,24 +44,24 @@ GOOD_ZIP_CODES = NYC_ZIP_CODES + SAN_FRANCISCO_ZIP_CODES +
   CHICAGO_ZIP_CODES
 
 captions = []
-File.foreach(asset_path "captions.txt") do |caption|
+File.foreach("captions.txt") do |caption|
   captions << caption
 end
 captions.shuffle!
 
 bios = []
-File.foreach(asset_path "bios.txt") do |bio|
+File.foreach("bios.txt") do |bio|
   bios << bio
 end
 bios.shuffle!
 
 comments = []
-File.foreach(asset_path "comments.txt") do |comment|
+File.foreach("comments.txt") do |comment|
   comments << comment
 end
 comments.shuffle!
 
-File.foreach(asset_path "us_zips.txt") do |zip_entry|
+File.foreach("us_zips.txt") do |zip_entry|
   zip_details = zip_entry.split("  ")
 
   zip_code = zip_details[1]
