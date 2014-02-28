@@ -17,8 +17,13 @@ class GalleriesController < ApplicationController
       @name = @subject.body
     end
 
+    if @subject.is_a?(ZipCode)
+      @photos = @subject.nearby_photos
+      .page(params[:page]).per(10).order("created_at DESC")
+    else
     @photos = @subject.photos
       .page(params[:page]).per(10).order("created_at DESC")
+    end
   end
 
 end

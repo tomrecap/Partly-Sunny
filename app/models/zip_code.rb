@@ -87,6 +87,13 @@ class ZipCode < ActiveRecord::Base
       .order("weather_reports.created_at DESC")
   end
 
+  def nearby_photos(number_of_photos = 6)
+    Photo.joins(:zip_code)
+      .where("zip_codes.id IN (?)", nearby_zip_codes.map(&:id))
+      .limit(number_of_photos)
+      .order("photos.created_at DESC")
+  end
+
   def top_three_conditions
     frequencies_by_name = {}
     self.array_of_frequencies_by_id[0...3].each do |id, frequency|

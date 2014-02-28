@@ -31,7 +31,7 @@ class ZipCodesController < ApplicationController
 
     @weather_condition_frequencies = @zip_code.top_three_conditions
 
-    @photos = @zip_code.photos.limit(2).order("created_at DESC")
+    @photos = @zip_code.nearby_photos
 
     # @photos = Photo.where
   end
