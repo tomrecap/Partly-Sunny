@@ -1,5 +1,7 @@
 <!-- /app/views/layouts/nav_bar_dropdowns/_user_menu.html.erb -->
 
+<section class="user-menu-partial">
+
 <% if signed_in? %>
 
   <h3 class="section-title">
@@ -7,18 +9,18 @@
   </h3>
 
 
-  <ul>
-    <li>
+  <ul class="group">
+    <li class="user-menu-partial-li">
       <%= link_to "Home", dashboard_user_url(current_user) %>
     </li>
-    <li>
+    <li class="user-menu-partial-li">
       <% if current_user.home_zip_code_id %>
         <%= link_to "Local Weather", zip_code_url(current_user.home_zip_code_id) %>
       <% else %>
         <%= link_to "Set your home zip_code for local weather.", edit_user_url(current_user) %>
       <% end %>
     </li>
-    <li>
+    <li class="user-menu-partial-li">
       <%= link_to "My Photos", user_gallery_url(current_user) %>
     </li>
   </ul>
@@ -28,3 +30,5 @@
   <%= render "sessions/new", user: current_user %>
 
 <% end %>
+
+</section>

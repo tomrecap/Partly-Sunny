@@ -8,7 +8,7 @@
 
   <% unless signed_in? %>
     <li>
-      Please <%= link_to "sign in", new_session_url %> to see your notifications.
+      <%= link_to "Please sign in to see your notifications.", new_session_url %>
     </li>
   <% else %>
     <li>

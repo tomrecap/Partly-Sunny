@@ -118,7 +118,7 @@
   <input
     type="submit"
     value="<%= mode == :new ? 'Sign Up!' : 'Update Information' %>"
-    class="submit">
+    class="submit"><%= "or #{link_to "Cancel", user_gallery_url(current_user)}".html_safe if mode == :edit %>
 
 </form>
     <p>*Required</p>

@@ -228,7 +228,28 @@ header .nav-bar-dropdown {
 header .nav-bar-dropdown li {
   display:block;
   width:180px;
-  height:50px;
+/*  height:15px;*/
+  padding:0;
+}
+
+header .nav-bar-dropdown li a, header .nav-bar-dropdown li .submit {
+  display:block;
+  width:180px;
+/*  height:50px;*/
+  padding:0;
+  padding-bottom:5px;
+}
+
+header .nav-bar-dropdown li .submit {
+  position:relative;
+  margin-left:auto;
+  margin-right:auto;
+  padding-top:5px;
+  width:100px;
+}
+
+header .nav-bar-dropdown li .submit:hover {
+  background:red;
 }
 
 nav .icon:hover .nav-bar-dropdown {

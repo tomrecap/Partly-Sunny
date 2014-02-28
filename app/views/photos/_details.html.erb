@@ -32,7 +32,7 @@
   <input
     type="submit"
     class="submit"
-    value="<%= mode == :new ? 'Add' : 'Update' %> Photo">
+    value="<%= mode == :new ? 'Add' : 'Update' %> Photo"><%= "or #{link_to "Cancel", photo_url(photo)}".html_safe if mode == :edit %>
 </form>
 
 <div class="input">
