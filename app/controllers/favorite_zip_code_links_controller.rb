@@ -1,5 +1,6 @@
 class FavoriteZipCodeLinksController < ApplicationController
   before_filter :require_signed_in!
+  before_filter :clear_redirect
 
   def create
     @favorite_zip_code_link = current_user.favorite_zip_code_links.new

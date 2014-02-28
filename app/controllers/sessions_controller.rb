@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_filter :require_not_signed_in!, except: :destroy
+  before_filter :clear_redirect, except: [:new, :create]
 
   def new
     # @zip_codes = ZipCode.all

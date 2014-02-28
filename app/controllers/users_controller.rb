@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :ignore_blank_password_entries, only: [:create, :update]
   before_filter :prevent_users_from_modifying_others,
     only: [:edit, :update, :destroy]
+  before_filter :clear_redirect, except: [:new, :create]
 
   def index
     @users = User.all

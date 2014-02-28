@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_filter :require_signed_in!
+  before_filter :clear_redirect
 
   def new
     prepare_instance_variables_for_details_form

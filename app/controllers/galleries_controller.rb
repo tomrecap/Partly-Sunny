@@ -1,5 +1,6 @@
 class GalleriesController < ApplicationController
   before_filter :require_signed_in!
+  before_filter :clear_redirect
 
   def show
     # @zip_codes = ZipCode.all

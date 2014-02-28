@@ -1,5 +1,6 @@
 class CitiesController < ApplicationController
   before_filter :require_signed_in!, except: [:show, :index, :search]
+  before_filter :clear_redirect
 
   def index
     redirect_to dashboard_user_url(current_user) if signed_in?

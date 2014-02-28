@@ -1,11 +1,16 @@
 class ZipCodesController < ApplicationController
   before_filter :require_signed_in!, except: [:show, :index, :search]
+  before_filter :clear_redirect
 
   def index
     redirect_to dashboard_user_url(current_user) if signed_in?
     @weather_conditions = WeatherCondition.all
 
-    @recently_updated_zip_codes = [WeatherReport.last.zip_code]# ZipCode.includes(:weather_reports).order("weather_reports.created_at DESC").uniq.limit(2)
+    @recently_updated_zip_codes = []# ZipCode
+#       .includes(:weather_reports)
+#       .order("weather_reports.created_at DESC")
+#       .uniq
+#       .limit(2)
 
     @recent_photos = [] # = @zip_codes.sample(2).map do |zip_code|
  #      zip_code.photos.first if zip_code.photos

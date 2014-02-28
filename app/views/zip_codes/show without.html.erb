@@ -54,19 +54,6 @@
   <section class="recent-photos">
     <h3 class="section-title"><%= link_to "Latest Photos", zip_code_gallery_url(@zip_code) %></h3>
     <%= render "photos/photo_list_minimal_caption", photos: @photos %>
-
-
-    <div id="carrousel">
-      <ul>
-        <% @photos.each do |photo| %>
-          <li><a href="<%= zip_code_gallery_url(@zip_code) %>">
-            <%= image_tag photo.image.url(:small), class: "teaser-photo" %>
-            </a>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-
   </section>
 </section>
 
@@ -99,7 +86,6 @@
 
 <script>
 
-// CONDITIONS CHART
 var ctx = $("#conditions-chart").get(0).getContext("2d");
 var data = {
   labels: <%= array_to_javascript_array_string(@weather_condition_frequencies.keys).html_safe %>,
@@ -129,85 +115,6 @@ var swapPercentagesWithChart = function () {
   $("#conditions-chart").toggleClass("hidden");
 };
 
-// PHOTO CARROUSEL
-var Carrousel = (function(){
-
-  var delay = 5000;
-  var carrousel = $("#carrousel");
-  var itemsHolder = carrousel.find("> ul");
-  var items = itemsHolder.find("> li");
-  var itemWidth = items.first().width();
-  var currentItem = -1;
-  var timerId;
-
-  // var nextButton = $("#carrousel-nav > .next");
-  // var previousButton = $("#carrousel-nav > .previous");
-  // var numberLabel = $("#carrousel-nav > .number");
-
-  var init = function(){
-    itemsHolder.css({"width": (items.length * itemWidth) + "px"});
-    bind();
-    start();
-  };
-
-  // var bind = function(){
-  //   nextButton.on("click", next);
-  //   previousButton.on("click", previous);
-  // }
-
-  var start = function(){
-    loop();
-    timerId = window.setInterval(loop, delay);
-  }
-
-  var stop = function(){
-    if(timerId){
-      window.clearInterval(timerId);
-    }
-  }
-
-  var loop = function(){
-    next();
-  }
-
-  var next = function(){
-    currentItem++;
-
-    if(currentItem == items.length){
-      currentItem = 0;
-    }
-
-    move();
-  };
-
-  // var previous = function(){
-  //   currentItem--;
-  //
-  //   if(currentItem <= 0){
-  //     currentItem = items.length - 1;
-  //   }
-  //
-  //   move();
-  // }
-
-  var move = function(){
-    // var html = (currentItem + 1) + " / " + items.length;
-    // numberLabel.html(html);
-
-    var leftPosition = currentItem * itemWidth * -1;
-    itemsHolder.stop().animate({"left": leftPosition + "px"}, 1000);
-  }
-
-  return {
-    init: init,
-    next: next,
-    previous: previous,
-    start: start,
-    stop: stop
-  }
-})();
-
-// STARS TO FAVORITE & UNFAVORITE CITIES
 var changeStarToFavorited = function (element) {
   $(element).addClass("true");
   $(element).removeClass("false");
@@ -220,13 +127,12 @@ var changeStarToUnfavorited = function (element) {
   console.log("star is now un-favorited");
 };
 
-
 $(document).ready(function(){
   $(".new-report-dumb-link").addClass("hidden");
   swapPercentagesWithChart();
-  Carrousel.init();
 
   $(".favorite-form").addClass("hidden");
+
   $("h2.page-title").on("click","a.favorite", function(event) {
     event.preventDefault();
     console.log("clicked a non-favorite star");
@@ -239,11 +145,11 @@ $(document).ready(function(){
           success: changeStarToUnfavorited(that)
         });
     } else {
-      $.ajax({
-        url: '<%= modify_favorite_zip_code_links_url + "?zip_code_id=#{@zip_code.id}" %>',
-        type: "POST",
-        success: changeStarToFavorited(that)
-      });
+        $.ajax({
+          url: '<%= modify_favorite_zip_code_links_url + "?zip_code_id=#{@zip_code.id}" %>',
+          type: "POST",
+          success: changeStarToFavorited(that)
+        });
     };
   });
 });

@@ -1,4 +1,5 @@
 class WeatherReportsController < ApplicationController
+  before_filter :clear_redirect
 
   def new
     @weather_report = WeatherReport.new(zip_code_id: params[:zip_code_id])

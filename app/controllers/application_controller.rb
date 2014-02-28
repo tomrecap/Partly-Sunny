@@ -66,4 +66,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def clear_redirect
+    session[:redirect_url] = nil
+  end
 end
