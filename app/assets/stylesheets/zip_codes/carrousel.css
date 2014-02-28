@@ -1,0 +1,51 @@
+#carrousel {
+  display:block;
+  position: relative;
+/*  height: 200px;*/
+/*  width: 400px;*/
+  height:auto;
+  width:auto;
+/*  margin: 100px auto 20px auto;*/
+/*  overflow: hidden;*/
+  border: 1px solid #999;
+}
+
+#carrousel > ul {
+  left: 0px;
+  top: 0;
+  position: absolute;
+  list-style: none;
+}
+
+#carrousel > ul:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+#carrousel > ul > li {
+  float: left;
+/*  width: 400px;*/
+/*  height: 200px;*/
+/*  background: blue;*/
+  height:auto;
+  width:auto;
+/*  font-size: 30px;*/
+/*  text-align: center;*/
+}
+
+#carrousel > ul > li:nth-child(even) {
+/*  background: green;*/
+}
+
+#carrousel-nav {
+  text-align: center;
+}
+
+#carrousel-nav > span {
+  cursor: pointer;
+}
+
+#carrousel-nav > span:hover {
+  text-decoration: underline;
+}

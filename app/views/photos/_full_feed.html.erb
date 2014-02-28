@@ -8,58 +8,86 @@
         <%= image_tag photo.image.url(:big), class: "content-photo" %>
       </a>
 
-      <figcaption>
-        <p>
+      <figcaption class="group">
+        <section class="posting-info group">
           <a href="<%= user_gallery_url(photo.submitter) %>"><%= image_tag photo.submitter.avatar.url(:thumbnail), class: "avatar" %></a>
 
-          <a href="<%= user_gallery_url(photo.submitter) %>">
-            <%= photo.submitter.user_name %></a>
+          <section class="person-and-place">
+            <a href="<%= user_gallery_url(photo.submitter) %>">
+              <%= photo.submitter.user_name %></a>
 
-          in
+            in
 
-          <a href="<%= zip_code_url(photo.zip_code_id) %>">
-            <%= photo.zip_code.city %></a>
+            <a href="<%= zip_code_url(photo.zip_code_id) %>">
+              <%= photo.zip_code.city %></a>
+          </section>
 
-          <%= time_ago_in_words(photo.created_at) %> ago
-        </p>
+          <section class="time">
+            <%= truncate_fuzzy_time(time_ago_in_words(photo.created_at)) %> ago
+          </section>
+        </section>
 
-        <p>
-          <%= photo.caption %>
-        </p>
+        <% if photo.caption.length > 0 %>
+        <section class="caption-text group">
+          <section class="fc-label">
+            Caption
+          </section>
 
-        <p>
-          Tags:
-          <ul class="tag-list">
-            <% photo.tags.each do |tag| %>
-            <li><%= link_to tag.body, tag_gallery_url(tag) %></li>
-            <% end %>
-          </ul>
-        </p>
+          <section class="fc-content">
+            <%= photo.caption %>
+          </section>
+        </section>
+        <% end %>
+
+        <% if photo.tags.all.any? %>
+        <section class="tags group">
+          <section class="fc-label">
+            Tags
+          </section>
+
+          <section class="fc-content">
+
+            <%= photo.tags.map{ |tag| link_to tag.body, tag_gallery_url(tag) }.join(", ").html_safe %>
+          </section>
+        </section>
+        <% end %>
+
+        <section class="comments group">
+          <section class="fc-label">
+            Comments
+          </section>
+
+          <section class="fc-content">
+            <ul id="comments-for-<%= photo.id %>" data-photo-id="<%= photo.id %>">
+              <% photo.comments.each do |comment| %>
+                <%= render comment %>
+              <% end %>
+            </ul>
+          </section>
+        </section>
+
+        <section class="comment-form group">
+          <section class="fc-label">
+            &nbsp;
+          </section>
+
+          <section class="fc-content">
+            <form
+              class="input comment"
+              id="comment-form-<%= photo.id %>"
+              data-photo-id="<%= photo.id %>"
+              action="<%= photo_comments_url(photo) %>"
+              method="post"
+              data-remote="true">
+              <%= insert_form_authenticity_token %>
+
+                <textarea name="comment[body]" class="comment" placeholder="Add a Comment:"></textarea>
 
 
-        Comments:
-        <ul id="comments-for-<%= photo.id %>">
-          <% photo.comments.each do |comment| %>
-          <li>
-            <%= render comment %>
-          </li>
-          <% end %>
-        </ul>
-
-
-        <form
-          class="input comment"
-          id="comment-form-<%= photo.id %>"
-          action="<%= photo_comments_url(photo) %>"
-          method="post"
-          data-remote="true">
-          <%= insert_form_authenticity_token %>
-
-            <textarea name="comment[body]" id="comment" placeholder="Add a Comment:"></textarea>
-
-
-          <input type="submit" name="commit" value="Post">
-        </form>
+              <input class="submit" type="submit" name="commit" value="Post">
+            </form>
+          </section>
+        </section>
 
       </figcaption>
     </figure>
@@ -73,7 +101,11 @@
 
 $(document).ready(function(){
   $("form.comment").on("ajax:success", function(event, data){
-    $(this).prev().append(data);
+    console.log(this)
+    var photoID = $(this).attr("data-photo-id");
+    var targetListClass = "comments-for-" + photoID
+    console.log(targetListClass)
+    $("ul#" + targetListClass).append(data);
     this.reset();
   });
 });

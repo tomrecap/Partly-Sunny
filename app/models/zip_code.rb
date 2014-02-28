@@ -59,7 +59,7 @@ class ZipCode < ActiveRecord::Base
     min_latitude = self.latitude - distance_range
     max_latitude = self.latitude + distance_range
 
-    ZipCode.includes(:weather_reports).where(
+    ZipCode.includes(:weather_reports, :photos).where(
       "(latitude BETWEEN ? AND ?) AND (longitude BETWEEN ? AND ?)",
       min_latitude,
       max_latitude,

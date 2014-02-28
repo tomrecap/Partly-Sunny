@@ -1,25 +1,12 @@
 <!-- app/views/sessions/new.html.erb -->
+<h2 class="page-title">Sign In</h2>
 
-<div class="content new-session">
+<section class="left-column">
+  &nbsp;
+</section>
 
-<header>
-  <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
-  <h1 class="page-title">Sign In</h1>
-  <nav>
-    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
-    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
-  </nav>
-</header>
-
-
-<section class="main-columns">
-  <section class="zip_code-picker">
-    <%= render "zip_codes/zip_code_picker", zip_codes: @zip_codes %>
+<section class="main-column no-border">
+  <section class="new-session-form">
+    <%= render 'new', user: @user %>
   </section>
-
-  <section class="middle-column">
-    <section class="new-session-form">
-      <%= render 'new', user: @user %>
-    </section>
-  </section>
-</div>
+</section>

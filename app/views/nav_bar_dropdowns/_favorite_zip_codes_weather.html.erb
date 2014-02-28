@@ -1,7 +1,12 @@
-<ul>
-  <% current_user.favorite_zip_codes.each do |zip_code| %>
-    <li>
-      <%= render "zip_codes/current_weather_summary", zip_code: zip_code %>
-    </li>
-  <% end %>
-</ul>
+
+<% if signed_in? %>
+  <ul>
+    <% current_user.favorite_zip_codes.each do |zip_code| %>
+      <li>
+        <%= render "zip_codes/current_weather_summary", zip_code: zip_code %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+<%= link_to "Sign in to see the weather in your favorite cities.", new_session_url %>
+<% end %>

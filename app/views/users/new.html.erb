@@ -1,25 +1,13 @@
 <!-- app/views/users/new.html.erb -->
 
-<div class="content new-user">
+<h2 class="page-title">Sign Up</h2>
 
-<header>
-  <a href="<%= root_url %>"><%= image_tag "http://placehold.it/350x150&text=Logo", class: "logo" %></a>
-  <h1 class="page-title">Sign Up</h1>
-  <nav>
-    <%= render "layouts/navigation_bar_signed_in" if signed_in? %>
-    <%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
-  </nav>
-</header>
+<section class="left-column">
+  or <%= link_to "sign in with Twitter", "/auth/twitter" %>
+</section>
 
-
-<section class="main-columns">
-  <section class="zip_code-picker">
-    <%= render "zip_codes/zip_code_picker", zip_codes: @zip_codes %>
+<section class="main-column">
+  <section class="new-user-form">
+    <%= render 'details', mode: :new, user: @user %>
   </section>
-
-  <section class="middle-column">
-    <section class="new-user-form">
-      <%= render 'details', mode: :new, user: @user %>
-    </section>
-  </section>
-</div>
+</section>

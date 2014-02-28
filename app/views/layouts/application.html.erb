@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WeatherApp</title>
+  <title>Partly Sunny</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -39,7 +39,7 @@
             </form>
           </li>
 
-          <li class="icon show-modal" id="new-post">
+          <li class="icon show-modal" >
             <a href="#">
               <i id="new-post"></i>
               Post a New Weather Report or Photo
@@ -64,7 +64,7 @@
           </li>
 
           <li class="icon">
-            <a href="<%= user_gallery_url(current_user) %>">
+            <a href="<%= user_gallery_url(current_user) if signed_in? %>">
               <i id="user-menu"></i>
               User Menu
             </a>
@@ -76,7 +76,7 @@
           </li>
 
           <li class="icon">
-            <a href="<%= edit_user_url(current_user) %>">
+            <a href="<%= edit_user_url(current_user) if signed_in? %>">
               <i id="settings-menu"></i>
               Settings Menu
             </a>
@@ -152,6 +152,31 @@ $(document).ready(function() {
       window.modal.hide();
     }
   });
+
+  $(".favorite-form").addClass("hidden");
+
+  $(".current-weather-summary").on("click","a.favorite", function(event) {
+    event.preventDefault();
+    var that = this;
+    var urlStub = "<%= modify_favorite_zip_code_links_url %>?zip_code_id=";
+    var zipCodeId = $(this).attr("data-zip-code-id");
+    var completeUrl = urlStub + zipCodeId;
+
+    if ($(this).hasClass("true")) {
+      $.ajax({
+        url: completeUrl,
+        type: "DELETE",
+        success: changeStarToUnfavorited(that)
+      });
+    } else {
+      $.ajax({
+        url: completeUrl,
+        type: "POST",
+        success: changeStarToFavorited(that)
+      });
+    };
+  });
+
 });
 
 </script>

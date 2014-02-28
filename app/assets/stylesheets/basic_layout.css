@@ -79,6 +79,11 @@ header h1.site-logo {
   letter-spacing:1px;
 }
 
+header h1.site-logo:hover {
+  color:ghostwhite;
+  text-shadow: 0px 0px 5px lightblue;
+}
+
 header nav {
   display:block;
   float:right;
@@ -235,7 +240,8 @@ header .nav-bar-dropdown h3 {
   font-size:14pt;
 }
 
-header .nav-bar-dropdown input[type="text"] {
+.nav-bar-dropdown input[type="text"],
+.nav-bar-dropdown input[type="password"] {
   width:150px;
 }
 
@@ -297,6 +303,10 @@ header .nav-bar-dropdown input[type="text"] {
   width:650px;
   padding-left:20px;
   border-left:1px solid #ccc;
+}
+
+.main-column.no-border {
+  border-left:0;
 }
 
 .zip-code-weather-left-column{
@@ -434,8 +444,9 @@ input.submit, button.submit {
   color:black;
 }
 
-.content .submit, .content .submit, .modal .submit {
+.content .submit, .nav-bar-dropdown .submit, .modal .submit {
   margin-top:10px;
+  margin-bottom:10px;
 }
 
 input.submit:hover, button.submit:hover {
