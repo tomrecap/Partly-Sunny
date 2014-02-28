@@ -240,12 +240,22 @@ header .nav-bar-dropdown li a, header .nav-bar-dropdown li .submit {
   padding-bottom:5px;
 }
 
+header .nav-bar-dropdown.favorites li a {
+  display:inline;
+/*  width:180px;*/
+/*  height:50px;*/
+  padding:0;
+  padding-bottom:5px;
+}
+
 header .nav-bar-dropdown li .submit {
   position:relative;
   margin-left:auto;
   margin-right:auto;
   padding-top:5px;
   width:100px;
+  border: 2px solid #000;
+  border-radius:5px;
 }
 
 header .nav-bar-dropdown li .submit:hover {

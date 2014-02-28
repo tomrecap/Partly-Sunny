@@ -6,15 +6,28 @@ class ZipCodesController < ApplicationController
     redirect_to dashboard_user_url(current_user) if signed_in?
     @weather_conditions = WeatherCondition.all
 
-    @recently_updated_zip_codes = []# ZipCode
-#       .includes(:weather_reports)
-#       .order("weather_reports.created_at DESC")
-#       .uniq
-#       .limit(2)
+    # recent_cities = ZipCode
+    #   .select("zip_codes.city")
+    #   .joins(:weather_reports)
+    #   .order("MAX(weather_reports.created_at) DESC")
+    #   .limit(2)
+    #   .group("zip_codes.id")
+    #   .uniq
+    #   .to_sql
+    #   # .includes(:weather_reports)
+    # zip_codes_from_recent_cities = ZipCode
+    #   .where("zip_code.city IN (#{recent_cities})")
+    #
+    #   fail
+    # @recently_updated_zip_codes = zip_codes_from_recent_cities.all.uniq { |zip_code| zip_code.city }
 
-    @recent_photos = [] # = @zip_codes.sample(2).map do |zip_code|
- #      zip_code.photos.first if zip_code.photos
- #    end
+
+    @recently_updated_zip_codes = [
+      ZipCode.find_by_city_and_state_code("New York City", "NY"),
+      ZipCode.find_by_city_and_state_code("Chicago", "IL")
+    ]
+
+    @background_photo = Photo.limit(1).offset(rand(Photo.count)).first
 
     render :index, layout: "public_index" unless signed_in?
   end

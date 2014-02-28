@@ -7,51 +7,59 @@
   <%= insert_form_authenticity_token %>
 
   <label for="temperature">Temperature</label>
-  <input
-    type="number"
-    name="weather_report[temperature]"
-    value="<%= @weather_report.try(&:temperature) %>"
-    id="temperature"
-    placeholder="Temperature">
 
-  <section class="radio-group">
+  <section class="temperature-details">
     <input
-      type="radio"
-      name="temperature_scale"
-      value="fahrenheit"
-      id="fahrenheit-radio-button"
-      <%= "checked" unless current_user.try(:celsius) %>>
-    <label for="fahrenheit-radio-button">&deg; F</label>
+      type="number"
+      name="weather_report[temperature]"
+      value="<%= @weather_report.try(&:temperature) %>"
+      id="temperature"
+      class="temperature"
+      placeholder="Temperature">
 
-    <input
-      type="radio"
-      name="temperature_scale"
-      value="celsius"
-      id="celsius-radio-button"
-      <%= "checked" if current_user.try(:celsius) %>>
-    <label for="celsius-radio-button">&deg; C</label>
+    <section class="radio-group">
+      <input
+        type="radio"
+        name="temperature_scale"
+        value="fahrenheit"
+        id="fahrenheit-radio-button"
+        <%= "checked" unless current_user.try(:celsius) %>>
+      <label for="fahrenheit-radio-button">&deg;F</label>
+
+      <input
+        type="radio"
+        name="temperature_scale"
+        value="celsius"
+        id="celsius-radio-button"
+        <%= "checked" if current_user.try(:celsius) %>>
+      <label for="celsius-radio-button">&deg;C</label>
+    </section>
   </section>
 
-  <label for="condition">Condition</label>
-  <select name="weather_report[weather_condition_id]" id="condition">
-    <% weather_conditions.each do |condition| %>
-      <option
-        value="<%= condition.id %>"
-        "<%= "selected" if @weather_report.try(&:weather_condition_id) == condition.id %>">
-        <%= condition.description %>
-      </option>
-    <% end %>
-  </select>
+  <section class="second-line-on-public-index group">
+    <section class="condition-details">
+      <label for="condition">Condition</label>
+      <select name="weather_report[weather_condition_id]" id="condition">
+        <% weather_conditions.each do |condition| %>
+          <option
+            value="<%= condition.id %>"
+            "<%= "selected" if @weather_report.try(&:weather_condition_id) == condition.id %>">
+            <%= condition.description %>
+          </option>
+        <% end %>
+      </select>
+    </section>
 
-
-
-  <label for="zip_code_code">Zip Code</label>
-  <input
-    type="text"
-    name="zip_code_for_weather_report"
-    value="<%= @weather_report.try(:zip_code).try(:zip_code) %>"
-    id="zip_code_code"
-    placeholder="Zip Code">
+    <section class="zip-code-details">
+      <label for="zip_code_code">Zip Code</label>
+      <input
+        type="text"
+        name="zip_code_for_weather_report"
+        value="<%= @weather_report.try(:zip_code).try(:zip_code) %>"
+        id="zip_code_code"
+        placeholder="Zip Code">
+    </section>
+  </section>
 
   <input class="submit" type="submit" value="Submit">
 </form>

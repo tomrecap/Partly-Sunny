@@ -2,6 +2,10 @@
 
 a.favorite {
   display:inline;
+/*  display:block;
+  float:right;
+  max-width:15px;
+  margin-right:0px;*/
   font-size:75%;
   text-decoration:none;
 }
@@ -23,11 +27,13 @@ a.favorite:hover {
 .percentages {
   display:block;
   position:relative;
-  width:300px;
-  height:200px;
   margin-top:20px;
 }
 
+canvas#conditions-chart{
+  width:330px;
+  height:200px;
+}
 
 .hidden {
   display:none;

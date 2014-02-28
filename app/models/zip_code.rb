@@ -59,6 +59,21 @@ class ZipCode < ActiveRecord::Base
     min_latitude = self.latitude - distance_range
     max_latitude = self.latitude + distance_range
 
+    ZipCode.where("(latitude BETWEEN ? AND ?) AND (longitude BETWEEN ? AND ?)",
+      min_latitude,
+      max_latitude,
+      min_longitude,
+      max_longitude
+    )
+  end
+
+  def nearby_zip_codes_with_associated_data
+    distance_range = 0.2
+    min_longitude = self.longitude - distance_range
+    max_longitude = self.longitude + distance_range
+    min_latitude = self.latitude - distance_range
+    max_latitude = self.latitude + distance_range
+
     ZipCode.includes(:weather_reports, :photos).where(
       "(latitude BETWEEN ? AND ?) AND (longitude BETWEEN ? AND ?)",
       min_latitude,
@@ -89,7 +104,7 @@ class ZipCode < ActiveRecord::Base
 
   def nearby_photos(number_of_photos = 6)
     Photo.joins(:zip_code)
-      .where("zip_codes.id IN (?)", nearby_zip_codes.map(&:id))
+      .where("zip_codes.id IN (?)", nearby_zip_codes_with_associated_data.map(&:id))
       .limit(number_of_photos)
       .order("photos.created_at DESC")
   end

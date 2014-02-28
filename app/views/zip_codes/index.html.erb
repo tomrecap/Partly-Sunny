@@ -1,37 +1,23 @@
 <!-- /app/views/zip_codes/index.html.erb -->
 
-<div class="content zip_codes-index">
+<div class="content zip-codes-index group">
 
-<header class="group">
+<div class="public-index-left-column">
   <section class="logo-and-tagline">
-    <a href="<%= root_url %>">
-      <%= image_tag "http://placehold.it/350x150&text=Logo" %>
+    <a href="<%= root_url %>" id="public-index-site-logo-link">
+      <h1 class="site-logo" id="public-index-site-logo">Partly Sunny</h1>
     </a>
-    <p class="tagline">
+    <section class="tagline">
       A crowd-sourced weather site for sharing forecasts & photos
-    </p>
+    </section>
   </section>
 
-  <section class="zip_code-picker">
+  <section class="weather-search">
     <%= render "zip_code_picker" %>
   </section>
-</header>
 
-<section class="middle-row">
-  <section class="signin">
-    <%= render "sessions/new", user: nil %>
-  </section>
-
-  <section class="new-report">
-    <%#= render "weather_reports/new",
-      weather_conditions: @weather_conditions,
-      zip_codes: @zip_codes %>
-  </section>
-</section>
-
-<section class="new-weather-and-photos">
   <section class="latest-reports">
-    <h2>Latest Reports</h2>
+    <h3 class="section-title">Latest Reports</h3>
     <ul>
     <% @recently_updated_zip_codes.each do |zip_code| %>
       <li><%= render "current_weather_summary", zip_code: zip_code %></li>
@@ -39,25 +25,34 @@
     </ul>
     <%= link_to "Sign in to customize >", new_session_url %>
   </section>
+</div>
 
-  <section class="recent-photos">
-    <h2>Recent Photos</h2>
-    <ul>
-      <% @recent_photos.each do |photo| %>
-      <li>
-        <a href="<%= zip_code_gallery_url(photo.zip_code_id) %>">
-          <%= image_tag photo.image.url(:small) %>
-        </a>
-        <figcaption>
-          <a href="<%= zip_code_gallery_url(photo.zip_code_id) %>">
-            <%= photo.zip_code.city %>
-          </a>
-        </figcaption>
-      </li>
-      <% end %>
-    </ul>
-    <%= link_to "Sign in to post your own >", new_session_url %>
+<section class="public-index-right-column">
+  <section class="new-report">
+    <h3 class="section-title">How is the weather?</h3>
+    <%= render "weather_reports/new",
+      weather_conditions: @weather_conditions%>
+  </section>
+
+  <section class="signin">
+    <h3 class="section-title">Sign Up or Sign In</h3>
+
+    <%= render "sessions/new", user: nil %>
   </section>
 </section>
 
+<!-- <footer>
+
+</footer> -->
+
 </div>
+
+<script>
+ $(document).ready(function(){
+
+   $("div.content").css("background", "rgba(255,255,255,0.5)");
+   $("body").css("background", "url(<%= @background_photo.image.url %>)").css("background-size", "100%");
+
+
+ })
+</script>

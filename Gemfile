@@ -20,7 +20,7 @@ gem 'faker'
 
 gem 'geocoder'
 gem 'chart-js-rails'
-
+# gem 'random-data'
 
 group :development do
   gem 'better_errors'

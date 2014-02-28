@@ -1,5 +1,9 @@
 <!-- app/views/sessions/_new.html.erb -->
 
+<p>
+  <%= link_to "Sign In with Twitter", "/auth/twitter" %>
+</p>
+
 <form class="input" action="<%= session_url %>" method="post">
   <%= insert_form_authenticity_token %>
 
@@ -26,7 +30,3 @@
   New? <%= link_to "Join!", new_user_url %>
 </p>
 
-- or -
-<p>
-  <%= link_to "Sign In with Twitter", "/auth/twitter" %>
-</p>

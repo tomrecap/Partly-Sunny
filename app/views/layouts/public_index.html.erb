@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WeatherApp</title>
+  <title>Partly Sunny</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<div class="public-index">
 
 <div class="content group">
   <!-- The body should consist of two columns: -->
@@ -17,15 +19,14 @@
 
   </div>
 
+  <footer>
+
+  </footer>
 
 <!-- <p>params: <%= params %></p>
 <p>session: <%= session %></p> -->
 
-<%= "<p>errors: #{flash[:errors]} </p>".html_safe if flash[:errors] %>
-<%= "<p>notice: #{flash[:notice]} </p>".html_safe if flash[:notice] %>
-
-<%= render "layouts/navigation_bar_signed_in" if signed_in? %>
-<%= render "layouts/navigation_bar_not_signed_in" if !signed_in? %>
+</div>
 
 </body>
 </html>

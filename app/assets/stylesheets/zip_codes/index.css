@@ -1,0 +1,114 @@
+.content:{
+  margin-bottom:0;
+}
+
+.content.zip-codes-index {
+  width:890px;
+  padding-top:50px;
+  background:none;
+}
+
+.public-index-left-column {
+  display:block;
+  float:left;
+  width:480px;
+}
+
+.public-index-left-column .logo-and-tagline {
+  display:block;
+  margin-bottom:150px;
+}
+
+.public-index-left-column h1.site-logo {
+  display:block;
+/*  float:left;*/
+  font-size:60pt;
+  font-weight:bold;
+  padding:0;
+  letter-spacing:1px;
+  margin-bottom:50px;
+/*  font-style:italic;
+*/}
+
+#public-index-site-logo-link:hover {
+  text-decoration:none;
+}
+
+.public-index-left-column .tagline {
+  display:block;
+  font-size:16pt;
+  margin-left:120px;
+  width:315px;
+}
+
+.public-index-left-column input {
+  display: inline-block;
+}
+
+.public-index-right-column {
+  display:block;
+  float:left;
+  width:330px;
+}
+
+.public-index-right-column .new-report {
+/*  border: 2px solid #333;*/
+  margin-left:50px;
+  border-radius:5px;
+}
+
+.public-index-right-column .new-report input {
+  max-width:7.5em;
+}
+
+.public-index-right-column .new-report input:focus {
+  border: 2px solid #1db800;
+}
+
+
+.public-index-right-column .new-report input.temperature {
+  display:inline-block;
+}
+
+.public-index-right-column .new-report .temperature-details {
+  display:block;
+}
+
+.public-index-right-column .new-report .radio-group {
+  display:inline-block;
+}
+
+.second-line-on-public-index {
+  display:block;
+  position:relative;
+}
+
+.public-index-right-column .new-report .condition-details {
+  display:block;
+  float:left;
+  position:relative;
+  width:115px;
+}
+
+.public-index-right-column .new-report .zip-code-details {
+  display:block;
+  float:left;
+  position:relative;
+  width:150px;
+}
+
+.public-index-right-column .new-report .submit {
+  position:relative;
+  left:181px;
+}
+
+.public-index-right-column .signin {
+  display:block;
+  position:relative;
+  padding-top:20px;
+}
+
+.public-index-left-column footer {
+  margin:0;
+  padding:0;
+}
