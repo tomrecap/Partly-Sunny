@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+
 AVATAR_URL_STEM = "https://s3.amazonaws.com/weather-app-production/examples/avatars/avatar"
 
 # AVATAR_URLS = ["http://mphprogramslist.com/files/2012/10/Julio_Frenk.jpeg"]
@@ -42,24 +44,24 @@ GOOD_ZIP_CODES = NYC_ZIP_CODES + SAN_FRANCISCO_ZIP_CODES +
   CHICAGO_ZIP_CODES
 
 captions = []
-File.foreach("vendor/assets/captions.txt") do |caption|
+File.foreach(asset_path "captions.txt") do |caption|
   captions << caption
 end
 captions.shuffle!
 
 bios = []
-File.foreach("vendor/assets/bios.txt") do |bio|
+File.foreach(asset_path "bios.txt") do |bio|
   bios << bio
 end
 bios.shuffle!
 
 comments = []
-File.foreach("vendor/assets/comments.txt") do |comment|
+File.foreach(asset_path "comments.txt") do |comment|
   comments << comment
 end
 comments.shuffle!
 
-File.foreach("vendor/assets/us_zips.txt") do |zip_entry|
+File.foreach(asset_path "us_zips.txt") do |zip_entry|
   zip_details = zip_entry.split("  ")
 
   zip_code = zip_details[1]
@@ -147,7 +149,7 @@ end
     email: "#{user_name}@example.com",
     password: "password",
     bio: bios.sample,
-    home_zip_code_id: GOOD_ZIP_CODES.sample.id,
+    home_zip_code_id: ZipCode.find_by_zip_code(GOOD_ZIP_CODES.sample).id,
     avatar: "#{AVATAR_URL_STEM}#{user_number}.jpg"
   )
 
