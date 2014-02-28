@@ -42,7 +42,7 @@ GOOD_ZIP_CODES = NYC_ZIP_CODES + SAN_FRANCISCO_ZIP_CODES +
   CHICAGO_ZIP_CODES
 
 captions = []
-File.foreach("vendor/assets/caption.txt") do |caption|
+File.foreach("vendor/assets/captions.txt") do |caption|
   captions << caption
 end
 captions.shuffle!
