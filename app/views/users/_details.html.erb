@@ -80,16 +80,13 @@
       <% if mode == :edit %>
         <section class="current-avatar">
           <label for="current-avatar">Current Avatar</label>
-					<img
-						src="<%= @user.try(:avatar).try(:url, :full) if @user %>"
-						class="teaser-photo current-avatar"
-						id="current-avatar">
+          <%= image_tag @user.try(:avatar).try(:url, :full), class: "teaser-photo current-avatar", id: "current-avatar" %>
         </section>
       <% end %>
 
       <section class="new-avatar">
         <label for="new-avatar">New Avatar</label>
-        <%= image_tag "", class: "teaser-photo new-avatar empty" %>
+        <%= image_tag ActionController::Base.helpers.asset_path('avatar.png'), class: "teaser-photo new-avatar empty" %>
       </section>
     </section>
 
