@@ -80,7 +80,10 @@
       <% if mode == :edit %>
         <section class="current-avatar">
           <label for="current-avatar">Current Avatar</label>
-          <%= image_tag @user.try(:avatar).try(:url, :full), class: "teaser-photo current-avatar", id: "current-avatar" %>
+					<img
+						src="<%= @user.try(:avatar).try(:url, :full) if @user %>"
+						class="teaser-photo current-avatar"
+						id="current-avatar">
         </section>
       <% end %>
 

@@ -106,7 +106,7 @@ class UsersController < ApplicationController
   private
   def prepare_details_form_instance_variables
     # # @zip_codes = ZipCode.all
-    @other_users = User.where("id <> ?", current_user.id) if signed_in?
+    # @other_users = User.where("id <> ?", current_user.id) if signed_in?
   end
 
   def ignore_blank_password_entries
