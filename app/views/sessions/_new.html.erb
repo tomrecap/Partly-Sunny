@@ -4,29 +4,51 @@
   <%= link_to "Sign In with Twitter", "/auth/twitter" %>
 </p>
 
-<form class="input" action="<%= session_url %>" method="post">
+<form class="input new-session" action="<%= session_url %>" method="post">
   <%= insert_form_authenticity_token %>
 
 
-    <label for="user_name">User Name</label>
+    <label for="user_name-session">User Name</label>
     <input
       type="text"
       name="user[user_name]"
       value="<%= user.try(:user_name) %>"
-      id="user_name">
+      id="user_name-session">
 
 
-    <label for="password">Password</label>
+    <label for="password-session">Password</label>
     <input
       type="password"
       name="user[password]"
-      id="password">
+      id="password-session">
 
 
-  <input class="submit" type="submit" value="Sign In!">
+  <input
+    class="submit"
+    type="submit"
+    value="Sign In!">
+  <input
+    class="submit"
+    type="submit"
+    value="Sign In As A Guest"
+    id="submit-guest">
 </form>
 
 <p>
   New? <%= link_to "Join!", new_user_url %>
 </p>
 
+<script>
+
+$(document).ready(function () {
+
+  $("form.new-session").on("click", "#submit-guest", function (event) {
+    event.preventDefault();
+    $("#user_name-session").attr("value", "guest");
+    $("#password-session").attr("value", "password");
+    $(this).parent().submit();
+  });
+
+})
+
+</script>
