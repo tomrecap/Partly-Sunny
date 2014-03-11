@@ -28,7 +28,7 @@ The moon! But first...
 
 #####Site Maintenance
 - [x] new readme
-- [ ] guest login
+- [x] guest login
 
 #####Weather
 - [ ] Use the friendly_routes gem to make /zip_codes/10003 -style routes.
@@ -49,7 +49,7 @@ The moon! But first...
 - [ ] Make comments box grow when you click it.
 
 #####Users
-- [ ] Fix Twitter login in production environment.
+- [x] Fix Twitter login in production environment.
 - [ ] Add password reset emails.
 - [ ] Add activation email to users.
 - [ ] Add notifications feature.
