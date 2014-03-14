@@ -25,8 +25,19 @@ gem 'chart-js-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+
   gem 'annotate'
   gem 'letter_opener'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', require: false
+  gem 'shoulda-matchers'
+end
+
+group :test do
+  gem 'guard-rspec'
 end
 
 # Gems used only for assets and not required
