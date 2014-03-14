@@ -17,9 +17,12 @@ class ZipCode < ActiveRecord::Base
   attr_accessible :zip_code, :city, :state_name, :state_code,
     :longitude, :latitude
 
-  validates :zip_code, :city, :state_name, :state_code,
-    :longitude, :latitude, presence: true
-  validates :zip_code, uniqueness: true
+  # validates :zip_code, :city, :state_name, :state_code,
+    # :longitude, :latitude, presence: true
+  validates_presence_of :zip_code, :city, :state_name, :state_code,
+    :longitude, :latitude
+  # validates :zip_code, uniqueness: true
+  validates_uniqueness_of :zip_code
 
   has_many(:weather_reports, class_name: "WeatherReport",
     foreign_key: :zip_code_id, primary_key: :id)
