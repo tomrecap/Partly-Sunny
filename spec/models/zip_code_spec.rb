@@ -15,7 +15,7 @@ describe ZipCode do
     FactoryGirl.create(:zip_code)
     should validate_uniqueness_of(:zip_code)
   end
-  
+
   context "nearby_zip_codes" do
     zip_codes = [
       "11110",
@@ -23,10 +23,11 @@ describe ZipCode do
       "11112",
       "11113",
       "11114",
-      "11115"]
+      "11115"
+    ]
     coords = [100, 100]
     zip_code_objects = []
-    
+
     zip_codes.each do |zip_code_value|
       zip_code_objects << FactoryGirl.create(
         :zip_code,
@@ -34,19 +35,27 @@ describe ZipCode do
         latitude: coords.first,
         longitude: coords.last
       )
-      coords.map! { |coord| coord + 0.09 }      
+      coords.map! { |coord| coord + 0.09 }
     end
-    
+
+    nearby_zip_code_objects = zip_code_objects
+      .first
+      .nearby_zip_codes
+    nearby_zip_codes = nearby_zip_code_objects.map do |z_c|
+      z_c.zip_code
+    end
+
     it "should find zip codes within 0.2 degrees of lat & long" do
-      nearby_zip_code_objects = zip_code_objects
-        .first.nearby_zip_codes
-      nearby_zip_codes = nearby_zip_code_objects.map do |z_c|
-        z_c.zip_code
-      end
-      
-      expect(nearby_zip_codes).to include("11110")
       expect(nearby_zip_codes).to include("11111", "11112")
+    end
+
+    it "should include the subject zip code in the results" do
+      expect(nearby_zip_codes).to include("11110")
+    end
+
+    it "should not include zip codes further than 0.2 degrees away" do
       expect(nearby_zip_codes).to_not include("11113", "11114", "11115")
     end
   end
+
 end
