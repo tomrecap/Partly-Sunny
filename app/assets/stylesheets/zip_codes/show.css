@@ -57,3 +57,11 @@ canvas#conditions-chart{
 .recent-reports td.temperature-value {
   text-align:right;
 }
+
+
+/*----------------- MAP -----------------------*/
+
+#map {
+  margin-top:25px;
+  height:400px;
+}

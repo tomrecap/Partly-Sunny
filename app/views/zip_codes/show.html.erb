@@ -1,5 +1,9 @@
 <!-- app/views/zip_codes/show.html.erb -->
 
+<% content_for :head do %>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' >
+<% end %>
+
 <h2 class="page-title"><%= @zip_code.city %>, <%= @zip_code.state_code %>
   <a
     href="#"
@@ -94,6 +98,45 @@
       <% end %>
 
     </table>
+
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+
+    <div id='map'></div>
+<%#= fail %>
+    <script type="text/javascript">
+      var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([<%= @zip_code.latitude %>, <%= @zip_code.longitude %>], 12);
+
+      <% @recent_reports.each do |report| %>
+        L.mapbox.featureLayer({
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [<%= report.zip_code.longitude %>, <%= report.zip_code.latitude %>]
+            },
+            properties: {
+                title: '<%= report.zip_code.city %>, <%= report.zip_code.state_code %> (<%= report.zip_code.zip_code %>)',
+                description: '<%= report.temperature %>&deg;<%= current_user.try(:celsius) ? "C" : "F" %> <%= report.weather_condition.description %>',
+                'marker-size': 'large',
+                'marker-color': '#02d'
+            }
+        }).addTo(map);
+      <% end %>
+
+      L.mapbox.featureLayer({
+          type: 'Feature',
+          geometry: {
+              type: 'Point',
+              coordinates: [<%= @zip_code.longitude %>, <%= @zip_code.latitude %>]
+          },
+          properties: {
+              title: '<%= @zip_code.city %>, <%= @zip_code.state_code %>',
+              description: '<%= @zip_code.zip_code %>',
+              'marker-size': 'large',
+              'marker-color': '#0d2'
+          }
+      }).addTo(map);
+    </script>
+
   </section>
 </section>
 
