@@ -104,7 +104,7 @@
     <div id='map'></div>
 <%#= fail %>
     <script type="text/javascript">
-      var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([<%= @zip_code.latitude %>, <%= @zip_code.longitude %>], 12);
+      var map = L.mapbox.map('map', 'examples.map-20v6611k').setView([<%= @zip_code.latitude %>, <%= @zip_code.longitude %>], 11);
 
       <% @recent_reports.each do |report| %>
         L.mapbox.featureLayer({
