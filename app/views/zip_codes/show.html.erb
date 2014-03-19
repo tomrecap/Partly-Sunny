@@ -97,130 +97,21 @@
   </section>
 </section>
 
+<%= javascript_tag do %>
+  // chart variable injected via ERB
+  window.chartLabels = <%= array_to_javascript_array_string(@weather_condition_frequencies.keys).html_safe %>;
+  window.chartData = <%= array_to_javascript_array_string(@weather_condition_frequencies.values).html_safe %>;
+  window.scaleSteps = <%= ((@weather_condition_frequencies.values.first / 5) + 1).round %>;
+
+  // favorite star variables injected via ERB
+  window.modifyFavoriteCityLinkUrl = "<%= modify_favorite_zip_code_links_url + "?zip_code_id=#{@zip_code.id}" %>"
+<% end %>
+
+<script src="<%= asset_path "zip_codes/conditions_chart.js" %>" type="text/javascript"></script>
+<script src="<%= asset_path "zip_codes/carrousel.js" %>" type="text/javascript"></script>
+<script src="<%= asset_path "zip_codes/modify_favorite_zip_code_link.js" %>" type="text/javascript"></script>
+
 <script>
-
-// CONDITIONS CHART
-var ctx = $("#conditions-chart").get(0).getContext("2d");
-var data = {
-  labels: <%= array_to_javascript_array_string(@weather_condition_frequencies.keys).html_safe %>,
-	datasets: [
-		{
-			fillColor : "rgba(230,230,250,1)",
-			strokeColor : "rgba(51,51,51,1)",
-			data : <%= array_to_javascript_array_string(@weather_condition_frequencies.values).html_safe %>
-		}
-	]
-};
-
-var conditionsChart = new Chart(ctx).Bar(data, {
-  scaleFontFamily: "'Fira Sans'",
-  scaleFontSize: 16,
-  scaleFontColor: "#000",
-  scaleOverride:true,
-  scaleSteps:<%= ((@weather_condition_frequencies.values.first / 5) + 1).round %>,
-  scaleStepWidth:5,
-  scaleStartValue: 0,
-  barValueSpacing: 5,
-  scaleLabel : "<%%= value %> %",
-});
-
-var swapPercentagesWithChart = function () {
-  $("#conditions-table").toggleClass("hidden");
-  $("#conditions-chart").toggleClass("hidden");
-};
-
-// PHOTO CARROUSEL
-var Carrousel = (function(){
-
-  var delay = 5000;
-  var carrousel = $("#carrousel");
-  var itemsHolder = carrousel.find("> ul");
-  var items = itemsHolder.find("> li");
-  var itemWidth = items.first().width();
-  var currentItem = -1;
-  var timerId;
-
-  // var nextButton = $("#carrousel-nav > .next");
-  // var previousButton = $("#carrousel-nav > .previous");
-  // var numberLabel = $("#carrousel-nav > .number");
-
-  var init = function(){
-    itemsHolder.css({"width": (items.length * itemWidth) + "px"});
-    // bind();
-    start();
-  };
-
-  // var bind = function(){
-  //   nextButton.on("click", next);
-  //   previousButton.on("click", previous);
-  // }
-
-  var start = function(){
-    loop();
-    timerId = window.setInterval(loop, delay);
-  }
-
-  var stop = function(){
-    if(timerId){
-      window.clearInterval(timerId);
-    }
-  }
-
-  var loop = function(){
-    next();
-  }
-
-  var next = function(){
-    currentItem++;
-
-    if(currentItem == items.length){
-      currentItem = 0;
-    }
-
-    move();
-  };
-
-  // var previous = function(){
-  //   currentItem--;
-  //
-  //   if(currentItem <= 0){
-  //     currentItem = items.length - 1;
-  //   }
-  //
-  //   move();
-  // }
-
-  var move = function(){
-    // var html = (currentItem + 1) + " / " + items.length;
-    // numberLabel.html(html);
-
-    var leftPosition = currentItem * itemWidth * -1;
-    itemsHolder.stop().animate({"left": leftPosition + "px"}, 1000);
-  }
-
-  return {
-    init: init,
-    next: next,
-    // previous: previous,
-    start: start,
-    stop: stop
-  }
-})();
-
-// STARS TO FAVORITE & UNFAVORITE CITIES
-var changeStarToFavorited = function (element) {
-  $(element).addClass("true");
-  $(element).removeClass("false");
-  console.log("star is now favorited");
-};
-
-var changeStarToUnfavorited = function (element) {
-  $(element).removeClass("true");
-  $(element).addClass("false");
-  console.log("star is now un-favorited");
-};
-
-
 $(document).ready(function(){
   $(".new-report-dumb-link").addClass("hidden");
   swapPercentagesWithChart();
@@ -229,22 +120,7 @@ $(document).ready(function(){
   $(".favorite-form").addClass("hidden");
   $("h2.page-title").on("click","a.favorite", function(event) {
     event.preventDefault();
-    console.log("clicked a non-favorite star");
-    var that = this;
-
-    if ($(this).hasClass("true")) {
-        $.ajax({
-          url: '<%= modify_favorite_zip_code_links_url + "?zip_code_id=#{@zip_code.id}" %>',
-          type: "DELETE",
-          success: changeStarToUnfavorited(that)
-        });
-    } else {
-      $.ajax({
-        url: '<%= modify_favorite_zip_code_links_url + "?zip_code_id=#{@zip_code.id}" %>',
-        type: "POST",
-        success: changeStarToFavorited(that)
-      });
-    };
+    toggleFavoriteAJAXRequest(this);
   });
 });
 
