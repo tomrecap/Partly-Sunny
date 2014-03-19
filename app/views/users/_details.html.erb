@@ -125,33 +125,12 @@
 
 <p>*Required</p>
 
+<!-- <script src="<%= asset_path "users/avatar_upload.js" %>" type="text/javascript"></script>
+ -->
 <script>
-
-$(document).ready(function(){
-
-  function readUrl(input) {
-    if (input.files && input.files[0]) {
-      var file = input.files[0]
-      var $fileInput = $(input);
-
-      if (/jpg|jpeg|png|bmp/.exec(file.type)) {
-
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          var picData = e.target.result;
-
-          // postAttachment(picData, $fileInput);
-          $('img.new-avatar').attr('src', picData);
-          $('img.new-avatar').removeClass("empty");
-        };
-        reader.readAsDataURL(input.files[0]);
-      };
-    }
-  };
-
-  $('form.user-details').on('change', 'input.avatar-file-picker', function() {
-    readUrl(this);
+  $(document).ready(function(){
+    $('form.user-details').on('change', 'input.avatar-file-picker', function() {
+      avatarFileUpload.readUrl(this);
+    });
   });
-});
-
 </script>
