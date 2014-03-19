@@ -31,7 +31,7 @@ The moon! But first...
 - [x] guest login
 
 #####Weather
-- [ ] Use the friendly_routes gem to make /zip_codes/10003 -style routes.
+- [ ] Use the `friendly_id` gem to make `/zip_codes/10003` -style routes.
 	- i.e., routes with real zip codes, rather than database IDs.
 - [ ] Add forecast to city show pages.
 	- Use National Weather Service API.
