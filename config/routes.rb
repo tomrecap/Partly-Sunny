@@ -3,6 +3,7 @@ WeatherApp::Application.routes.draw do
 
   resources :weather_reports, only: [:new, :create] do
     post "create_with_photo", on: :collection
+    get "update_times_with_photos", on: :collection
   end
 
   # resources :cities, only: [:show, :index] do

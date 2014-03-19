@@ -76,4 +76,29 @@ class WeatherReportsController < ApplicationController
     end
   end
 
+  def update_times_with_photos
+    attempt_counter = 0
+    error_counter = 0
+
+    WeatherReport.all.each do |weather_report|
+      recent_random_time = Time.now - rand(0..(2 * 60 * 60))
+      weather_report.created_at = recent_random_time
+      error_counter += 1 unless weather_report.save
+      attempt_counter += 1
+    end
+
+    Photo.all.each do |photo|
+      recent_random_time = Time.now - rand(0..(60 * 60))
+      photo.created_at = recent_random_time
+      error_counter += 1 unless photo.save
+      attempt_counter += 1
+    end
+
+    if error_counter > 0
+      render json: "#{attempt_counter} attempts, #{error_counter} errors", status: 422
+    else
+      render json: "everything is recent", status: 400
+    end
+  end
+
 end
