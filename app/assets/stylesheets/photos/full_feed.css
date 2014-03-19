@@ -1,3 +1,12 @@
+.page {
+  letter-spacing:1px;
+}
+
+.page.current {
+/*  font-weight:bold;*/
+  font-size:125%;
+}
+
 .photo-feed li {
   display:block;
   position:relative;
