@@ -7,7 +7,8 @@
 /*  width:auto;*/
 /*  margin: 100px auto 20px auto;*/
   overflow: hidden;
-  border: 1px solid #999;
+/*  border: 2px solid #000;*/
+  background: #000;
 }
 
 #carrousel > ul {
@@ -39,6 +40,7 @@
 }
 
 img.carrousel-photo {
-  width: 400px;
-  max-height: 300px;
+  max-width: 400px;
+  height: 304px;
+/*  vertical-align:middle;*/
 }
