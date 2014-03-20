@@ -2,7 +2,7 @@
 
 var conditionsChart = {};
 
-$(document).ready(function () {
+var startConditionsChart = function () {
   conditionsChart.ctx = $("#conditions-chart").get(0).getContext("2d");
   conditionsChart.data = {
     labels: chartLabels,
@@ -31,4 +31,4 @@ $(document).ready(function () {
     $("#conditions-table").toggleClass("hidden");
     $("#conditions-chart").toggleClass("hidden");
   };
-});
+};
