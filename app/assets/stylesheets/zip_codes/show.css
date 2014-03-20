@@ -22,6 +22,36 @@ a.favorite:hover {
   text-shadow: 0px 0px 1px #333;
 }
 
+/*------- Weather map button ----------------------------------*/
+
+a#weather-map-button {
+  display:block;
+  position:relative;
+
+  width:250px;
+  padding:20px;
+  margin:25px auto 24px auto;
+
+  background:#eee;
+  border:2px solid #000;
+  border-radius:5px;
+
+  text-align:center;
+  font-size:150%;
+}
+
+.weather-arrow {
+  display:inline-block;
+  position:relative;
+  top:10px;
+  -webkit-transform: rotate(90deg);
+  font-size:155%;
+}
+
+a#weather-map-button:hover {
+  text-decoration:none;
+  background: #90ee90;
+}
 
 /*------- Weather conditions percentages numbers & chart -----*/
 .percentages {

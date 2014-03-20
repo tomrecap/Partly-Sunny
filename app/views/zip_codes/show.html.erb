@@ -4,6 +4,9 @@
   <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' >
 <% end %>
 
+<section class="zip-code-weather-left-column">
+
+
 <h2 class="page-title"><%= @zip_code.city %>, <%= @zip_code.state_code %>
   <a
     href="#"
@@ -24,7 +27,6 @@
     <%= insert_approriate_favorite_zip_code_button(@zip_code.id) if signed_in? %>
   </div>
 
-<section class="zip-code-weather-left-column">
   <section class="current-conditions">
       <h3 class="section-title">Current Conditions</h3>
 
@@ -51,6 +53,14 @@
 </section>
 
 <section class="zip-code-weather-right-column">
+
+  <section>
+    <a href="#map" id="weather-map-button">
+      <span class="weather-arrow">&#10153;</span>
+      &nbsp;Weather Map&nbsp;
+      <span class="weather-arrow">&#10153;</span>
+    </a>
+  </section>
 
   <section class="new-report-dumb-link">
     <%= link_to "New Report for #{@zip_code.city}", new_weather_report_url(zip_code_id: @zip_code.id) %>
