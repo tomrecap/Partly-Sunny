@@ -32,7 +32,7 @@ a#weather-map-button {
   padding:20px;
   margin:25px auto 24px auto;
 
-  background:#eee;
+  background:#ccc;
   border:2px solid #000;
   border-radius:5px;
 
@@ -51,6 +51,11 @@ a#weather-map-button {
 a#weather-map-button:hover {
   text-decoration:none;
   background: #90ee90;
+}
+
+a#weather-map-button:active {
+  text-decoration:none;
+  border-color:#0b0;
 }
 
 /*------- Weather conditions percentages numbers & chart -----*/

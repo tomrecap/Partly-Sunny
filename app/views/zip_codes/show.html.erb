@@ -162,6 +162,11 @@
 
 <script>
   $(document).ready(function(){
+    $("#weather-map-button").click(function (event) {
+      event.preventDefault();
+      $("body").animate({ scrollTop: 947 }, "fast")
+    });
+
     $(".new-report-dumb-link").addClass("hidden");
 
     startConditionsChart();
