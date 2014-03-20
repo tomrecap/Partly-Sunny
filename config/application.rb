@@ -83,5 +83,9 @@ module WeatherApp
       }
     }
 
+    if ENV["S3_BUCKET"] == "weather-app-dev"
+      config.paperclip_defaults[:s3_credentials][:s3_host_name] = ENV["S3_HOST_NAME"]
+    end
+
   end
 end
