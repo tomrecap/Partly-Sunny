@@ -22,6 +22,8 @@ gem 'geocoder'
 gem 'chart-js-rails'
 # gem 'random-data'
 
+gem 'rest-client'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

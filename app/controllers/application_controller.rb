@@ -69,4 +69,37 @@ class ApplicationController < ActionController::Base
   def clear_redirect
     session[:redirect_url] = nil
   end
+
+  def interpret_weather_conditions(api_condition)
+    weather_conditions = {}
+
+    WeatherCondition.all.each do |condition|
+      weather_conditions[condition.description] = condition.id
+    end
+
+    if api_condition == 905 || api_condition.between?(950, 962)
+      weather_conditions["Windy"]
+
+    elsif api_condition.between?(200, 531)
+      weather_conditions["Rainy"]
+
+    elsif api_condition == 800
+      weather_conditions["Sunny"]
+
+    elsif api_condition.between?(801, 804)
+      weather_conditions["Cloudy"]
+
+    elsif api_condition == 904
+      weather_conditions["Hot"]
+
+    elsif api_condition == 903
+      weather_conditions["Cold"]
+
+    elsif api_condition.between?(600,622)
+      weather_conditions["Snowing"]
+
+    else
+      weather_conditions["Cloudy"]
+    end
+  end
 end

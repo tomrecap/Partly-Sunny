@@ -76,18 +76,59 @@ class WeatherReportsController < ApplicationController
     end
   end
 
+  def refresh_weather_data_from_api
+    zip_code_ids = WeatherReport
+      .order("weather_reports.created_at ASC")
+      .limit(50)
+      .map(&:zip_code_id)
+      .uniq
+
+    coordinates = ZipCode.find(zip_code_ids).map do |zip_code_object|
+      [zip_code_object.id, zip_code_object.latitude, zip_code_object.longitude]
+    end
+
+    weather_data = coordinates.map do |id, latitude, longitude|
+      api_response = RestClient.get("api.openweathermap.org/data/2.5/weather?lat=#{latitude}&lon=#{longitude}&units=imperial")
+      data = JSON.parse(api_response)
+      temperature = data["main"]["temp"].round
+      api_condition_code = data["weather"].first["id"]
+      weather_condition_id = interpret_weather_conditions(api_condition_code)
+      [id, temperature, weather_condition_id]
+    end
+
+    new_weather_reports = weather_data.map do |id, temperature, weather_condition_id|
+      WeatherReport.create(
+        temperature: temperature,
+        zip_code_id: id,
+        weather_condition_id: weather_condition_id
+      )
+    end
+
+    new_weather_reports.each do |weather_report|
+      weather_report.created_at = (Time.now - rand(0..(2 * 60 * 60)))
+      weather_report.save
+    end
+
+    WeatherReport
+      .order("weather_reports.created_at ASC")
+      .limit(zip_code_ids.count)
+      .destroy_all
+  end
+
   def update_times_with_photos
     attempt_counter = 0
     error_counter = 0
 
-    WeatherReport.all.each do |weather_report|
-      recent_random_time = Time.now - rand(0..(2 * 60 * 60))
-      weather_report.created_at = recent_random_time
-      error_counter += 1 unless weather_report.save
-      attempt_counter += 1
-    end
+    # WeatherReport.all.each do |weather_report|
+    #   recent_random_time = Time.now - rand(0..(2 * 60 * 60))
+    #   weather_report.created_at = recent_random_time
+    #   error_counter += 1 unless weather_report.save
+    #   attempt_counter += 1
+    # end
 
-    Photo.all.each do |photo|
+    refresh_weather_data_from_api
+
+    Photo.order("photos.created_at ASC").limit(50).each do |photo|
       recent_random_time = Time.now - rand(0..(60 * 60))
       photo.created_at = recent_random_time
       error_counter += 1 unless photo.save
